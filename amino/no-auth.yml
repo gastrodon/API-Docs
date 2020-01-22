@@ -1,4 +1,10 @@
 globals:
+    responses:
+        "*":
+            400:104:
+                title: Missing NDCDEVICEID
+                description: The NDCDEVICEID header was not included, or did not compute on amino servers
+                body: $api_codes.api:104
     headers:
         "*":
             - name: NDCDEVICEID
@@ -15,11 +21,43 @@ globals:
               required: false
 
 vars:
+    query-strings:
+        all:
+            pageToken:
+                name: pageToken
+                description: page token for paginated requests
+                required: false
+            size:
+                name: size
+                description: max number of items to get for paginated requests
+                required: false
+            pagingType:
+                name: pagingType
+                description: Seems to have no effect, default value is `t`
+                required: false
+            v:
+                name: v
+                description: Likely a verson number. Changing to numbers or strings, or omission, seems to have no effect
+                required: false
+        topic:
+            categoryKey:
+                name: categoryKey
+                description: Likely has to do with what type of items are returned. Logged out values seen include [`recommendation`, `fresh`]
+                required: false
+            moduleID:
+                name: moduleID
+                description: Unknown. Seems to be a UUIDv4 by default, changing this (even to invalid UUIDv4 strings) seems to have no effect
+                required: false
+            type:
+                name: type
+                description: the type of communities to get, observed include [`discover`, `discovery-list`]. Omission or arbitrary values will not fail the request, but will return zero values.
+                required: false
     url-args:
-        topic-variant:
-            name: variant
-            description: The variant of this topic item. Nonzero values seem to have no effect
-            required: false
+        topic:
+            variant:
+                name: variant
+                description: The variant of this topic item. Nonzero values seem to have no effect
+                required: false
     request:
         device:
             POST:
@@ -286,6 +324,16 @@ vars:
                                 "refreshPageToken": "...    <Unknown use>"
                             }
                         }
+    api_codes:
+        api:104:
+            lang: JSON
+            content:
+                {
+                    "api:message": "Invalid Request. Please update to the latest version. If the problem continues, please contact us.",
+                    "api:timestamp": "2020-01-22T22:11:28Z  <API timestamp>",
+                    "api:statuscode": "104                  <Statuscode 104 represents a bad NDCDEVICEID header>",
+                    "api:duration": "0.000s                 <Processing time>"
+                }
 
 routes:
     /g/s/device/:
@@ -293,7 +341,7 @@ routes:
             description: POST a device configuration
             body: $request.device.POST
             responses:
-                200:
+                "200":
                     title: Device Configured
                     description: The device config was accepted
                     body: $response.device.POST.ok
@@ -305,7 +353,7 @@ routes:
                   description: Same as NDCDEVICEID
                   required: true
             responses:
-                200:
+                "200":
                     title: auid Generated
                     description: An auid was generated and returned by the server. It may now be used in request headers
                     body: $response.auid.GET.ok
@@ -314,7 +362,7 @@ routes:
             description: POST device information for configuration. Likely related to analytics / telemetry
             body: $request.client-config.POST
             responses:
-                200:
+                "200":
                     title: Client Configured
                     description: The client config was accepted
                     body: $response.client-config.POST.ok
@@ -322,7 +370,7 @@ routes:
         GET:
             description: GET the app content language settings
             responses:
-                200:
+                "200":
                     title: Language Settings
                     description: The language settings were retrieved
                     body: $response.content-language-settings.GET.ok
@@ -330,7 +378,7 @@ routes:
         GET:
             description: GET the app appearance settings
             responses:
-                200:
+                "200":
                     title: Appearance Settings
                     description: The appearance objects to use was retrieved
                     body: $response.appearance-settings.GET.ok
@@ -338,7 +386,7 @@ routes:
         GET:
             description: GET auth config data (unknown use)
             responses:
-                200:
+                "200":
                     title: Config Recieved
                     description: Data with an unknown purpose is recieved
                     body: $response.auth-config.GET.ok
@@ -350,7 +398,7 @@ routes:
                   description: language code used, example being `en`. Affects experiments
                   required: false
             responses:
-                200:
+                "200":
                     title: Eventlog Retrieved
                     description: The eventlog for this device profile. This data appears to be related to AB experiments
                     body: $response.eventlog-profile.GET.ok
@@ -358,7 +406,7 @@ routes:
         GET:
             description: GET community config info
             responses:
-                200:
+                "200":
                     title: Community Config
                     description: Community config was retrieved
                     body: $response.community-configuration.GET.ok
@@ -366,11 +414,9 @@ routes:
         GET:
             description: GET content modules for homepage discovery. This includes community info, stories, ads, ect
             query strings:
-                - name: v
-                  description: Likely a version number, seems to always be 1. No visible change when using arbitrary values.
-                  required: false
+                - $query-strings.all.v
             responses:
-                200:
+                "200":
                     title: Content Modules
                     description: discovery content modules were retrieved
                     body: $response.content-modules.GET.ok
@@ -378,50 +424,44 @@ routes:
         GET:
             description: GET a piece of media for a topic. Usually seems to be used in homepage exploration
             url arguments:
-                - $url-args.topic-variant
+                - $url-args.topic.variant
             query strings:
                 - name: adUnitId
                   description: The id of this add, which is a number
                   required: true
-                - name: size
-                  description: Unknown. Seems to make no difference
-                  required: false
-                - name: pagingType
-                  description: Unknown. Values that are not `t` seem to return no items in itemList (which otherwise has one item)
-                  required: false
-                - name: moduleID
-                  description: Unknown. Seems to be a UUIDv4 by default, changing this (even to invalid UUIDv4 strings) seems to have no effect
-                  required: false
+                - $query-strings.all.pagingType
+                - $query-strings.all.size
+                - $query-strings.topic.categoryKey
             responses:
-                200:
+                "200":
                     title: Banner Ads Retrieved
                     description: The banner ads matching this id were retrieved
                     body: $response.topic-banner-ads.GET.ok
     /g/s/topic/:variant/feed/story/:
         GET:
-            description: GET a list of blogs for a topic.  Usually from homepage display
+            description: GET a list of blogs for a topic.  Usually for homepage display
             url arguments:
-                - $url-args.topic-variant
+                - $url-args.topic.variant
             query strings:
-                - name: type
-                  description: The type of story set to get. Only `discover-list` seems to be used and work
-                  required: true
-                - name: categoryKey
-                  description: Likely has to do with what type of posts are returned. Logged out default is `recommendation`
-                  required: false
-                - name: v
-                  description: Likely a version number. Changing to arbitrary strings seems to have no effect
-                  required: false
-                - name: size
-                  description: Likely intended to be number of items retrieved, seems not to have an effect
-                  required: false
-                - name: pageToken
-                  description: Likely intended to be for pagination, seems not to have an effect
-                - name: pagingType
-                  description: Seems to have no effect, default value is `t`
-                  required: false
+                - $query-strings.all.v
+                - $query-strings.topic.type
+                - $query-strings.topic.categoryKey
+                - $query-strings.all.size
+                - $query-strings.all.pageToken
+                - $query-strings.all.pagingType
             responses:
-                200:
+                "200":
                     title: Blogs Retrieved
                     description: The blogs for frontpage display were retrieved
                     body: $response.topic-story.GET.ok
+    /g/s/topic/:variant/feed/community/:
+        GET:
+            description: GET a list of communities. Usually for homepage display
+            url arguments:
+                - $url-args.topic.variant
+            query strings:
+                - $query-strings.topic.type
+                - $query-strings.topic.categoryKey
+                - $query-strings.all.size
+                - $query-strings.all.pageToken
+                - $query-strings.all.pagingType

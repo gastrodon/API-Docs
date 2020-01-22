@@ -30,6 +30,20 @@ An auid was generated and returned by the server. It may now be used in request 
 }
 ```
 
+- 400:104 - Missing NDCDEVICEID
+Missing NDCDEVICEID
+
+The NDCDEVICEID header was not included, or did not compute on amino servers
+
+```JSON
+{
+    "api:message": "Invalid Request. Please update to the latest version. If the problem continues, please contact us.",
+    "api:timestamp": "2020-01-22T22:11:28Z  <API timestamp>",
+    "api:statuscode": "104                  <Statuscode 104 represents a bad NDCDEVICEID header>",
+    "api:duration": "0.000s                 <Processing time>"
+}
+```
+
 
 </details>
 
@@ -59,6 +73,20 @@ Data with an unknown purpose is recieved
     "mobileSignUpProviderList": [
         8
     ]
+}
+```
+
+- 400:104 - Missing NDCDEVICEID
+Missing NDCDEVICEID
+
+The NDCDEVICEID header was not included, or did not compute on amino servers
+
+```JSON
+{
+    "api:message": "Invalid Request. Please update to the latest version. If the problem continues, please contact us.",
+    "api:timestamp": "2020-01-22T22:11:28Z  <API timestamp>",
+    "api:statuscode": "104                  <Statuscode 104 represents a bad NDCDEVICEID header>",
+    "api:duration": "0.000s                 <Processing time>"
 }
 ```
 
@@ -105,6 +133,20 @@ The client config was accepted
 }
 ```
 
+- 400:104 - Missing NDCDEVICEID
+Missing NDCDEVICEID
+
+The NDCDEVICEID header was not included, or did not compute on amino servers
+
+```JSON
+{
+    "api:message": "Invalid Request. Please update to the latest version. If the problem continues, please contact us.",
+    "api:timestamp": "2020-01-22T22:11:28Z  <API timestamp>",
+    "api:statuscode": "104                  <Statuscode 104 represents a bad NDCDEVICEID header>",
+    "api:duration": "0.000s                 <Processing time>"
+}
+```
+
 
 </details>
 
@@ -141,6 +183,20 @@ The appearance objects to use was retrieved
 }
 ```
 
+- 400:104 - Missing NDCDEVICEID
+Missing NDCDEVICEID
+
+The NDCDEVICEID header was not included, or did not compute on amino servers
+
+```JSON
+{
+    "api:message": "Invalid Request. Please update to the latest version. If the problem continues, please contact us.",
+    "api:timestamp": "2020-01-22T22:11:28Z  <API timestamp>",
+    "api:statuscode": "104                  <Statuscode 104 represents a bad NDCDEVICEID header>",
+    "api:duration": "0.000s                 <Processing time>"
+}
+```
+
 
 </details>
 
@@ -170,6 +226,20 @@ The language settings were retrieved
     "contentLanguageSettings": {
         "language": "en     <The language preference>"
     }
+}
+```
+
+- 400:104 - Missing NDCDEVICEID
+Missing NDCDEVICEID
+
+The NDCDEVICEID header was not included, or did not compute on amino servers
+
+```JSON
+{
+    "api:message": "Invalid Request. Please update to the latest version. If the problem continues, please contact us.",
+    "api:timestamp": "2020-01-22T22:11:28Z  <API timestamp>",
+    "api:statuscode": "104                  <Statuscode 104 represents a bad NDCDEVICEID header>",
+    "api:duration": "0.000s                 <Processing time>"
 }
 ```
 
@@ -237,6 +307,20 @@ Community config was retrieved
 }
 ```
 
+- 400:104 - Missing NDCDEVICEID
+Missing NDCDEVICEID
+
+The NDCDEVICEID header was not included, or did not compute on amino servers
+
+```JSON
+{
+    "api:message": "Invalid Request. Please update to the latest version. If the problem continues, please contact us.",
+    "api:timestamp": "2020-01-22T22:11:28Z  <API timestamp>",
+    "api:statuscode": "104                  <Statuscode 104 represents a bad NDCDEVICEID header>",
+    "api:duration": "0.000s                 <Processing time>"
+}
+```
+
 
 </details>
 
@@ -278,6 +362,20 @@ The device config was accepted
 ```JSON
 {
     "devOptions": "null     <?>"
+}
+```
+
+- 400:104 - Missing NDCDEVICEID
+Missing NDCDEVICEID
+
+The NDCDEVICEID header was not included, or did not compute on amino servers
+
+```JSON
+{
+    "api:message": "Invalid Request. Please update to the latest version. If the problem continues, please contact us.",
+    "api:timestamp": "2020-01-22T22:11:28Z  <API timestamp>",
+    "api:statuscode": "104                  <Statuscode 104 represents a bad NDCDEVICEID header>",
+    "api:duration": "0.000s                 <Processing time>"
 }
 ```
 
@@ -332,6 +430,20 @@ The eventlog for this device profile. This data appears to be related to AB expe
 }
 ```
 
+- 400:104 - Missing NDCDEVICEID
+Missing NDCDEVICEID
+
+The NDCDEVICEID header was not included, or did not compute on amino servers
+
+```JSON
+{
+    "api:message": "Invalid Request. Please update to the latest version. If the problem continues, please contact us.",
+    "api:timestamp": "2020-01-22T22:11:28Z  <API timestamp>",
+    "api:statuscode": "104                  <Statuscode 104 represents a bad NDCDEVICEID header>",
+    "api:duration": "0.000s                 <Processing time>"
+}
+```
+
 
 </details>
 
@@ -344,7 +456,7 @@ __query strings__
 
 |name|description|required|
 | - | - | - |
-|v|Likely a version number, seems to always be 1. No visible change when using arbitrary values.|False|
+|v|Likely a verson number. Changing to numbers or strings, or omission, seems to have no effect|False|
 
 __headers__
 
@@ -417,6 +529,20 @@ discovery content modules were retrieved
 }
 ```
 
+- 400:104 - Missing NDCDEVICEID
+Missing NDCDEVICEID
+
+The NDCDEVICEID header was not included, or did not compute on amino servers
+
+```JSON
+{
+    "api:message": "Invalid Request. Please update to the latest version. If the problem continues, please contact us.",
+    "api:timestamp": "2020-01-22T22:11:28Z  <API timestamp>",
+    "api:statuscode": "104                  <Statuscode 104 represents a bad NDCDEVICEID header>",
+    "api:duration": "0.000s                 <Processing time>"
+}
+```
+
 
 </details>
 
@@ -436,9 +562,9 @@ __query strings__
 |name|description|required|
 | - | - | - |
 |adUnitId|The id of this add, which is a number|True|
-|size|Unknown. Seems to make no difference|False|
-|pagingType|Unknown. Values that are not `t` seem to return no items in itemList (which otherwise has one item)|False|
-|moduleID|Unknown. Seems to be a UUIDv4 by default, changing this (even to invalid UUIDv4 strings) seems to have no effect|False|
+|pagingType|Seems to have no effect, default value is `t`|False|
+|size|max number of items to get for paginated requests|False|
+|categoryKey|Likely has to do with what type of items are returned. Logged out values seen include [`recommendation`, `fresh`]|False|
 
 __headers__
 
@@ -485,13 +611,27 @@ The banner ads matching this id were retrieved
 }
 ```
 
+- 400:104 - Missing NDCDEVICEID
+Missing NDCDEVICEID
+
+The NDCDEVICEID header was not included, or did not compute on amino servers
+
+```JSON
+{
+    "api:message": "Invalid Request. Please update to the latest version. If the problem continues, please contact us.",
+    "api:timestamp": "2020-01-22T22:11:28Z  <API timestamp>",
+    "api:statuscode": "104                  <Statuscode 104 represents a bad NDCDEVICEID header>",
+    "api:duration": "0.000s                 <Processing time>"
+}
+```
+
 
 </details>
 
 
 <details>
-<summary>GET /g/s/topic/:variant/feed/story/</summary>
-GET a list of blogs for a topic.  Usually from homepage display
+<summary>GET /g/s/topic/:variant/feed/community/</summary>
+GET a list of communities. Usually for homepage display
 
 __url arguments__
 
@@ -503,11 +643,60 @@ __query strings__
 
 |name|description|required|
 | - | - | - |
-|type|The type of story set to get. Only `discover-list` seems to be used and work|True|
-|categoryKey|Likely has to do with what type of posts are returned. Logged out default is `recommendation`|False|
-|v|Likely a version number. Changing to arbitrary strings seems to have no effect|False|
-|size|Likely intended to be number of items retrieved, seems not to have an effect|False|
-|pageToken|Likely intended to be for pagination, seems not to have an effect| |
+|type|the type of communities to get, observed include [`discover`, `discovery-list`]. Omission or arbitrary values will not fail the request, but will return zero values.|False|
+|categoryKey|Likely has to do with what type of items are returned. Logged out values seen include [`recommendation`, `fresh`]|False|
+|size|max number of items to get for paginated requests|False|
+|pageToken|page token for paginated requests|False|
+|pagingType|Seems to have no effect, default value is `t`|False|
+
+__headers__
+
+|name|description|required|
+| - | - | - |
+|NDCDEVICEID|The device id generated by the app. See|True|
+|NDC-MSG-SIG|Message signature (?) generated by the app|False|
+|SMDEVICEID|I don't know, seems to be a non-string hex number|False|
+|AUID|The auid (UUIDv4) generated on amino servers for this client, retrieved with GET /g/s/auid|False|
+
+__responses__
+
+- 400:104 - Missing NDCDEVICEID
+Missing NDCDEVICEID
+
+The NDCDEVICEID header was not included, or did not compute on amino servers
+
+```JSON
+{
+    "api:message": "Invalid Request. Please update to the latest version. If the problem continues, please contact us.",
+    "api:timestamp": "2020-01-22T22:11:28Z  <API timestamp>",
+    "api:statuscode": "104                  <Statuscode 104 represents a bad NDCDEVICEID header>",
+    "api:duration": "0.000s                 <Processing time>"
+}
+```
+
+
+</details>
+
+
+<details>
+<summary>GET /g/s/topic/:variant/feed/story/</summary>
+GET a list of blogs for a topic.  Usually for homepage display
+
+__url arguments__
+
+|name|description|required|
+| - | - | - |
+|variant|The variant of this topic item. Nonzero values seem to have no effect|False|
+
+__query strings__
+
+|name|description|required|
+| - | - | - |
+|v|Likely a verson number. Changing to numbers or strings, or omission, seems to have no effect|False|
+|type|the type of communities to get, observed include [`discover`, `discovery-list`]. Omission or arbitrary values will not fail the request, but will return zero values.|False|
+|categoryKey|Likely has to do with what type of items are returned. Logged out values seen include [`recommendation`, `fresh`]|False|
+|size|max number of items to get for paginated requests|False|
+|pageToken|page token for paginated requests|False|
 |pagingType|Seems to have no effect, default value is `t`|False|
 
 __headers__
@@ -547,6 +736,20 @@ The blogs for frontpage display were retrieved
         "nextPageToken": "...       <Page token>",
         "refreshPageToken": "...    <Unknown use>"
     }
+}
+```
+
+- 400:104 - Missing NDCDEVICEID
+Missing NDCDEVICEID
+
+The NDCDEVICEID header was not included, or did not compute on amino servers
+
+```JSON
+{
+    "api:message": "Invalid Request. Please update to the latest version. If the problem continues, please contact us.",
+    "api:timestamp": "2020-01-22T22:11:28Z  <API timestamp>",
+    "api:statuscode": "104                  <Statuscode 104 represents a bad NDCDEVICEID header>",
+    "api:duration": "0.000s                 <Processing time>"
 }
 ```
 
