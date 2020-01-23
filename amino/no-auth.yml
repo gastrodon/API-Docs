@@ -376,6 +376,17 @@ vars:
                                 }
                             }
                         }
+        announcement:
+            GET:
+                ok:
+                    lang: JSON
+                    content:
+                        {
+                            "blogList": [
+                                "{...}      <Blog object. Always by System (UUIDv4 all 0's)>"
+                            ]
+                        }
+
     api_codes:
         api:104:
             lang: JSON
@@ -542,3 +553,15 @@ routes:
                     title: Chats Retrieved
                     description: Chat info and users were retrieved
                     body: $response.live-layer.GET.ok
+    /g/s/announcement/:
+        GET:
+            description: GET the announcement blog list
+            query string:
+                - $query-strings.all.language
+                - $query-strings.all.start
+                - $query-strings.all.size
+            responses:
+                "200":
+                    title: Announcements Retrieved
+                    description: Current announcement blogs were retrieved
+                    body: $response.announcement.GET.ok
