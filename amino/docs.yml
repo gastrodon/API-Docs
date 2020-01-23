@@ -98,6 +98,20 @@ vars:
                         "device": "d2usc                        <Another way to identify the phone model>",
                         "timestamp": "1579580222209             <request time in ms>"
                     }
+        login:
+            POST:
+                lang: JSON
+                content:
+                    {
+                        "email": "...               <account email address>",
+                        "v": "2                     <Unknown use, probably verson number. All integer values seem to work>",
+                        "secret": "...              <Login secret. Can be server supplied secret, or in the format \"0 <password>\"",
+                        "deviceID": "...            <NDCDEVICEID of this client>",
+                        "clientType": "100          <Unknown meaning, always seems to be 100>",
+                        "action": "normal           <Unknown use>",
+                        "timestamp": "1579754764781 <Login timestamp"
+                    }
+
     response:
         device:
             POST:
@@ -386,7 +400,65 @@ vars:
                                 "{...}      <Blog object. Always by System (UUIDv4 all 0's)>"
                             ]
                         }
-
+        login:
+            POST:
+                ok:
+                    lang: JSON
+                    content:
+                        {
+                            "account": {
+                                "<->": "                                <This differs from regular profile info in that it is privileged information>",
+                                "activation": "1                        <Unknown use>",
+                                "phoneNumber": "null                    <Account linked phone number>",
+                                "phoneNumberActivation": "0             <Likely related to phone verification, in the same way as with email",
+                                "email": "...                           <User email>",
+                                "emailActivation": "1                   <Email activation, 1 / 0 bool>",
+                                "username": "null                       <Unknown>",
+                                "uid": "...                             <UUIDv4 of this user>",
+                                "aminoIdEditable": "true                <May the aminoId be changed? (I believe that one lifetime change is allowed)>",
+                                "membership": "null                     <Probably related to paid membership>",
+                                "aminoId": "BooruBot                    <Unique aminoId that points to this user>",
+                                "mediaList": "null                      <Unknown use, probably a list of media objects>",
+                                "icon": "...                            <Link to this user's profile image>",
+                                "nickname": "BooruBot                   <Non-unique account global (non-community) nickname>",
+                                "role": "0                              <Unknown. Probably related to admin / curator roles in communities, N / A globally (unless amino admin?)>",
+                                "securityLevel": "3                     <Unknown use. Probably related to admin / moderator only visibility stuff>",
+                                "status": "0                            <Unknown, probably also related to admin / moderator. Could also be ban / mute status>",
+                                "dateOfBirth": "null                    <User birthdate>",
+                                "address": "null                        <Likely related to physical city / street address>",
+                                "latitude": "null                       <Physical latitude>",
+                                "longitude": "null                      <Physical longitude>",
+                                "facebookID": "null                     <Linked facebook profile>",
+                                "googleID": "null                       <Linked google profile>",
+                                "twitterID": "null                      <Linked twitter profile>",
+                                "gender": "null                         <User gender>",
+                                "createdTime": "2019-05-16T03:47:29Z    <Account creation time>",
+                                "modifiedTime": "2019-08-15T06:39:15Z   <Account last modified time>",
+                                "advancedSettings": "{...}              <Unknown settings>",
+                                "extensions": {
+                                    "adsEnabled": "true                 <Are ads enabled? Probably related to amino paid membership. Useable for adblock?>",
+                                    "adsFlags": "11                     <Unknown, probably has to do with ad selection>",
+                                    "adsLevel": "1                      <Unknown, probably has to do with ad frequency>",
+                                    "contentLanguage": "en              <Primary app language>",
+                                    "deviceInfo": {
+                                        "lastClientType": "100          <Client type used before this. Always 100? All mobile 100?>"
+                                    }
+                                },
+                            },
+                            "auid": "...                                <UUIDv4 of this device>",
+                            "secret": "...                              <Secret that may be used for logging in. Appears to contain device auid, ipv4 address, and other stuff>",
+                            "sid": "...                                 <session ID>",
+                            "userProfile": "{...}                       <User object>"
+                        }
+                incorrect-info:
+                    lang: JSON
+                    content:
+                        {
+                            "api:message": "Account or password is incorrect! If you forget your password, please reset it.",
+                            "api:timestamp": "2020-01-23T04:44:36Z  <API timestamp>",
+                            "api:statuscode": "200                  <Statuscode 200 represents bad credentials>",
+                            "api:duration": "0.016s                 <Processing time>"
+                        }
     api_codes:
         api:104:
             lang: JSON
@@ -408,6 +480,7 @@ vars:
                 }
 
 routes:
+    # Does not require auth
     /g/s/device/:
         POST:
             description: POST a device configuration
@@ -565,3 +638,17 @@ routes:
                     title: Announcements Retrieved
                     description: Current announcement blogs were retrieved
                     body: $response.announcement.GET.ok
+    # On login
+    /g/s/auth/login/:
+        POST:
+            description: Log in with credentials
+            body: $request.login.POST
+            responses:
+                "200":
+                    title: Login Successful
+                    description: The login was successful and account information was sent
+                    body: $response.login.POST.ok
+                400:200:
+                    title: Login Unsuccessful
+                    description: The supplied credentials were not correct
+                    body: $response.login.POST.incorrect-info
