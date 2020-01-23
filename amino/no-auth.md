@@ -30,6 +30,20 @@ An auid was generated and returned by the server. It may now be used in request 
 }
 ```
 
+- 200:0 - api:ok
+api:ok
+
+The request was successful. This is not a separate response, but included in every 200 response's json
+
+```JSON
+{
+    "api:message": "OK",
+    "api:timestamp": "2020-01-22T23:49:13Z  <API timestamp>",
+    "api:statuscode": "0                    <Statuscode 0 is ok>",
+    "api:duration": "0.010s                 <Processing time>"
+}
+```
+
 - 400:104 - Missing NDCDEVICEID
 Missing NDCDEVICEID
 
@@ -73,6 +87,20 @@ Data with an unknown purpose is recieved
     "mobileSignUpProviderList": [
         8
     ]
+}
+```
+
+- 200:0 - api:ok
+api:ok
+
+The request was successful. This is not a separate response, but included in every 200 response's json
+
+```JSON
+{
+    "api:message": "OK",
+    "api:timestamp": "2020-01-22T23:49:13Z  <API timestamp>",
+    "api:statuscode": "0                    <Statuscode 0 is ok>",
+    "api:duration": "0.010s                 <Processing time>"
 }
 ```
 
@@ -133,6 +161,20 @@ The client config was accepted
 }
 ```
 
+- 200:0 - api:ok
+api:ok
+
+The request was successful. This is not a separate response, but included in every 200 response's json
+
+```JSON
+{
+    "api:message": "OK",
+    "api:timestamp": "2020-01-22T23:49:13Z  <API timestamp>",
+    "api:statuscode": "0                    <Statuscode 0 is ok>",
+    "api:duration": "0.010s                 <Processing time>"
+}
+```
+
 - 400:104 - Missing NDCDEVICEID
 Missing NDCDEVICEID
 
@@ -183,6 +225,20 @@ The appearance objects to use was retrieved
 }
 ```
 
+- 200:0 - api:ok
+api:ok
+
+The request was successful. This is not a separate response, but included in every 200 response's json
+
+```JSON
+{
+    "api:message": "OK",
+    "api:timestamp": "2020-01-22T23:49:13Z  <API timestamp>",
+    "api:statuscode": "0                    <Statuscode 0 is ok>",
+    "api:duration": "0.010s                 <Processing time>"
+}
+```
+
 - 400:104 - Missing NDCDEVICEID
 Missing NDCDEVICEID
 
@@ -226,6 +282,20 @@ The language settings were retrieved
     "contentLanguageSettings": {
         "language": "en     <The language preference>"
     }
+}
+```
+
+- 200:0 - api:ok
+api:ok
+
+The request was successful. This is not a separate response, but included in every 200 response's json
+
+```JSON
+{
+    "api:message": "OK",
+    "api:timestamp": "2020-01-22T23:49:13Z  <API timestamp>",
+    "api:statuscode": "0                    <Statuscode 0 is ok>",
+    "api:duration": "0.010s                 <Processing time>"
 }
 ```
 
@@ -307,6 +377,20 @@ Community config was retrieved
 }
 ```
 
+- 200:0 - api:ok
+api:ok
+
+The request was successful. This is not a separate response, but included in every 200 response's json
+
+```JSON
+{
+    "api:message": "OK",
+    "api:timestamp": "2020-01-22T23:49:13Z  <API timestamp>",
+    "api:statuscode": "0                    <Statuscode 0 is ok>",
+    "api:duration": "0.010s                 <Processing time>"
+}
+```
+
 - 400:104 - Missing NDCDEVICEID
 Missing NDCDEVICEID
 
@@ -362,6 +446,20 @@ The device config was accepted
 ```JSON
 {
     "devOptions": "null     <?>"
+}
+```
+
+- 200:0 - api:ok
+api:ok
+
+The request was successful. This is not a separate response, but included in every 200 response's json
+
+```JSON
+{
+    "api:message": "OK",
+    "api:timestamp": "2020-01-22T23:49:13Z  <API timestamp>",
+    "api:statuscode": "0                    <Statuscode 0 is ok>",
+    "api:duration": "0.010s                 <Processing time>"
 }
 ```
 
@@ -427,6 +525,20 @@ The eventlog for this device profile. This data appears to be related to AB expe
         "communitySearchRerankExp": 1,
         "<->": "                        <various AB experiment values>"
     }
+}
+```
+
+- 200:0 - api:ok
+api:ok
+
+The request was successful. This is not a separate response, but included in every 200 response's json
+
+```JSON
+{
+    "api:message": "OK",
+    "api:timestamp": "2020-01-22T23:49:13Z  <API timestamp>",
+    "api:statuscode": "0                    <Statuscode 0 is ok>",
+    "api:duration": "0.010s                 <Processing time>"
 }
 ```
 
@@ -529,6 +641,20 @@ discovery content modules were retrieved
 }
 ```
 
+- 200:0 - api:ok
+api:ok
+
+The request was successful. This is not a separate response, but included in every 200 response's json
+
+```JSON
+{
+    "api:message": "OK",
+    "api:timestamp": "2020-01-22T23:49:13Z  <API timestamp>",
+    "api:statuscode": "0                    <Statuscode 0 is ok>",
+    "api:duration": "0.010s                 <Processing time>"
+}
+```
+
 - 400:104 - Missing NDCDEVICEID
 Missing NDCDEVICEID
 
@@ -584,7 +710,7 @@ The banner ads matching this id were retrieved
 
 ```JSON
 {
-    "allItemCount": "1                          <Total returnable item count>",
+    "allItemCount": "1              <Total returnable item count>",
     "itemList": [
         {
             "adCampaignId": "803326             <Likely related to ad grouping by campaign, use unknown>",
@@ -605,9 +731,21 @@ The banner ads matching this id were retrieved
             }
         }
     ],
-    "paging": {
-        "nextPageToken": "...                   <Page token>"
-    }
+    "paging": "{...}                <Paging info>"
+}
+```
+
+- 200:0 - api:ok
+api:ok
+
+The request was successful. This is not a separate response, but included in every 200 response's json
+
+```JSON
+{
+    "api:message": "OK",
+    "api:timestamp": "2020-01-22T23:49:13Z  <API timestamp>",
+    "api:statuscode": "0                    <Statuscode 0 is ok>",
+    "api:duration": "0.010s                 <Processing time>"
 }
 ```
 
@@ -659,6 +797,35 @@ __headers__
 |AUID|The auid (UUIDv4) generated on amino servers for this client, retrieved with GET /g/s/auid|False|
 
 __responses__
+
+- 200 - Communities Retrieved
+Communities Retrieved
+
+The communities for frontpage display were retrieved
+
+```JSON
+{
+    "allItemCount": "100    <Total returnable item count>",
+    "communityList": [
+        "{...}              <Community object>"
+    ],
+    "paging": "{...}        <Paging info>"
+}
+```
+
+- 200:0 - api:ok
+api:ok
+
+The request was successful. This is not a separate response, but included in every 200 response's json
+
+```JSON
+{
+    "api:message": "OK",
+    "api:timestamp": "2020-01-22T23:49:13Z  <API timestamp>",
+    "api:statuscode": "0                    <Statuscode 0 is ok>",
+    "api:duration": "0.010s                 <Processing time>"
+}
+```
 
 - 400:104 - Missing NDCDEVICEID
 Missing NDCDEVICEID
@@ -732,10 +899,21 @@ The blogs for frontpage display were retrieved
             "status": "0            <Unknown>"
         }
     },
-    "paging": {
-        "nextPageToken": "...       <Page token>",
-        "refreshPageToken": "...    <Unknown use>"
-    }
+    "paging": "{...}                <Paging info>"
+}
+```
+
+- 200:0 - api:ok
+api:ok
+
+The request was successful. This is not a separate response, but included in every 200 response's json
+
+```JSON
+{
+    "api:message": "OK",
+    "api:timestamp": "2020-01-22T23:49:13Z  <API timestamp>",
+    "api:statuscode": "0                    <Statuscode 0 is ok>",
+    "api:duration": "0.010s                 <Processing time>"
 }
 ```
 

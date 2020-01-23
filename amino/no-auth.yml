@@ -277,7 +277,7 @@ vars:
                     lang: JSON
                     content:
                         {
-                            "allItemCount": "1                          <Total returnable item count>",
+                            "allItemCount": "1              <Total returnable item count>",
                             "itemList": [
                                 {
                                     "adCampaignId": "803326             <Likely related to ad grouping by campaign, use unknown>",
@@ -298,9 +298,7 @@ vars:
                                     }
                                 }
                             ],
-                            "paging": {
-                                "nextPageToken": "...                   <Page token>"
-                            }
+                            "paging": "{...}                <Paging info>"
                         }
         topic-story:
             GET:
@@ -323,10 +321,19 @@ vars:
                                     "status": "0            <Unknown>"
                                 }
                             },
-                            "paging": {
-                                "nextPageToken": "...       <Page token>",
-                                "refreshPageToken": "...    <Unknown use>"
-                            }
+                            "paging": "{...}                <Paging info>"
+                        }
+        topic-communities:
+            GET:
+                ok:
+                    lang: JSON
+                    content:
+                        {
+                            "allItemCount": "100    <Total returnable item count>",
+                            "communityList": [
+                                "{...}              <Community object>"
+                            ],
+                            "paging": "{...}        <Paging info>"
                         }
     api_codes:
         api:104:
@@ -478,3 +485,8 @@ routes:
                 - $query-strings.all.size
                 - $query-strings.all.pageToken
                 - $query-strings.all.pagingType
+            responses:
+                "200":
+                    title: Communities Retrieved
+                    description: The communities for frontpage display were retrieved
+                    body: $response.topic-communities.GET.ok
