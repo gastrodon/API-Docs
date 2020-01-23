@@ -343,7 +343,7 @@ vars:
                             ],
                             "paging": "{...}        <Paging info>"
                         }
-        announcement:
+        live-layer:
             GET:
                 ok:
                     lang: JSON
@@ -531,15 +531,14 @@ routes:
                     title: Communities Retrieved
                     description: The communities for frontpage display were retrieved
                     body: $response.topic-communities.GET.ok
-    /g/s/announcement/:
+    /g/s/live-layer/public-chats/:
         GET:
-            description: GET the current announcement. This is actually just info about a bunch of communities and public chats
+            description: GET the active public chats and information about who is in them.
             query strings:
-                - $query-strings.all.start
+                - $query-strings.all.pageToken
                 - $query-strings.all.size
-                - $query-strings.all.language
             responses:
                 "200":
-                    title: Info Retrieved
-                    description: Announcement blogs and threads were retrieved
-                    body: $response.announcement.GET.ok
+                    title: Chats Retrieved
+                    description: Chat info and users were retrieved
+                    body: $response.live-layer.GET.ok
