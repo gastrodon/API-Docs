@@ -31,9 +31,17 @@ vars:
                 name: pageToken
                 description: page token for paginated requests
                 required: false
+            start:
+                name: start
+                description: paginated data index offset. Difference to
+                required: false
             size:
                 name: size
                 description: max number of items to get for paginated requests
+                required: false
+            language:
+                name: language
+                description: Content language to be returned
                 required: false
             pagingType:
                 name: pagingType
@@ -335,6 +343,39 @@ vars:
                             ],
                             "paging": "{...}        <Paging info>"
                         }
+        announcement:
+            GET:
+                ok:
+                    lang: JSON
+                    content:
+                        {
+                            "communityInfoMapping": {
+                                "<ndcId>": "{...}           <Community object>"
+                            },
+                            "paging": "{...}                <Paging info>",
+                            "playlistInThreadList": {
+                                "<->": "                    <Info about videos playing in chat threads>",
+                                "<UUIDv4 thread id>": {
+                                    "currentItemIndex": "14 <Playlist length>",
+                                    "currentItemStatus": "2 <Likely playlist current index>",
+                                    "items": [
+                                        "{...}              <Youtube video object>"
+                                    ]
+                                }
+                            },
+                            "threadList": [
+                                "{...}                      <Chat thread object>"
+                            ],
+                            "userInfoInThread": {
+                                "<->": "                    <Info about users in chat threads>",
+                                "<UUIDv4 thread id>": {
+                                    "userProfileCount": 2,
+                                    "userProfileList": [
+                                        "{...}              <User object>"
+                                    ]
+                                }
+                            }
+                        }
     api_codes:
         api:104:
             lang: JSON
@@ -490,3 +531,15 @@ routes:
                     title: Communities Retrieved
                     description: The communities for frontpage display were retrieved
                     body: $response.topic-communities.GET.ok
+    /g/s/announcement/:
+        GET:
+            description: GET the current announcement. This is actually just info about a bunch of communities and public chats
+            query strings:
+                - $query-strings.all.start
+                - $query-strings.all.size
+                - $query-strings.all.language
+            responses:
+                "200":
+                    title: Info Retrieved
+                    description: Announcement blogs and threads were retrieved
+                    body: $response.announcement.GET.ok
