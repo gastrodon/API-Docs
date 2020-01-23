@@ -1,6 +1,10 @@
 globals:
     responses:
         "*":
+            "200:0":
+                title: api:ok
+                description: The request was successful. This is not a separate response, but included in every 200 response's json
+                body: $api_codes.api:0
             400:104:
                 title: Missing NDCDEVICEID
                 description: The NDCDEVICEID header was not included, or did not compute on amino servers
@@ -333,6 +337,15 @@ vars:
                     "api:timestamp": "2020-01-22T22:11:28Z  <API timestamp>",
                     "api:statuscode": "104                  <Statuscode 104 represents a bad NDCDEVICEID header>",
                     "api:duration": "0.000s                 <Processing time>"
+                }
+        api:0:
+            lang: JSON
+            content:
+                {
+                    "api:message": "OK",
+                    "api:timestamp": "2020-01-22T23:49:13Z  <API timestamp>",
+                    "api:statuscode": "0                    <Statuscode 0 is ok>",
+                    "api:duration": "0.010s                 <Processing time>"
                 }
 
 routes:
