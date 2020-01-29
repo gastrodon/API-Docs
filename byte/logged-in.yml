@@ -12,6 +12,7 @@ globals:
             - name: user-agent
               value: The user agent of the device using this app
               required: false
+
 vars:
     request:
         device:
@@ -69,7 +70,80 @@ vars:
                             },
                             "success": 0
                         }
-
+        global-feed:
+            GET:
+                ok:
+                    lang: JSON
+                    content:
+                        {
+                            "data": {
+                                "accounts": {
+                                    "   <Account id>": {
+                                        "avatarURL": "...                       <Account pfp link>",
+                                        "backgroundColor": "#000000             <Account background color",
+                                        "bio": "...                             <Account bio>",
+                                        "displayName": "...                     <Non-unique display name>",
+                                        "followerCount": "0                     <Subscribers of this account>",
+                                        "followingCount": "0                    <Subscriptions of this account>",
+                                        "foregroundColor": "#CCD6E9             <Account foreground color",
+                                        "id": "                                 <Account id, should match the above key>",
+                                        "isChannel": "false                     <Is this user a channel?>",
+                                        "isDeactivated": "false                 <Did this user deactivate their account?>",
+                                        "isRegistered": "true                   <Is this user registered?>",
+                                        "isSuspended": "false                   <Is this account suspended?>",
+                                        "loopCount": "0                         <Total loops played of this account>",
+                                        "loopsConsumedCount": "0                <Total loops played by this account>",
+                                        "registrationDate": "1580272854         <Account creation Unix timestamp>",
+                                        "username": "robotter                   <Account username>"
+                                    }
+                                },
+                                "posts": [
+                                    {
+                                        "allowCuration": "true                  <May this post be curated?>",
+                                        "allowRemix": "false                    <May this post be remixed?>",
+                                        "authorID": "...                        <ID that points to the post author",
+                                        "caption": "                            <Post caption>",
+                                        "commentCount": "0                      <Total comment count>",
+                                        "comments": [
+                                            {
+                                                "authorID": "...                <Comment author id>",
+                                                "body": "...                    <Comment body",
+                                                "date": "1580273915             <Comment creation timestamp>",
+                                                "id": "...                      <Comment id. In the format post_id-unique_id",
+                                                "mentions": "[...]              <Mentions in this comment>",
+                                                "postID": "76ORWVE6ZRCIZB7JX6PM23A7S4"
+                                            }
+                                        ],
+                                        "date": "1580274189                     <Post create timestamp>",
+                                        "id": "...                              <ID that points to this post>",
+                                        "likeCount": "0                         <Total like count>",
+                                        "likedByMe": "false                     <Was this liked by the authed user?>",
+                                        "loopCount": "0                         <Total loops played of this video>",
+                                        "mentions": [
+                                                        {
+                                                            "accountID": "...   <Account mentioned>",
+                                                            "byteRange": {
+                                                                "start": "10    <Unknown>",
+                                                                "stop": "15     <Unknown, same length as range>"
+                                                            },
+                                                            "range": {
+                                                                "start": "8     <Mention substring start>",
+                                                                "stop": "13     <Mention substring end>"
+                                                            },
+                                                            "text": "@byte      <Mention text>",
+                                                            "username": "byte   <Username mentioned"
+                                                        }
+                                                    ],
+                                        "rebytedByMe": "false                   <Was this rebyted by the authed user?>",
+                                        "thumbSrc": "...                        <Video thumbnail link>",
+                                        "type": "0                              <Unknown use>",
+                                        "videoSrc": "...                        <Video link>"
+                                    }
+                                ],
+                                "cursor": "...                                  <Likely pagination cursor>"
+                            },
+                            "success": 1
+                        }
 routes:
         /account/me/:
             GET:
@@ -92,3 +166,11 @@ routes:
                         title: Device info incorrect
                         description: The device info sent is malformed
                         body: $response.device.PUT.malformed
+        /feed/global/:
+            GET:
+                description: Get data from the global feed
+                responses:
+                    "200":
+                        title: Feed Data Fetched
+                        description: A slice of data was fetched from the globla feed
+                        body: $response.global-feed.GET.ok

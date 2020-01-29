@@ -103,3 +103,78 @@ Unauthorized to make request, either because the authorization header is incorre
 
 
 </details>
+
+
+<details>
+<summary>GET /feed/global/</summary>
+Get data from the global feed
+
+__headers__
+
+|name|value|required|
+| - | - | - |
+|authorization|The token returned when logging in or creating an account|True|
+|user-agent|The user agent of the device using this app|False|
+
+__responses__
+
+- 200 - Feed Data Fetched
+Feed Data Fetched
+
+A slice of data was fetched from the globla feed
+
+```JSON
+{
+    "data": {
+        "accounts": {
+            "<Account id>": {
+                "avatarURL": "...                   <Account pfp link>",
+                "backgroundColor": "#000000         <Account background color",
+                "bio": "...                         <Account bio>",
+                "displayName": "...                 <Non-unique display name>",
+                "followerCount": "0                 <Subscribers of this account>",
+                "followingCount": "0                <Subscriptions of this account>",
+                "foregroundColor": "#CCD6E9         <Account foreground color",
+                "id": "                             <Account id, should match the above key>",
+                "isChannel": "false                 <Is this user a channel?>",
+                "isDeactivated": "false             <Did this user deactivate their account?>",
+                "isRegistered": "true               <Is this user registered?>",
+                "isSuspended": "false               <Is this account suspended?>",
+                "loopCount": "0                     <Total loops played of this account>",
+                "loopsConsumedCount": "0            <Total loops played by this account>",
+                "registrationDate": "1580272854     <Account creation Unix timestamp>",
+                "username": "robotter               <Account username>"
+            }
+        },
+        "posts": [
+            {
+                "allowCuration": "true              <May this post be curated?>",
+                "allowRemix": "false                <May this post be remixed?>",
+                "authorID": "...                    <ID that points to the post author",
+                "caption": "                        <Post caption>",
+                "commentCount": "0                  <Total comment count>",
+                "date": "1580274189                 <Post create timestamp>",
+                "id": "...                          <ID that points to this post>",
+                "likeCount": "0                     <Total like count>",
+                "likedByMe": "false                 <Was this liked by the authed user?>",
+                "loopCount": "0                     <Total loops played of this video>",
+                "mentions": "[...]                  <Mentions in this post>",
+                "rebytedByMe": "false               <Was this rebyted by the authed user?>",
+                "thumbSrc": "...                    <Video thumbnail link>",
+                "type": "0                          <Unknown use>",
+                "videoSrc": "...                    <Video link>"
+            }
+        ],
+        "cursor": "...                              <Likely pagination cursor>"
+    },
+    "success": 1
+}
+```
+
+- 401 - Unauthorized
+Unauthorized
+
+Unauthorized to make request, either because the authorization header is incorrect or missing
+
+
+</details>
