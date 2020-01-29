@@ -1,0 +1,109 @@
+vars:
+    request:
+        client-event:
+            POST:
+                lang: JSON
+                content:
+                    {
+                        "eventData": {
+                            "os": "android"
+                        },
+                        "eventType": "appOpen"
+                    }
+        authenticate:
+            POST:
+                new:
+                    {
+                      "provider": "google",
+                      "token": "<Google oauth token for my eyes only>"
+                    }
+
+
+    response:
+        client-event:
+            POST: nothing!
+        authenticate:
+            POST:
+                new:
+                    lang: JSON
+                    content:
+                        {
+                          "success": 0,
+                          "error": {
+                            "code": 1305,
+                            "message": "account not found"
+                          }
+                        }
+        precheck:
+            POST:
+                taken:
+                    lang: JSON
+                    content:
+                        {
+                            "success": 0,
+                            "error": {
+                                "code": 1402,
+                                "message": "username is already in use"
+                            }
+                        }
+                free:
+                    lang: JSON
+                    content:
+                        {
+                            "data": {},
+                            "success": 1
+                        }
+                invalid:
+                    lang: JSON
+                    content:
+                        {
+                            "success": 0,
+                            "error": {
+                                "code": 1401,
+                                "message": "invalid username"
+                            }
+                        }
+
+routes:
+    # No auth
+    /client/event/:
+        POST:
+            description: Likely has to do with event tracking. Appears to always ratelimit me
+            body: $request.client-event.POST
+            responses:
+                "429":
+                    title: Ratelimited
+                    description: The request was not accepted becuase of ratelimiting. Appears to always happen
+
+    /account/register/precheck/:
+        POST:
+            description: Check username availability. Used when creating an account
+            body: $request.precheck.POST
+            responses:
+                "200:taken":
+                    title: Username taken
+                    description: The username checked is in use already
+                    body:
+                        $response.precheck.POST.taken
+                "200:free":
+                    title: Username free
+                    description: The username checked is not in use and can be registered
+                    body:
+                        $response.precheck.POST.free
+                "200:invalid":
+                    title: Username invalid
+                    description: The username supplied is not valid. This can be because of length, or because of invalid characters like spaces
+                    body:
+                        $response.precheck.POST.invalid
+
+    # At auth
+    /authenticate/google/:
+        POST:
+            description: Post a google token for user authentication. This is for new and existing accounts
+            body: $request.authenticate.POST
+            responses:
+                "200:no account":
+                    title: No Such Account
+                    description: No account exists attached to this google user, and one should be created
+                    body:
+                        $response.authenticate.POST.new
