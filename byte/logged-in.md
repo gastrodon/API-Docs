@@ -2,6 +2,13 @@
 <summary>GET /account/me/</summary>
 Get information about the logged in account
 
+__headers__
+
+|name|value|required|
+| - | - | - |
+|authorization|The token returned when logging in or creating an account|True|
+|user-agent|The user agent of the device using this app|False|
+
 __responses__
 
 - 200 - Account fetched
