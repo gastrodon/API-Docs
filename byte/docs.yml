@@ -79,25 +79,25 @@ vars:
                         {
                             "data": {
                                 "account": {
-                                    "id": "                             <account id>",
-                                    "isRegistered": "true               <Is this user registered?>",
-                                    "isChannel": "false                 <Is this user a channel?>",
-                                    "isSuspended": "false               <Is this account suspended?>",
-                                    "isDeactivated": "false             <Did this user deactivate their account?>",
-                                    "registrationDate": "-62135596800   <Account creation time. Unknown format, appears to be an error>",
-                                    "username": "robotter               <Account username>",
                                     "backgroundColor": "#000000         <Account background color",
-                                    "foregroundColor": "#CCD6E9         <Account foreground color",
                                     "followerCount": "0                 <Subscribers of this account>",
                                     "followingCount": "0                <Subscriptions of this account>",
+                                    "foregroundColor": "#CCD6E9         <Account foreground color",
+                                    "id": "                             <account id>",
+                                    "isChannel": "false                 <Is this user a channel?>",
+                                    "isDeactivated": "false             <Did this user deactivate their account?>",
+                                    "isRegistered": "true               <Is this user registered?>",
+                                    "isSuspended": "false               <Is this account suspended?>",
                                     "loopCount": "0                     <Total loops played of this account>",
-                                    "loopsConsumedCount": "0            <Total loops played by this account>"
+                                    "loopsConsumedCount": "0            <Total loops played by this account>",
+                                    "registrationDate": "-62135596800   <Account creation time. Unknown format, appears to be an error>",
+                                    "username": "robotter               <Account username>"
                                 },
                                 "token": {
-                                    "token": "                  <auth token>",
                                     "accountID": "              <account id>",
+                                    "isDeactivated": "false     <duplicate>",
                                     "isRegistered": "true       <duplicate>",
-                                    "isDeactivated": "false     <duplicate>"
+                                    "token": "                  <auth token>"
                                 }
                             },
                             "success": 1

@@ -20,19 +20,19 @@ The account information of the logged in user was fetched
 {
     "data": {
         "account": {
-            "id": "                             <account id>",
-            "isRegistered": "true               <Is this user registered?>",
-            "isChannel": "false                 <Is this user a channel?>",
-            "isSuspended": "false               <Is this account suspended?>",
-            "isDeactivated": "false             <Did this user deactivate their account?>",
-            "registrationDate": "1580272854     <Account creation Unix timestamp>",
-            "username": "robotter               <Account username>",
             "backgroundColor": "#000000         <Account background color",
-            "foregroundColor": "#CCD6E9         <Account foreground color",
             "followerCount": "0                 <Subscribers of this account>",
             "followingCount": "0                <Subscriptions of this account>",
+            "foregroundColor": "#CCD6E9         <Account foreground color",
+            "id": "                             <account id>",
+            "isChannel": "false                 <Is this user a channel?>",
+            "isDeactivated": "false             <Did this user deactivate their account?>",
+            "isRegistered": "true               <Is this user registered?>",
+            "isSuspended": "false               <Is this account suspended?>",
             "loopCount": "0                     <Total loops played of this account>",
-            "loopsConsumedCount": "0            <Total loops played by this account>"
+            "loopsConsumedCount": "0            <Total loops played by this account>",
+            "registrationDate": "1580272854     <Account creation Unix timestamp>",
+            "username": "robotter               <Account username>"
         }
     },
     "success": 1
