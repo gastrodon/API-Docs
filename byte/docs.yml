@@ -26,7 +26,6 @@ vars:
                         "token": "<google oauth token>",
                         "username": "robotter"
                     }
-
     response:
         client-event:
             POST: nothing!
@@ -133,7 +132,6 @@ routes:
                 "429":
                     title: Ratelimited
                     description: The request was not accepted becuase of ratelimiting. Appears to always happen
-
     /account/register/precheck/:
         POST:
             description: Check username availability. Used when creating an account
@@ -154,7 +152,6 @@ routes:
                     description: The username checked is in use already
                     body:
                         $response.precheck.POST.taken
-
     # At auth
     /account/register/:
         POST:
@@ -176,7 +173,6 @@ routes:
                     description: The username used to sign up is already in use
                     body:
                         $response.register.POST.taken
-
     /authenticate/google/:
         POST:
             description: Post a google token for user authentication. This is for new and existing accounts
