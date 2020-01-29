@@ -26,7 +26,7 @@ A user was registered and their information was registered
             "isChannel": "false                 <Is this user a channel?>",
             "isSuspended": "false               <Is this account suspended?>",
             "isDeactivated": "false             <Did this user deactivate their account?>",
-            "registrationDate": "-62135596800   <Account creation time. Unknown format>",
+            "registrationDate": "-62135596800   <Account creation time. Unknown format, appears to be an error>",
             "username": "robotter               <Account username>",
             "backgroundColor": "#000000         <Account background color",
             "foregroundColor": "#CCD6E9         <Account foreground color",
