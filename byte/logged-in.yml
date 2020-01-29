@@ -262,6 +262,15 @@ routes:
                         title: Device info incorrect
                         description: The device info sent is malformed
                         body: $response.device.PUT.malformed
+        /client/event/:
+            POST:
+                description: Likely has to do with event tracking. Appears to always ratelimit me
+                body: $request.client-event.POST
+                responses:
+                    "200":
+                        title: Event accepted
+                        description: The recorded event was accepted and recorded
+                        body: $response.global.ok
         /feed/global/:
             GET:
                 description: Get data from the global feed

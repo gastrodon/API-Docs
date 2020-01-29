@@ -106,6 +106,40 @@ Unauthorized to make request, either because the authorization header is incorre
 
 
 <details>
+<summary>POST /client/event/</summary>
+Likely has to do with event tracking. Appears to always ratelimit me
+
+__headers__
+
+|name|value|required|
+| - | - | - |
+|authorization|The token returned when logging in or creating an account|True|
+|user-agent|The user agent of the device using this app|False|
+
+__responses__
+
+- 200 - Event accepted
+Event accepted
+
+The recorded event was accepted and recorded
+
+```JSON
+{
+    "data": {},
+    "success": 1
+}
+```
+
+- 401 - Unauthorized
+Unauthorized
+
+Unauthorized to make request, either because the authorization header is incorrect or missing
+
+
+</details>
+
+
+<details>
 <summary>GET /explore/</summary>
 Get possible explore feeds
 
