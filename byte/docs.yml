@@ -80,21 +80,21 @@ routes:
             description: Check username availability. Used when creating an account
             body: $request.precheck.POST
             responses:
-                "200:taken":
-                    title: Username taken
-                    description: The username checked is in use already
-                    body:
-                        $response.precheck.POST.taken
-                "200:free":
+                "200":
                     title: Username free
                     description: The username checked is not in use and can be registered
                     body:
                         $response.precheck.POST.free
-                "200:invalid":
+                "200:1401":
                     title: Username invalid
                     description: The username supplied is not valid. This can be because of length, or because of invalid characters like spaces
                     body:
                         $response.precheck.POST.invalid
+                "200:1402":
+                    title: Username taken
+                    description: The username checked is in use already
+                    body:
+                        $response.precheck.POST.taken
 
     # At auth
     /authenticate/google/:
@@ -102,7 +102,7 @@ routes:
             description: Post a google token for user authentication. This is for new and existing accounts
             body: $request.authenticate.POST
             responses:
-                "200:no account":
+                "200:1305":
                     title: No Such Account
                     description: No account exists attached to this google user, and one should be created
                     body:

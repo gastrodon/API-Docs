@@ -4,7 +4,7 @@ Check username availability. Used when creating an account
 
 __responses__
 
-- 200:free - Username free
+- 200 - Username free
 Username free
 
 The username checked is not in use and can be registered
@@ -16,7 +16,7 @@ The username checked is not in use and can be registered
 }
 ```
 
-- 200:invalid - Username invalid
+- 200:1401 - Username invalid
 Username invalid
 
 The username supplied is not valid. This can be because of length, or because of invalid characters like spaces
@@ -31,7 +31,7 @@ The username supplied is not valid. This can be because of length, or because of
 }
 ```
 
-- 200:taken - Username taken
+- 200:1402 - Username taken
 Username taken
 
 The username checked is in use already
@@ -56,7 +56,7 @@ Post a google token for user authentication. This is for new and existing accoun
 
 __responses__
 
-- 200:no account - No Such Account
+- 200:1305 - No Such Account
 No Such Account
 
 No account exists attached to this google user, and one should be created
