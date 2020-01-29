@@ -212,6 +212,7 @@ A slice of data was fetched from the globla feed
                 "authorID": "...                        <ID that points to the post author",
                 "caption": "                            <Post caption>",
                 "commentCount": "0                      <Total comment count>",
+                "commentCursor": "...                   <Comment pagination cursor>",
                 "comments": [
                     {
                         "authorID": "...                <Comment author id>",
@@ -219,7 +220,7 @@ A slice of data was fetched from the globla feed
                         "date": "1580273915             <Comment creation timestamp>",
                         "id": "...                      <Comment id. In the format post_id-unique_id",
                         "mentions": "[...]              <Mentions in this comment>",
-                        "postID": "76ORWVE6ZRCIZB7JX6PM23A7S4"
+                        "postID": "...                  <ID of this post>"
                     }
                 ],
                 "date": "1580274189                     <Post create timestamp>",
@@ -229,17 +230,17 @@ A slice of data was fetched from the globla feed
                 "loopCount": "0                         <Total loops played of this video>",
                 "mentions": [
                     {
-                        "accountID": "...   <Account mentioned>",
+                        "accountID": "...               <Account mentioned>",
                         "byteRange": {
-                            "start": "10    <Unknown>",
-                            "stop": "15     <Unknown, same length as range>"
+                            "start": "10                <Unknown>",
+                            "stop": "15                 <Unknown, same length as range>"
                         },
                         "range": {
-                            "start": "8     <Mention substring start>",
-                            "stop": "13     <Mention substring end>"
+                            "start": "8                 <Mention substring start>",
+                            "stop": "13                 <Mention substring end>"
                         },
-                        "text": "@byte      <Mention text>",
-                        "username": "byte   <Username mentioned"
+                        "text": "@byte                  <Mention text>",
+                        "username": "byte               <Username mentioned"
                     }
                 ],
                 "rebytedByMe": "false                   <Was this rebyted by the authed user?>",
@@ -249,6 +250,93 @@ A slice of data was fetched from the globla feed
             }
         ],
         "cursor": "...                                  <Likely pagination cursor>"
+    },
+    "success": 1
+}
+```
+
+- 401 - Unauthorized
+Unauthorized
+
+Unauthorized to make request, either because the authorization header is incorrect or missing
+
+
+</details>
+
+
+<details>
+<summary>GET /timeline/rebytes/</summary>
+Posts that have been rebyted into your timeline.
+Essentially post objects wrapped in rebyte info, with the regular id -> user table in feeds
+
+
+__headers__
+
+|name|value|required|
+| - | - | - |
+|authorization|The token returned when logging in or creating an account|True|
+|user-agent|The user agent of the device using this app|False|
+
+__responses__
+
+- 200 - Rebyte feed slice fetched
+Rebyte feed slice fetched
+
+A slice of rebytes relevant to the authed user were fetched
+
+```JSON
+{
+    "data": {
+        "accounts": "{...}                                  <id -> account object map>",
+        "rebytes": [
+            {
+                "authorID": "...                            <Rebyter id>",
+                "date": "1580240837                         <Rebyte timestamp>",
+                "id": "...                                  <Rebyte id>",
+                "post": {
+                    "allowCuration": "true                  <May this post be curated?>",
+                    "allowRemix": "false                    <May this post be remixed?>",
+                    "authorID": "...                        <ID that points to the post author",
+                    "caption": "                            <Post caption>",
+                    "commentCount": "0                      <Total comment count>",
+                    "commentCursor": "...                   <Comment pagination cursor>",
+                    "comments": [
+                        {
+                            "authorID": "...                <Comment author id>",
+                            "body": "...                    <Comment body",
+                            "date": "1580273915             <Comment creation timestamp>",
+                            "id": "...                      <Comment id. In the format post_id-unique_id",
+                            "mentions": "[...]              <Mentions in this comment>",
+                            "postID": "...                  <ID of this post>"
+                        }
+                    ],
+                    "date": "1580274189                     <Post create timestamp>",
+                    "id": "...                              <ID that points to this post>",
+                    "likeCount": "0                         <Total like count>",
+                    "likedByMe": "false                     <Was this liked by the authed user?>",
+                    "loopCount": "0                         <Total loops played of this video>",
+                    "mentions": [
+                        {
+                            "accountID": "...               <Account mentioned>",
+                            "byteRange": {
+                                "start": "10                <Unknown>",
+                                "stop": "15                 <Unknown, same length as range>"
+                            },
+                            "range": {
+                                "start": "8                 <Mention substring start>",
+                                "stop": "13                 <Mention substring end>"
+                            },
+                            "text": "@byte                  <Mention text>",
+                            "username": "byte               <Username mentioned"
+                        }
+                    ],
+                    "rebytedByMe": "false                   <Was this rebyted by the authed user?>",
+                    "thumbSrc": "...                        <Video thumbnail link>",
+                    "type": "0                              <Unknown use>",
+                    "videoSrc": "...                        <Video link>"
+                }
+            }
+        ]
     },
     "success": 1
 }

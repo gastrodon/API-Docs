@@ -104,6 +104,7 @@ vars:
                                         "authorID": "...                        <ID that points to the post author",
                                         "caption": "                            <Post caption>",
                                         "commentCount": "0                      <Total comment count>",
+                                        "commentCursor": "...                   <Comment pagination cursor>",
                                         "comments": [
                                             {
                                                 "authorID": "...                <Comment author id>",
@@ -111,7 +112,7 @@ vars:
                                                 "date": "1580273915             <Comment creation timestamp>",
                                                 "id": "...                      <Comment id. In the format post_id-unique_id",
                                                 "mentions": "[...]              <Mentions in this comment>",
-                                                "postID": "76ORWVE6ZRCIZB7JX6PM23A7S4"
+                                                "postID": "...                  <ID of this post>"
                                             }
                                         ],
                                         "date": "1580274189                     <Post create timestamp>",
@@ -120,19 +121,19 @@ vars:
                                         "likedByMe": "false                     <Was this liked by the authed user?>",
                                         "loopCount": "0                         <Total loops played of this video>",
                                         "mentions": [
-                                                        {
-                                                            "accountID": "...   <Account mentioned>",
-                                                            "byteRange": {
-                                                                "start": "10    <Unknown>",
-                                                                "stop": "15     <Unknown, same length as range>"
-                                                            },
-                                                            "range": {
-                                                                "start": "8     <Mention substring start>",
-                                                                "stop": "13     <Mention substring end>"
-                                                            },
-                                                            "text": "@byte      <Mention text>",
-                                                            "username": "byte   <Username mentioned"
-                                                        }
+                                            {
+                                                "accountID": "...               <Account mentioned>",
+                                                "byteRange": {
+                                                    "start": "10                <Unknown>",
+                                                    "stop": "15                 <Unknown, same length as range>"
+                                                },
+                                                "range": {
+                                                    "start": "8                 <Mention substring start>",
+                                                    "stop": "13                 <Mention substring end>"
+                                                },
+                                                "text": "@byte                  <Mention text>",
+                                                "username": "byte               <Username mentioned"
+                                            }
                                                     ],
                                         "rebytedByMe": "false                   <Was this rebyted by the authed user?>",
                                         "thumbSrc": "...                        <Video thumbnail link>",
@@ -178,6 +179,66 @@ vars:
                             },
                             "success": 1
                         }
+        rebytes:
+            GET:
+                ok:
+                    lang: JSON
+                    content:
+                        {
+                            "data": {
+                                "accounts": "{...}                                  <id -> account object map>",
+                                "rebytes": [
+                                    {
+                                        "authorID": "...                            <Rebyter id>",
+                                        "date": "1580240837                         <Rebyte timestamp>",
+                                        "id": "...                                  <Rebyte id>",
+                                        "post": {
+                                            "allowCuration": "true                  <May this post be curated?>",
+                                            "allowRemix": "false                    <May this post be remixed?>",
+                                            "authorID": "...                        <ID that points to the post author",
+                                            "caption": "                            <Post caption>",
+                                            "commentCount": "0                      <Total comment count>",
+                                            "commentCursor": "...                   <Comment pagination cursor>",
+                                            "comments": [
+                                                {
+                                                    "authorID": "...                <Comment author id>",
+                                                    "body": "...                    <Comment body",
+                                                    "date": "1580273915             <Comment creation timestamp>",
+                                                    "id": "...                      <Comment id. In the format post_id-unique_id",
+                                                    "mentions": "[...]              <Mentions in this comment>",
+                                                    "postID": "...                  <ID of this post>"
+                                                }
+                                            ],
+                                            "date": "1580274189                     <Post create timestamp>",
+                                            "id": "...                              <ID that points to this post>",
+                                            "likeCount": "0                         <Total like count>",
+                                            "likedByMe": "false                     <Was this liked by the authed user?>",
+                                            "loopCount": "0                         <Total loops played of this video>",
+                                            "mentions": [
+                                                {
+                                                    "accountID": "...               <Account mentioned>",
+                                                    "byteRange": {
+                                                        "start": "10                <Unknown>",
+                                                        "stop": "15                 <Unknown, same length as range>"
+                                                    },
+                                                    "range": {
+                                                        "start": "8                 <Mention substring start>",
+                                                        "stop": "13                 <Mention substring end>"
+                                                    },
+                                                    "text": "@byte                  <Mention text>",
+                                                    "username": "byte               <Username mentioned"
+                                                }
+                                                        ],
+                                            "rebytedByMe": "false                   <Was this rebyted by the authed user?>",
+                                            "thumbSrc": "...                        <Video thumbnail link>",
+                                            "type": "0                              <Unknown use>",
+                                            "videoSrc": "...                        <Video link>"
+                                        }
+                                    }
+                                ]
+                            },
+                            "success": 1
+                        }
 
 routes:
         /account/me/:
@@ -217,3 +278,13 @@ routes:
                         title: Explore cards recieved
                         description: The current explore cards have been fetched
                         body: $response.explore.GET.ok
+        /timeline/rebytes/:
+            GET:
+                description: |
+                    Posts that have been rebyted into your timeline.
+                    Essentially post objects wrapped in rebyte info, with the regular id -> user table in feeds
+                responses:
+                    "200":
+                        title: Rebyte feed slice fetched
+                        description: A slice of rebytes relevant to the authed user were fetched
+                        body: $response.rebytes.GET.ok
