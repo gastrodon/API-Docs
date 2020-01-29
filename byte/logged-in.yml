@@ -1,0 +1,44 @@
+globals:
+    responses:
+        "*":
+            "401":
+                title: Unauthorized
+                description: Unauthorized to make request, either because the authorization header is incorrect or missing
+                
+vars:
+    response:
+        me:
+            GET:
+                ok:
+                    lang: JSON
+                    content:
+                        {
+                            "data": {
+                                "account": {
+                                    "id": "                             <account id>",
+                                    "isRegistered": "true               <Is this user registered?>",
+                                    "isChannel": "false                 <Is this user a channel?>",
+                                    "isSuspended": "false               <Is this account suspended?>",
+                                    "isDeactivated": "false             <Did this user deactivate their account?>",
+                                    "registrationDate": "1580272854     <Account creation Unix timestamp>",
+                                    "username": "robotter               <Account username>",
+                                    "backgroundColor": "#000000         <Account background color",
+                                    "foregroundColor": "#CCD6E9         <Account foreground color",
+                                    "followerCount": "0                 <Subscribers of this account>",
+                                    "followingCount": "0                <Subscriptions of this account>",
+                                    "loopCount": "0                     <Total loops played of this account>",
+                                    "loopsConsumedCount": "0            <Total loops played by this account>"
+                                }
+                            },
+                            "success": 1
+                        }
+
+routes:
+        /account/me/:
+            GET:
+                description: Get information about the logged in account
+                responses:
+                    "200":
+                        title: Account fetched
+                        description: The account information of the logged in user was fetched
+                        body: $response.me.GET.ok
