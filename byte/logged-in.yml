@@ -144,6 +144,41 @@ vars:
                             },
                             "success": 1
                         }
+        explore:
+            GET:
+                ok:
+                    lang: JSON
+                    content:
+                        {
+                            "data": {
+                                "layout": [
+                                    {
+                                        "background": {
+                                            "color": "#00BBDB           <Card background color>",
+                                            "type": "image              <Card background type>",
+                                            "url": "...                 <Background image link, if any such background>"
+                                        },
+                                        "description": "null            <Card description, if any>",
+                                        "header": {
+                                            "backgroundColor": "null    <Header background color>",
+                                            "color": "null              <Header color>",
+                                            "title": "Popular Now       <Header title>"
+                                        },
+                                        "icon": "null                   <Icon link, if any such icon>",
+                                        "sponsored": "false             <Is this sponsored? Ads appear to not yet be implemented>",
+                                        "title": {
+                                            "backgroundColor": "null    <Appears to always be nil>",
+                                            "color": "#ffffff           <Title color>",
+                                            "title": "Popular Now       <Title title>"
+                                        },
+                                        "type": "large                  <Card display type, observed include [image, large, medium]",
+                                        "uri": "byte://...              <Byte-handleable endpoint. byte:// can be subbed for the api's baseurl>"
+                                    }
+                                ]
+                            },
+                            "success": 1
+                        }
+
 routes:
         /account/me/:
             GET:
@@ -174,3 +209,11 @@ routes:
                         title: Feed Data Fetched
                         description: A slice of data was fetched from the globla feed
                         body: $response.global-feed.GET.ok
+        /explore/:
+            GET:
+                description: Get possible explore feeds
+                responses:
+                    "200":
+                        title: Explore cards recieved
+                        description: The current explore cards have been fetched
+                        body: $response.explore.GET.ok
