@@ -526,46 +526,6 @@ vars:
                         }
 
 routes:
-        /account/me:
-            GET:
-                description: Get information about the logged in account
-                responses:
-                    "200":
-                        title: Account fetched
-                        description: The account information of the logged in account was fetched
-                        body: $response.me.GET.ok
-            PUT:
-                description: |
-                    Update the authed account.
-                    Any or all of the json fields may be included or omitted,
-                    but the request will only work if all data being sent is new
-                body: $request.account.PUT
-                responses:
-                    "200":
-                        title: Account updated
-                        description: The information sent was ok and the profile information is updated
-                        body: $response.global.ok
-                    "200:1401":
-                        title: accountname invalid
-                        description: The accountname sent is too long or has bad characters
-                        body: $response.global.invalid
-                    "200:1402":
-                        title: accountname taken
-                        description: The accountname sent is already taken and cannot be used
-                        body: $response.global.taken
-        /account/me/device:
-            PUT:
-                description: Give byte information about this device
-                body: $request.device.PUT
-                responses:
-                    "200":
-                        title: Device info accepted
-                        description: The device info sent is correct and was accepted
-                        body: $response.global.ok
-                    "200:1404":
-                        title: Device info incorrect
-                        description: The device info sent is malformed
-                        body: $response.device.PUT.malformed
         /client/event:
             POST:
                 description: Likely has to do with event tracking. Appears to always ratelimit me
@@ -666,6 +626,46 @@ routes:
                         description: A slice of comments was fetched
                         body: $response.post-comments.GET.ok
         # accounts
+        /account/me:
+            GET:
+                description: Get information about the logged in account
+                responses:
+                    "200":
+                        title: Account fetched
+                        description: The account information of the logged in account was fetched
+                        body: $response.me.GET.ok
+            PUT:
+                description: |
+                    Update the authed account.
+                    Any or all of the json fields may be included or omitted,
+                    but the request will only work if all data being sent is new
+                body: $request.account.PUT
+                responses:
+                    "200":
+                        title: Account updated
+                        description: The information sent was ok and the profile information is updated
+                        body: $response.global.ok
+                    "200:1401":
+                        title: accountname invalid
+                        description: The accountname sent is too long or has bad characters
+                        body: $response.global.invalid
+                    "200:1402":
+                        title: accountname taken
+                        description: The accountname sent is already taken and cannot be used
+                        body: $response.global.taken
+        /account/me/device:
+            PUT:
+                description: Give byte information about this device
+                body: $request.device.PUT
+                responses:
+                    "200":
+                        title: Device info accepted
+                        description: The device info sent is correct and was accepted
+                        body: $response.global.ok
+                    "200:1404":
+                        title: Device info incorrect
+                        description: The device info sent is malformed
+                        body: $response.device.PUT.malformed
         /account/id/:id:
             GET:
                 description: Get a account by their id
