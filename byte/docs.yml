@@ -140,18 +140,15 @@ routes:
                 "200":
                     title: Username free
                     description: The username checked is not in use and can be registered
-                    body:
-                        $response.precheck.POST.free
+                    body: $response.precheck.POST.free
                 "200:1401":
                     title: Username invalid
                     description: The username supplied is not valid. This can be because of length, or because of invalid characters like spaces
-                    body:
-                        $response.precheck.POST.invalid
+                    body: $response.precheck.POST.invalid
                 "200:1402":
                     title: Username taken
                     description: The username checked is in use already
-                    body:
-                        $response.precheck.POST.taken
+                    body: $response.precheck.POST.taken
     # At auth
     /account/register/:
         POST:
@@ -161,18 +158,15 @@ routes:
                 "200":
                     title: User registered
                     description: A user was registered and their information was registered
-                    body:
-                        $response.register.POST.created
+                    body: $response.register.POST.created
                 "200:1300":
                     title: OAuth token expired
                     description: The google oauth token generated for this account create has expired. Likely because you took too long at username select screen
-                    body:
-                        $response.register.POST.invalid-token
+                    body: $response.register.POST.invalid-token
                 "200:1402":
                     title: Username taken
                     description: The username used to sign up is already in use
-                    body:
-                        $response.register.POST.taken
+                    body: $response.register.POST.taken
     /authenticate/google/:
         POST:
             description: Post a google token for user authentication. This is for new and existing accounts
@@ -181,5 +175,4 @@ routes:
                 "200:1305":
                     title: No Such Account
                     description: No account exists attached to this google user, and one should be created
-                    body:
-                        $response.authenticate.POST.new
+                    body: $response.authenticate.POST.new
