@@ -28,6 +28,10 @@ globals:
               required: false
 
 vars:
+    url:
+        account-id:
+            name: id
+            description: the id of the user to query
     feed-responses:
         "200":
             title: Feed slice fetched
@@ -53,6 +57,21 @@ vars:
                         "data": {
                             "accounts": "{...}  <id -> user map>",
                             "posts": "[...]     <Array of posts>",
+                            "cursor": "...      <Pagination cursor>",
+                        },
+                        "success": 1
+                    }
+    feed-rebytes-paged:
+        "200":
+            title: Feed slice fetched
+            description: A slice of posts of this feed were fetched with usermap and pagination data
+            body:
+                lang: JSON
+                content:
+                    {
+                        "data": {
+                            "accounts": "{...}  <id -> user map>",
+                            "rebytes": "[...]   <Array of post rebytes>",
                             "cursor": "...      <Pagination cursor>",
                         },
                         "success": 1
@@ -141,6 +160,30 @@ vars:
                             }
                         ],
                         "postID": "...              <Parent post id>"
+                    }
+            user:
+                lang: JSON
+                content:
+                    {
+                        "data": {
+                            "avatarURL": "...                   <Account pfp link>",
+                            "backgroundColor": "#000000         <Account background color",
+                            "bio": "...                         <Account bio>",
+                            "displayName": "...                 <Non-unique display name>",
+                            "followerCount": "0                 <Subscribers of this account>",
+                            "followingCount": "0                <Subscriptions of this account>",
+                            "foregroundColor": "#CCD6E9         <Account foreground color",
+                            "id": "                             <Account id>",
+                            "isBlocked": "false                 <Is this user blocked by the authed user?>",
+                            "isChannel": "false                 <Is this user a channel?>",
+                            "isFollowed": "false                <Is this user being followed by the authed user?>",
+                            "isFollowing": "false               <Is this user following the authed user?>",
+                            "loopCount": "0                     <Total loops played of this account>",
+                            "loopsConsumedCount": "0            <Total loops played by this account>",
+                            "registrationDate": "1580272854     <Account creation Unix timestamp>",
+                            "username": "robotter               <Account username>"
+                        },
+                        "success": 1
                     }
         global:
             ok:
@@ -568,6 +611,7 @@ routes:
                     The only observed sub-endpoint for any category is `popular`.
                     Lists of categories can be fetched with GET `/categories`
                 responses: $feed-responses-paged
+        # posts
         /post/id/:id:
             GET:
                 description: Get a post by its id
@@ -595,3 +639,41 @@ routes:
                         title: Comment slice recieved
                         description: A slice of comments was fetched
                         body: $response.post-comments.GET.ok
+        # users
+        /account/id/:id:
+            GET:
+                description: Get a user by their id
+                url params:
+                    - $url.account-id
+                responses:
+                    "200":
+                        title: User information recieved
+                        description: A user of id `id` exists and was retrieved
+                        body: $response.object.user
+        /account/id/:id/posts:
+            GET:
+                description: Get posts by some user
+                url params:
+                    - $url.account-id
+                responses: $feed-responses-paged
+        /account/id/:id/rebytes:
+            GET:
+                description: Get rebytes by some user
+                url params:
+                    - $url.account-id
+                responses: $feed-rebytes-paged
+        /account/prefix/:prefix:
+            GET:
+                description: Search for users by some username `prefix`
+                url params:
+                    - name: prefix
+                      description: prefix to search for
+                responses:
+                    "200":
+                        title: Search results fetched
+                        description: Search results for the prefix used were returned
+                        body: $response.user-list.GET.ok
+                    "200:1401":
+                        title: Bad search
+                        description: Search string has invalid characters that cannot prefix a username
+                        body: $response.global.invalid

@@ -1,4 +1,149 @@
 <details>
+<summary>GET /account/id/:id</summary>
+Get a user by their id
+
+__url params__
+
+|name|description|
+| - | - |
+|id|the id of the user to query|
+
+__headers__
+
+|name|value|required|
+| - | - | - |
+|authorization|The token returned when logging in or creating an account|True|
+|user-agent|The user agent of the device using this app|False|
+
+__responses__
+
+- 200 - User information recieved
+User information recieved
+
+A user of id `id` exists and was retrieved
+
+```JSON
+{
+    "data": {
+        "avatarURL": "...                   <Account pfp link>",
+        "backgroundColor": "#000000         <Account background color",
+        "bio": "...                         <Account bio>",
+        "displayName": "...                 <Non-unique display name>",
+        "followerCount": "0                 <Subscribers of this account>",
+        "followingCount": "0                <Subscriptions of this account>",
+        "foregroundColor": "#CCD6E9         <Account foreground color",
+        "id": "                             <Account id>",
+        "isBlocked": "false                 <Is this user blocked by the authed user?>",
+        "isChannel": "false                 <Is this user a channel?>",
+        "isFollowed": "false                <Is this user being followed by the authed user?>",
+        "isFollowing": "false               <Is this user following the authed user?>",
+        "loopCount": "0                     <Total loops played of this account>",
+        "loopsConsumedCount": "0            <Total loops played by this account>",
+        "registrationDate": "1580272854     <Account creation Unix timestamp>",
+        "username": "robotter               <Account username>"
+    },
+    "success": 1
+}
+```
+
+- 401 - Unauthorized
+Unauthorized
+
+Unauthorized to make request, either because the authorization header is incorrect or missing
+
+
+</details>
+
+
+<details>
+<summary>GET /account/id/:id/posts</summary>
+Get posts by some user
+
+__url params__
+
+|name|description|
+| - | - |
+|id|the id of the user to query|
+
+__headers__
+
+|name|value|required|
+| - | - | - |
+|authorization|The token returned when logging in or creating an account|True|
+|user-agent|The user agent of the device using this app|False|
+
+__responses__
+
+- 200 - Feed slice fetched
+Feed slice fetched
+
+A slice of posts of this feed were fetched with usermap and pagination data
+
+```JSON
+{
+    "data": {
+        "accounts": "{...}  <id -> user map>",
+        "posts": "[...]     <Array of posts>",
+        "cursor": "...      <Pagination cursor>"
+    },
+    "success": 1
+}
+```
+
+- 401 - Unauthorized
+Unauthorized
+
+Unauthorized to make request, either because the authorization header is incorrect or missing
+
+
+</details>
+
+
+<details>
+<summary>GET /account/id/:id/rebytes</summary>
+Get rebytes by some user
+
+__url params__
+
+|name|description|
+| - | - |
+|id|the id of the user to query|
+
+__headers__
+
+|name|value|required|
+| - | - | - |
+|authorization|The token returned when logging in or creating an account|True|
+|user-agent|The user agent of the device using this app|False|
+
+__responses__
+
+- 200 - Feed slice fetched
+Feed slice fetched
+
+A slice of posts of this feed were fetched with usermap and pagination data
+
+```JSON
+{
+    "data": {
+        "accounts": "{...}  <id -> user map>",
+        "rebytes": "[...]   <Array of post rebytes>",
+        "cursor": "...      <Pagination cursor>"
+    },
+    "success": 1
+}
+```
+
+- 401 - Unauthorized
+Unauthorized
+
+Unauthorized to make request, either because the authorization header is incorrect or missing
+
+
+</details>
+
+
+<details>
 <summary>GET /account/me</summary>
 Get information about the logged in account
 
@@ -201,6 +346,82 @@ The device info sent is malformed
         "message": "invalid device type"
     },
     "success": 0
+}
+```
+
+- 401 - Unauthorized
+Unauthorized
+
+Unauthorized to make request, either because the authorization header is incorrect or missing
+
+
+</details>
+
+
+<details>
+<summary>GET /account/prefix/:prefix</summary>
+Search for users by some username `prefix`
+
+__url params__
+
+|name|description|
+| - | - |
+|prefix|prefix to search for|
+
+__headers__
+
+|name|value|required|
+| - | - | - |
+|authorization|The token returned when logging in or creating an account|True|
+|user-agent|The user agent of the device using this app|False|
+
+__responses__
+
+- 200 - Search results fetched
+Search results fetched
+
+Search results for the prefix used were returned
+
+```JSON
+{
+    "data": {
+        "accounts": [
+            {
+                "avatarURL": "...                   <Account pfp link>",
+                "backgroundColor": "#000000         <Account background color",
+                "bio": "...                         <Account bio>",
+                "displayName": "...                 <Non-unique display name>",
+                "followerCount": "0                 <Subscribers of this account>",
+                "followingCount": "0                <Subscriptions of this account>",
+                "foregroundColor": "#CCD6E9         <Account foreground color",
+                "id": "                             <Account id>",
+                "isBlocked": "false                 <Is this user blocked by the authed user?>",
+                "isChannel": "false                 <Is this user a channel?>",
+                "isFollowed": "false                <Is this user being followed by the authed user?>",
+                "isFollowing": "false               <Is this user following the authed user?>",
+                "loopCount": "0                     <Total loops played of this account>",
+                "loopsConsumedCount": "0            <Total loops played by this account>",
+                "registrationDate": "1580272854     <Account creation Unix timestamp>",
+                "username": "robotter               <Account username>"
+            }
+        ]
+    },
+    "success": 1
+}
+```
+
+- 200:1401 - Bad search
+Bad search
+
+Search string has invalid characters that cannot prefix a username
+
+```JSON
+{
+    "success": 0,
+    "error": {
+        "code": 1401,
+        "message": "invalid username"
+    }
 }
 ```
 
@@ -789,64 +1010,17 @@ __headers__
 
 __responses__
 
-- 200 - Rebyte feed slice fetched
-Rebyte feed slice fetched
+- 200 - Feed slice fetched
+Feed slice fetched
 
-A slice of rebytes relevant to the authed user were fetched
+A slice of posts of this feed were fetched with usermap and pagination data
 
 ```JSON
 {
     "data": {
-        "accounts": "{...}                                  <id -> account object map>",
-        "rebytes": [
-            {
-                "authorID": "...                            <Rebyter id>",
-                "date": "1580240837                         <Rebyte timestamp>",
-                "id": "...                                  <Rebyte id>",
-                "post": {
-                    "allowCuration": "true                  <May this post be curated?>",
-                    "allowRemix": "false                    <May this post be remixed?>",
-                    "authorID": "...                        <ID that points to the post author",
-                    "caption": "                            <Post caption>",
-                    "commentCount": "0                      <Total comment count>",
-                    "commentCursor": "...                   <Comment pagination cursor>",
-                    "comments": [
-                        {
-                            "authorID": "...                <Comment author id>",
-                            "body": "...                    <Comment body",
-                            "date": "1580273915             <Comment creation timestamp>",
-                            "id": "...                      <Comment id. In the format post_id-unique_id",
-                            "mentions": "[...]              <Mentions in this comment>",
-                            "postID": "...                  <ID of this post>"
-                        }
-                    ],
-                    "date": "1580274189                     <Post create timestamp>",
-                    "id": "...                              <ID that points to this post>",
-                    "likeCount": "0                         <Total like count>",
-                    "likedByMe": "false                     <Was this liked by the authed user?>",
-                    "loopCount": "0                         <Total loops played of this video>",
-                    "mentions": [
-                        {
-                            "accountID": "...               <Account mentioned>",
-                            "byteRange": {
-                                "start": "10                <Unknown>",
-                                "stop": "15                 <Unknown, same length as range>"
-                            },
-                            "range": {
-                                "start": "8                 <Mention substring start>",
-                                "stop": "13                 <Mention substring end>"
-                            },
-                            "text": "@byte                  <Mention text>",
-                            "username": "byte               <Username mentioned"
-                        }
-                    ],
-                    "rebytedByMe": "false                   <Was this rebyted by the authed user?>",
-                    "thumbSrc": "...                        <Video thumbnail link>",
-                    "type": "0                              <Unknown use>",
-                    "videoSrc": "...                        <Video link>"
-                }
-            }
-        ]
+        "accounts": "{...}  <id -> user map>",
+        "rebytes": "[...]   <Array of post rebytes>",
+        "cursor": "...      <Pagination cursor>"
     },
     "success": 1
 }
