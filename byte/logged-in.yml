@@ -4,6 +4,13 @@ globals:
             "401":
                 title: Unauthorized
                 description: Unauthorized to make request, either because the authorization header is incorrect or missing
+        "PUT":
+            "200:1101":
+                title: Bad request format
+                description: |
+                    The information sent is either malformed, has missing keys, or has unexpected extra keys.
+                    It cannot be used. This should be treated similarly too an HTTP 400 bad request
+                body: $response.global.bad-request
     headers:
         "*":
             - name: authorization
@@ -73,6 +80,36 @@ vars:
                             "<->": "            <Only some feeds have cursors, sometimes>"
                         },
                         "success": 1
+                    }
+            taken:
+                lang: JSON
+                content:
+                    {
+                        "success": 0,
+                        "error": {
+                            "code": 1402,
+                            "message": "username is already in use"
+                        }
+                    }
+            invalid:
+                lang: JSON
+                content:
+                    {
+                        "success": 0,
+                        "error": {
+                            "code": 1401,
+                            "message": "invalid username"
+                        }
+                    }
+            bad-request:
+                lang: JSON
+                content:
+                    {
+                        "error": {
+                            "code": 1101,
+                            "message": "bad request format"
+                        },
+                        "success": 0
                     }
         me:
             GET:
