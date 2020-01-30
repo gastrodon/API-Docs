@@ -172,6 +172,10 @@ routes:
             description: Post a google token for user authentication. This is for new and existing accounts
             body: $request.authenticate.POST
             responses:
+                "200":
+                    title: Authenticated
+                    description: An account exists as bound to this google client and it was authenticated
+                    body: $response.register.POST.created
                 "200:1305":
                     title: No Such Account
                     description: No account exists attached to this google user, and one should be created

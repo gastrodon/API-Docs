@@ -1,5 +1,5 @@
 <details>
-<summary>POST /account/register/</summary>
+<summary>POST /account/register</summary>
 Create a profile
 
 ```JSON
@@ -81,7 +81,7 @@ The username used to sign up is already in use
 
 
 <details>
-<summary>POST /account/register/precheck/</summary>
+<summary>POST /account/register/precheck</summary>
 Check username availability. Used when creating an account
 
 __responses__
@@ -133,10 +133,44 @@ The username checked is in use already
 
 
 <details>
-<summary>POST /authenticate/google/</summary>
+<summary>POST /authenticate/google</summary>
 Post a google token for user authentication. This is for new and existing accounts
 
 __responses__
+
+- 200 - Authenticated
+Authenticated
+
+An account exists as bound to this google client and it was authenticated
+
+```JSON
+{
+    "data": {
+        "account": {
+            "backgroundColor": "#000000         <Account background color",
+            "followerCount": "0                 <Subscribers of this account>",
+            "followingCount": "0                <Subscriptions of this account>",
+            "foregroundColor": "#CCD6E9         <Account foreground color",
+            "id": "                             <account id>",
+            "isChannel": "false                 <Is this user a channel?>",
+            "isDeactivated": "false             <Did this user deactivate their account?>",
+            "isRegistered": "true               <Is this user registered?>",
+            "isSuspended": "false               <Is this account suspended?>",
+            "loopCount": "0                     <Total loops played of this account>",
+            "loopsConsumedCount": "0            <Total loops played by this account>",
+            "registrationDate": "-62135596800   <Account creation time. Unknown format, appears to be an error>",
+            "username": "robotter               <Account username>"
+        },
+        "token": {
+            "accountID": "              <account id>",
+            "isDeactivated": "false     <duplicate>",
+            "isRegistered": "true       <duplicate>",
+            "token": "                  <auth token>"
+        }
+    },
+    "success": 1
+}
+```
 
 - 200:1305 - No Such Account
 No Such Account
@@ -158,7 +192,7 @@ No account exists attached to this google user, and one should be created
 
 
 <details>
-<summary>POST /client/event/</summary>
+<summary>POST /client/event</summary>
 Likely has to do with event tracking. Appears to always ratelimit me
 
 ```JSON
