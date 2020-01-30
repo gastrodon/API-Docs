@@ -124,7 +124,7 @@ vars:
 
 routes:
     # No auth
-    /client/event/:
+    /client/event:
         POST:
             description: Likely has to do with event tracking. Appears to always ratelimit me
             body: $request.client-event.POST
@@ -132,7 +132,7 @@ routes:
                 "429":
                     title: Ratelimited
                     description: The request was not accepted becuase of ratelimiting. Appears to always happen
-    /account/register/precheck/:
+    /account/register/precheck:
         POST:
             description: Check username availability. Used when creating an account
             body: $request.precheck.POST
@@ -150,7 +150,7 @@ routes:
                     description: The username checked is in use already
                     body: $response.precheck.POST.taken
     # At auth
-    /account/register/:
+    /account/register:
         POST:
             description: Create a profile
             body: $request.register.POST
@@ -167,7 +167,7 @@ routes:
                     title: Username taken
                     description: The username used to sign up is already in use
                     body: $response.register.POST.taken
-    /authenticate/google/:
+    /authenticate/google:
         POST:
             description: Post a google token for user authentication. This is for new and existing accounts
             body: $request.authenticate.POST
