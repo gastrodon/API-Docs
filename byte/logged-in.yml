@@ -11,6 +11,13 @@ globals:
                     The information sent is either malformed, has missing keys, or has unexpected extra keys.
                     It cannot be used. This should be treated similarly too an HTTP 400 bad request
                 body: $response.global.bad-request
+        "POST":
+            "200:1101":
+                title: Bad request format
+                description: |
+                    The information sent is either malformed, has missing keys, or has unexpected extra keys.
+                    It cannot be used. This should be treated similarly too an HTTP 400 bad request
+                body: $response.global.bad-request
     headers:
         "*":
             - name: authorization
@@ -83,6 +90,57 @@ vars:
                             "<->": "            <Only some feeds have cursors, sometimes>"
                         },
                         "success": 1
+                    }
+            post:
+                lang: JSON
+                content:
+                    {
+                        "data": {
+                            "accounts": "{...}      <id -> profile map>",
+                            "allowCuration": "true  <May this post be curated?>",
+                            "allowRemix": "false    <May this post be remixed?>",
+                            "authorID": "...        <Post author id>",
+                            "caption": "...         <Post caption>",
+                            "commentCount": "6633   <Total comment count>",
+                            "commentCursor": "...   <Comments paging cursor>",
+                            "comments": "[...]      <Array of comments>",
+                            "date": "1579934060     <Post create timestamp>",
+                            "id": "...              <Post id>",
+                            "likeCount": "119453    <Total like count>",
+                            "likedByMe": "false     <Did the authed user like this post?>",
+                            "loopCount": "2356580   <Total loop count>",
+                            "mentions": "[]         <Array of mentions>",
+                            "rebytedByMe": "false   <Did the authed user rebyte this post?>",
+                            "thumbSrc": "...        <Thumbnail resource link>",
+                            "type": "0              <Unknown>",
+                            "videoSrc": "...        <Video resource link>"
+                        },
+                        "success": 1
+                    }
+            comment:
+                lang: JSON
+                content:
+                    {
+                        "authorID": "...            <Comment author id>",
+                        "body": "...                <Comment text body>",
+                        "date": "1580275243         <Comment create timestamp>",
+                        "id": "...-...              <Comment id as <post_id>-<comment_id>",
+                        "mentions": [
+                            {
+                                "accountID": "...   <Account mentioned>",
+                                "byteRange": {
+                                    "start": "10    <Unknown>",
+                                    "stop": "15     <Unknown, same length as range>"
+                                },
+                                "range": {
+                                    "start": "8     <Mention substring start>",
+                                    "stop": "13     <Mention substring end>"
+                                },
+                                "text": "@byte      <Mention text>",
+                                "username": "byte   <Username mentioned"
+                            }
+                        ],
+                        "postID": "...              <Parent post id>"
                     }
         global:
             ok:
@@ -345,6 +403,54 @@ vars:
                             },
                             "success": 1
                         }
+        loop:
+            POST:
+                ok:
+                    lang: JSON
+                    content:
+                        {
+                            "data": {
+                                    "postID": "...      <ID of the looped post>",
+                                    "loopCount": "...   <Updated loop count>"
+                                },
+                                "success": 1
+                        }
+        post-comments:
+            GET:
+                ok:
+                    lang: JSON
+                    content:
+                        {
+                            "data": {
+                                "accounts": "{...}                  <id -> profile map>",
+                                "comments": [
+                                    {
+                                        "authorID": "...            <Comment author id>",
+                                        "body": "...                <Comment text body>",
+                                        "date": "1580275243         <Comment create timestamp>",
+                                        "id": "...-...              <Comment id as <post_id>-<comment_id>",
+                                        "mentions": [
+                                            {
+                                                "accountID": "...   <Account mentioned>",
+                                                "byteRange": {
+                                                    "start": "10    <Unknown>",
+                                                    "stop": "15     <Unknown, same length as range>"
+                                                },
+                                                "range": {
+                                                    "start": "8     <Mention substring start>",
+                                                    "stop": "13     <Mention substring end>"
+                                                },
+                                                "text": "@byte      <Mention text>",
+                                                "username": "byte   <Username mentioned"
+                                            }
+                                        ],
+                                        "postID": "...              <Parent post id>"
+                                    }
+                                ],
+                                "cursor": "...                      <Pagination cursor>"
+                            },
+                            "success": 1
+                        }
 
 routes:
         /account/me:
@@ -462,3 +568,30 @@ routes:
                     The only observed sub-endpoint for any category is `popular`.
                     Lists of categories can be fetched with GET `/categories`
                 responses: $feed-responses-paged
+        /post/id/:id:
+            GET:
+                description: Get a post by its id
+                responses:
+                    "200":
+                        title: Post retrieved
+                        description: A post of id `id` exists and was retrieved
+                        body: $response.object.post
+        /post/id/:id/loop:
+            POST:
+                description: |
+                    Mark video as looped and increase its total loop count.
+                    There appears to be no ratelimit to marking posts as looped, so videos can be looped more times
+                    than they could be watched in the same timeframe
+                responses:
+                    "200":
+                        title: Post looped
+                        description: This post has been marked as looped, and its loop count has been updated
+                        body: $response.loop.POST.ok
+        /post/id/:id/feedback/comments:
+            GET:
+                description: Get a slice of comments on a post with usermap data
+                responses:
+                    "200":
+                        title: Comment slice recieved
+                        description: A slice of comments was fetched
+                        body: $response.post-comments.GET.ok

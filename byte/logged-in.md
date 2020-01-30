@@ -280,6 +280,23 @@ The recorded event was accepted and recorded
 }
 ```
 
+- 200:1101 - Bad request format
+Bad request format
+
+The information sent is either malformed, has missing keys, or has unexpected extra keys.
+It cannot be used. This should be treated similarly too an HTTP 400 bad request
+
+
+```JSON
+{
+    "error": {
+        "code": 1101,
+        "message": "bad request format"
+    },
+    "success": 0
+}
+```
+
 - 401 - Unauthorized
 Unauthorized
 
@@ -535,6 +552,177 @@ A slice of posts of this feed were fetched with usermap data
         "posts": "[...]     <Array of posts>"
     },
     "success": 1
+}
+```
+
+- 401 - Unauthorized
+Unauthorized
+
+Unauthorized to make request, either because the authorization header is incorrect or missing
+
+
+</details>
+
+
+<details>
+<summary>GET /post/id/:id</summary>
+Get a post by its id
+
+__headers__
+
+|name|value|required|
+| - | - | - |
+|authorization|The token returned when logging in or creating an account|True|
+|user-agent|The user agent of the device using this app|False|
+
+__responses__
+
+- 200 - Post retrieved
+Post retrieved
+
+A post of id `id` exists and was retrieved
+
+```JSON
+{
+    "data": {
+        "accounts": "{...}      <id -> profile map>",
+        "allowCuration": "true  <May this post be curated?>",
+        "allowRemix": "false    <May this post be remixed?>",
+        "authorID": "...        <Post author id>",
+        "caption": "...         <Post caption>",
+        "commentCount": "6633   <Total comment count>",
+        "commentCursor": "...   <Comments paging cursor>",
+        "comments": "[...]      <Array of comments>",
+        "date": "1579934060     <Post create timestamp>",
+        "id": "...              <Post id>",
+        "likeCount": "119453    <Total like count>",
+        "likedByMe": "false     <Did the authed user like this post?>",
+        "loopCount": "2356580   <Total loop count>",
+        "mentions": "[]         <Array of mentions>",
+        "rebytedByMe": "false   <Did the authed user rebyte this post?>",
+        "thumbSrc": "...        <Thumbnail resource link>",
+        "type": "0              <Unknown>",
+        "videoSrc": "...        <Video resource link>"
+    },
+    "success": 1
+}
+```
+
+- 401 - Unauthorized
+Unauthorized
+
+Unauthorized to make request, either because the authorization header is incorrect or missing
+
+
+</details>
+
+
+<details>
+<summary>GET /post/id/:id/feedback/comments</summary>
+Get a slice of comments on a post with usermap data
+
+__headers__
+
+|name|value|required|
+| - | - | - |
+|authorization|The token returned when logging in or creating an account|True|
+|user-agent|The user agent of the device using this app|False|
+
+__responses__
+
+- 200 - Comment slice recieved
+Comment slice recieved
+
+A slice of comments was fetched
+
+```JSON
+{
+    "data": {
+        "accounts": "{...}                  <id -> profile map>",
+        "comments": [
+            {
+                "authorID": "...            <Comment author id>",
+                "body": "...                <Comment text body>",
+                "date": "1580275243         <Comment create timestamp>",
+                "id": "...-...              <Comment id as <post_id>-<comment_id>",
+                "mentions": [
+                    {
+                        "accountID": "...   <Account mentioned>",
+                        "byteRange": {
+                            "start": "10    <Unknown>",
+                            "stop": "15     <Unknown, same length as range>"
+                        },
+                        "range": {
+                            "start": "8     <Mention substring start>",
+                            "stop": "13     <Mention substring end>"
+                        },
+                        "text": "@byte      <Mention text>",
+                        "username": "byte   <Username mentioned"
+                    }
+                ],
+                "postID": "...              <Parent post id>"
+            }
+        ],
+        "cursor": "...                      <Pagination cursor>"
+    },
+    "success": 1
+}
+```
+
+- 401 - Unauthorized
+Unauthorized
+
+Unauthorized to make request, either because the authorization header is incorrect or missing
+
+
+</details>
+
+
+<details>
+<summary>POST /post/id/:id/loop</summary>
+Mark video as looped and increase its total loop count.
+There appears to be no ratelimit to marking posts as looped, so videos can be looped more times
+than they could be watched in the same timeframe
+
+
+__headers__
+
+|name|value|required|
+| - | - | - |
+|authorization|The token returned when logging in or creating an account|True|
+|user-agent|The user agent of the device using this app|False|
+
+__responses__
+
+- 200 - Post looped
+Post looped
+
+This post has been marked as looped, and its loop count has been updated
+
+```JSON
+{
+    "data": {
+        "postID": "...      <ID of the looped post>",
+        "loopCount": "...   <Updated loop count>"
+    },
+    "success": 1
+}
+```
+
+- 200:1101 - Bad request format
+Bad request format
+
+The information sent is either malformed, has missing keys, or has unexpected extra keys.
+It cannot be used. This should be treated similarly too an HTTP 400 bad request
+
+
+```JSON
+{
+    "error": {
+        "code": 1101,
+        "message": "bad request format"
+    },
+    "success": 0
 }
 ```
 
