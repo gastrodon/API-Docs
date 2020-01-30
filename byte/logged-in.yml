@@ -33,6 +33,16 @@ vars:
                         "data": {},
                         "success": 1
                     }
+            feed:
+                lang: JSON
+                content:
+                    {
+                        "data": {
+                            "accounts": "{...}  <id -> user map>",
+                            "posts": "[...]     <Array of posts>"
+                        },
+                        "success": 1
+                    }
         me:
             GET:
                 ok:
@@ -287,6 +297,14 @@ routes:
                         title: Explore cards recieved
                         description: The current explore cards have been fetched
                         body: $response.explore.GET.ok
+        /timeline/:
+            GET:
+                description: Get posts in the timeline of the authed user
+                responses:
+                    "200":
+                        title: Timeline feed slice fetched
+                        description: A slice of the timeline feed was fetched
+                        body: $response.global.feed
         /timeline/rebytes/:
             GET:
                 description: |

@@ -299,6 +299,43 @@ Unauthorized to make request, either because the authorization header is incorre
 
 
 <details>
+<summary>GET /timeline/</summary>
+Get posts in the timeline of the authed user
+
+__headers__
+
+|name|value|required|
+| - | - | - |
+|authorization|The token returned when logging in or creating an account|True|
+|user-agent|The user agent of the device using this app|False|
+
+__responses__
+
+- 200 - Timeline feed slice fetched
+Timeline feed slice fetched
+
+A slice of the timeline feed was fetched
+
+```JSON
+{
+    "data": {
+        "accounts": "{...}  <id -> user map>",
+        "posts": "[...]     <Array of posts>"
+    },
+    "success": 1
+}
+```
+
+- 401 - Unauthorized
+Unauthorized
+
+Unauthorized to make request, either because the authorization header is incorrect or missing
+
+
+</details>
+
+
+<details>
 <summary>GET /timeline/rebytes/</summary>
 Posts that have been rebyted into your timeline.
 Essentially post objects wrapped in rebyte info, with the regular id -> user table in feeds
