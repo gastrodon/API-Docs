@@ -46,6 +46,97 @@ Unauthorized to make request, either because the authorization header is incorre
 
 
 </details>
+<details>
+<summary>PUT /account/me</summary>
+Update the authed user.
+Any or all of the json fields may be included or omitted,
+but the request will only work if all data being sent is new
+
+
+__headers__
+
+|name|value|required|
+| - | - | - |
+|authorization|The token returned when logging in or creating an account|True|
+|user-agent|The user agent of the device using this app|False|
+
+```JSON
+{
+    "colorScheme": "2       <Predefined color scheme to use>",
+    "bio": "...             <Profile bio to use, send a blank to remove>",
+    "displayName": "...     <Non-unique display name to use, send blank to remove>",
+    "username": "...        <Unique username to use>"
+}
+```
+
+__responses__
+
+- 200 - Account updated
+Account updated
+
+The information sent was ok and the profile information is updated
+
+```JSON
+{
+    "data": {},
+    "success": 1
+}
+```
+
+- 200:1101 - Bad request format
+Bad request format
+
+The information sent is either malformed, has missing keys, or has unexpected extra keys.
+It cannot be used. This should be treated similarly too an HTTP 400 bad request
+
+
+```JSON
+{
+    "error": {
+        "code": 1101,
+        "message": "bad request format"
+    },
+    "success": 0
+}
+```
+
+- 200:1401 - Username invalid
+Username invalid
+
+The username sent is too long or has bad characters
+
+```JSON
+{
+    "success": 0,
+    "error": {
+        "code": 1401,
+        "message": "invalid username"
+    }
+}
+```
+
+- 200:1402 - Username taken
+Username taken
+
+The username sent is already taken and cannot be used
+
+```JSON
+{
+    "success": 0,
+    "error": {
+        "code": 1402,
+        "message": "username is already in use"
+    }
+}
+```
+
+- 401 - Unauthorized
+Unauthorized
+
+Unauthorized to make request, either because the authorization header is incorrect or missing
+
+
+</details>
 
 
 <details>
@@ -78,6 +169,23 @@ The device info sent is correct and was accepted
 {
     "data": {},
     "success": 1
+}
+```
+
+- 200:1101 - Bad request format
+Bad request format
+
+The information sent is either malformed, has missing keys, or has unexpected extra keys.
+It cannot be used. This should be treated similarly too an HTTP 400 bad request
+
+
+```JSON
+{
+    "error": {
+        "code": 1101,
+        "message": "bad request format"
+    },
+    "success": 0
 }
 ```
 
@@ -377,13 +485,14 @@ __responses__
 - 200 - Feed slice fetched
 Feed slice fetched
 
-A slice of posts of this feed were fetched with usermap data
+A slice of posts of this feed were fetched with usermap and pagination data
 
 ```JSON
 {
     "data": {
         "accounts": "{...}  <id -> user map>",
-        "posts": "[...]     <Array of posts>"
+        "posts": "[...]     <Array of posts>",
+        "cursor": "...      <Pagination cursor>"
     },
     "success": 1
 }
