@@ -24,24 +24,24 @@ globals:
               value: The token returned when logging in or creating an account
               required: true
             - name: user-agent
-              value: The user agent of the device using this app
+              value: The account agent of the device using this app
               required: false
 
 vars:
     url:
         account-id:
             name: id
-            description: the id of the user to query
+            description: the id of the account to query
     feed-responses:
         "200":
             title: Feed slice fetched
-            description: A slice of posts of this feed were fetched with usermap data
+            description: A slice of posts of this feed were fetched with accountmap data
             body:
                 lang: JSON
                 content:
                     {
                         "data": {
-                            "accounts": "{...}  <id -> user map>",
+                            "accounts": "{...}  <id -> account map>",
                             "posts": "[...]     <Array of posts>",
                         },
                         "success": 1
@@ -49,13 +49,13 @@ vars:
     feed-responses-paged:
         "200":
             title: Feed slice fetched
-            description: A slice of posts of this feed were fetched with usermap and pagination data
+            description: A slice of posts of this feed were fetched with accountmap and pagination data
             body:
                 lang: JSON
                 content:
                     {
                         "data": {
-                            "accounts": "{...}  <id -> user map>",
+                            "accounts": "{...}  <id -> account map>",
                             "posts": "[...]     <Array of posts>",
                             "cursor": "...      <Pagination cursor>",
                         },
@@ -64,13 +64,13 @@ vars:
     feed-rebytes-paged:
         "200":
             title: Feed slice fetched
-            description: A slice of posts of this feed were fetched with usermap and pagination data
+            description: A slice of posts of this feed were fetched with accountmap and pagination data
             body:
                 lang: JSON
                 content:
                     {
                         "data": {
-                            "accounts": "{...}  <id -> user map>",
+                            "accounts": "{...}  <id -> account map>",
                             "rebytes": "[...]   <Array of post rebytes>",
                             "cursor": "...      <Pagination cursor>",
                         },
@@ -94,7 +94,7 @@ vars:
                         "colorScheme": "2       <Predefined color scheme to use>",
                         "bio": "...             <Profile bio to use, send a blank to remove>",
                         "displayName": "...     <Non-unique display name to use, send blank to remove>",
-                        "username": "...        <Unique username to use>"
+                        "accountname": "...        <Unique accountname to use>"
                     }
     response:
         object:
@@ -103,7 +103,7 @@ vars:
                 content:
                     {
                         "data": {
-                            "accounts": "{...}  <id -> user map>",
+                            "accounts": "{...}  <id -> account map>",
                             "posts": "[...]     <Array of posts>",
                             "cursor": "...      <Pagination cursor>",
                             "<->": "            <Only some feeds have cursors, sometimes>"
@@ -126,10 +126,10 @@ vars:
                             "date": "1579934060     <Post create timestamp>",
                             "id": "...              <Post id>",
                             "likeCount": "119453    <Total like count>",
-                            "likedByMe": "false     <Did the authed user like this post?>",
+                            "likedByMe": "false     <Did the authed account like this post?>",
                             "loopCount": "2356580   <Total loop count>",
                             "mentions": "[]         <Array of mentions>",
-                            "rebytedByMe": "false   <Did the authed user rebyte this post?>",
+                            "rebytedByMe": "false   <Did the authed account rebyte this post?>",
                             "thumbSrc": "...        <Thumbnail resource link>",
                             "type": "0              <Unknown>",
                             "videoSrc": "...        <Video resource link>"
@@ -156,12 +156,12 @@ vars:
                                     "stop": "13     <Mention substring end>"
                                 },
                                 "text": "@byte      <Mention text>",
-                                "username": "byte   <Username mentioned"
+                                "accountname": "byte   <accountname mentioned"
                             }
                         ],
                         "postID": "...              <Parent post id>"
                     }
-            user:
+            account:
                 lang: JSON
                 content:
                     {
@@ -174,14 +174,14 @@ vars:
                             "followingCount": "0                <Subscriptions of this account>",
                             "foregroundColor": "#CCD6E9         <Account foreground color",
                             "id": "                             <Account id>",
-                            "isBlocked": "false                 <Is this user blocked by the authed user?>",
-                            "isChannel": "false                 <Is this user a channel?>",
-                            "isFollowed": "false                <Is this user being followed by the authed user?>",
-                            "isFollowing": "false               <Is this user following the authed user?>",
+                            "isBlocked": "false                 <Is this account blocked by the authed account?>",
+                            "isChannel": "false                 <Is this account a channel?>",
+                            "isFollowed": "false                <Is this account being followed by the authed account?>",
+                            "isFollowing": "false               <Is this account following the authed account?>",
                             "loopCount": "0                     <Total loops played of this account>",
                             "loopsConsumedCount": "0            <Total loops played by this account>",
                             "registrationDate": "1580272854     <Account creation Unix timestamp>",
-                            "username": "robotter               <Account username>"
+                            "accountname": "robotter               <Account accountname>"
                         },
                         "success": 1
                     }
@@ -200,7 +200,7 @@ vars:
                         "success": 0,
                         "error": {
                             "code": 1402,
-                            "message": "username is already in use"
+                            "message": "accountname is already in use"
                         }
                     }
             invalid:
@@ -210,7 +210,7 @@ vars:
                         "success": 0,
                         "error": {
                             "code": 1401,
-                            "message": "invalid username"
+                            "message": "invalid accountname"
                         }
                     }
             bad-request:
@@ -236,14 +236,14 @@ vars:
                                     "followingCount": "0                <Subscriptions of this account>",
                                     "foregroundColor": "#CCD6E9         <Account foreground color",
                                     "id": "                             <account id>",
-                                    "isChannel": "false                 <Is this user a channel?>",
-                                    "isDeactivated": "false             <Did this user deactivate their account?>",
-                                    "isRegistered": "true               <Is this user registered?>",
+                                    "isChannel": "false                 <Is this account a channel?>",
+                                    "isDeactivated": "false             <Did this account deactivate their account?>",
+                                    "isRegistered": "true               <Is this account registered?>",
                                     "isSuspended": "false               <Is this account suspended?>",
                                     "loopCount": "0                     <Total loops played of this account>",
                                     "loopsConsumedCount": "0            <Total loops played by this account>",
                                     "registrationDate": "1580272854     <Account creation Unix timestamp>",
-                                    "username": "robotter               <Account username>"
+                                    "accountname": "robotter               <Account accountname>"
                                 }
                             },
                             "success": 1
@@ -277,14 +277,14 @@ vars:
                                         "followingCount": "0                    <Subscriptions of this account>",
                                         "foregroundColor": "#CCD6E9             <Account foreground color",
                                         "id": "                                 <Account id, should match the above key>",
-                                        "isChannel": "false                     <Is this user a channel?>",
-                                        "isDeactivated": "false                 <Did this user deactivate their account?>",
-                                        "isRegistered": "true                   <Is this user registered?>",
+                                        "isChannel": "false                     <Is this account a channel?>",
+                                        "isDeactivated": "false                 <Did this account deactivate their account?>",
+                                        "isRegistered": "true                   <Is this account registered?>",
                                         "isSuspended": "false                   <Is this account suspended?>",
                                         "loopCount": "0                         <Total loops played of this account>",
                                         "loopsConsumedCount": "0                <Total loops played by this account>",
                                         "registrationDate": "1580272854         <Account creation Unix timestamp>",
-                                        "username": "robotter                   <Account username>"
+                                        "accountname": "robotter                   <Account accountname>"
                                     }
                                 },
                                 "posts": [
@@ -308,7 +308,7 @@ vars:
                                         "date": "1580274189                     <Post create timestamp>",
                                         "id": "...                              <ID that points to this post>",
                                         "likeCount": "0                         <Total like count>",
-                                        "likedByMe": "false                     <Was this liked by the authed user?>",
+                                        "likedByMe": "false                     <Was this liked by the authed account?>",
                                         "loopCount": "0                         <Total loops played of this video>",
                                         "mentions": [
                                             {
@@ -322,10 +322,10 @@ vars:
                                                     "stop": "13                 <Mention substring end>"
                                                 },
                                                 "text": "@byte                  <Mention text>",
-                                                "username": "byte               <Username mentioned"
+                                                "accountname": "byte               <accountname mentioned"
                                             }
                                                     ],
-                                        "rebytedByMe": "false                   <Was this rebyted by the authed user?>",
+                                        "rebytedByMe": "false                   <Was this rebyted by the authed account?>",
                                         "thumbSrc": "...                        <Video thumbnail link>",
                                         "type": "0                              <Unknown use>",
                                         "videoSrc": "...                        <Video link>"
@@ -402,7 +402,7 @@ vars:
                                             "date": "1580274189                     <Post create timestamp>",
                                             "id": "...                              <ID that points to this post>",
                                             "likeCount": "0                         <Total like count>",
-                                            "likedByMe": "false                     <Was this liked by the authed user?>",
+                                            "likedByMe": "false                     <Was this liked by the authed account?>",
                                             "loopCount": "0                         <Total loops played of this video>",
                                             "mentions": [
                                                 {
@@ -416,10 +416,10 @@ vars:
                                                         "stop": "13                 <Mention substring end>"
                                                     },
                                                     "text": "@byte                  <Mention text>",
-                                                    "username": "byte               <Username mentioned"
+                                                    "accountname": "byte               <accountname mentioned"
                                                 }
                                                         ],
-                                            "rebytedByMe": "false                   <Was this rebyted by the authed user?>",
+                                            "rebytedByMe": "false                   <Was this rebyted by the authed account?>",
                                             "thumbSrc": "...                        <Video thumbnail link>",
                                             "type": "0                              <Unknown use>",
                                             "videoSrc": "...                        <Video link>"
@@ -484,7 +484,7 @@ vars:
                                                     "stop": "13     <Mention substring end>"
                                                 },
                                                 "text": "@byte      <Mention text>",
-                                                "username": "byte   <Username mentioned"
+                                                "accountname": "byte   <accountname mentioned"
                                             }
                                         ],
                                         "postID": "...              <Parent post id>"
@@ -494,7 +494,7 @@ vars:
                             },
                             "success": 1
                         }
-        user-list:
+        account-list:
             GET:
                 ok:
                     lang: JSON
@@ -511,14 +511,14 @@ vars:
                                         "followingCount": "0                <Subscriptions of this account>",
                                         "foregroundColor": "#CCD6E9         <Account foreground color",
                                         "id": "                             <Account id>",
-                                        "isBlocked": "false                 <Is this user blocked by the authed user?>",
-                                        "isChannel": "false                 <Is this user a channel?>",
-                                        "isFollowed": "false                <Is this user being followed by the authed user?>",
-                                        "isFollowing": "false               <Is this user following the authed user?>",
+                                        "isBlocked": "false                 <Is this account blocked by the authed account?>",
+                                        "isChannel": "false                 <Is this account a channel?>",
+                                        "isFollowed": "false                <Is this account being followed by the authed account?>",
+                                        "isFollowing": "false               <Is this account following the authed account?>",
                                         "loopCount": "0                     <Total loops played of this account>",
                                         "loopsConsumedCount": "0            <Total loops played by this account>",
                                         "registrationDate": "1580272854     <Account creation Unix timestamp>",
-                                        "username": "robotter               <Account username>"
+                                        "accountname": "robotter               <Account accountname>"
                                     }
                                 ]
                             },
@@ -532,11 +532,11 @@ routes:
                 responses:
                     "200":
                         title: Account fetched
-                        description: The account information of the logged in user was fetched
+                        description: The account information of the logged in account was fetched
                         body: $response.me.GET.ok
             PUT:
                 description: |
-                    Update the authed user.
+                    Update the authed account.
                     Any or all of the json fields may be included or omitted,
                     but the request will only work if all data being sent is new
                 body: $request.account.PUT
@@ -546,12 +546,12 @@ routes:
                         description: The information sent was ok and the profile information is updated
                         body: $response.global.ok
                     "200:1401":
-                        title: Username invalid
-                        description: The username sent is too long or has bad characters
+                        title: accountname invalid
+                        description: The accountname sent is too long or has bad characters
                         body: $response.global.invalid
                     "200:1402":
-                        title: Username taken
-                        description: The username sent is already taken and cannot be used
+                        title: accountname taken
+                        description: The accountname sent is already taken and cannot be used
                         body: $response.global.taken
         /account/me/device:
             PUT:
@@ -590,7 +590,7 @@ routes:
         # feeds
         /timeline:
             GET:
-                description: Get posts in the timeline of the authed user
+                description: Get posts in the timeline of the authed account
                 responses:
                     "200":
                         title: Timeline feed slice fetched
@@ -600,14 +600,14 @@ routes:
             GET:
                 description: |
                     Posts that have been rebyted into your timeline.
-                    Essentially post objects wrapped in rebyte info, with the regular id -> user table in feeds
+                    Essentially post objects wrapped in rebyte info, with the regular id -> account table in feeds
                 responses: $feed-rebytes-paged
         /feed/popular/v2:
             GET:
                 description: |
                     Get a slice of posts in the popular feed.
                     These posts are mostly based on raw popularity, with little to no algorithmic influence.
-                    This is different than the /v3/ endpoint, which is an algorithm based feed for some user
+                    This is different than the /v3/ endpoint, which is an algorithm based feed for some account
                 responses: $feed-responses-paged
         /feed/popular/v3:
             GET:
@@ -659,38 +659,38 @@ routes:
                         body: $response.loop.POST.ok
         /post/id/:id/feedback/comments:
             GET:
-                description: Get a slice of comments on a post with usermap data
+                description: Get a slice of comments on a post with accountmap data
                 responses:
                     "200":
                         title: Comment slice recieved
                         description: A slice of comments was fetched
                         body: $response.post-comments.GET.ok
-        # users
+        # accounts
         /account/id/:id:
             GET:
-                description: Get a user by their id
+                description: Get a account by their id
                 url params:
                     - $url.account-id
                 responses:
                     "200":
-                        title: User information recieved
-                        description: A user of id `id` exists and was retrieved
-                        body: $response.object.user
+                        title: account information recieved
+                        description: A account of id `id` exists and was retrieved
+                        body: $response.object.account
         /account/id/:id/posts:
             GET:
-                description: Get posts by some user
+                description: Get posts by some account
                 url params:
                     - $url.account-id
                 responses: $feed-responses-paged
         /account/id/:id/rebytes:
             GET:
-                description: Get rebytes by some user
+                description: Get rebytes by some account
                 url params:
                     - $url.account-id
                 responses: $feed-rebytes-paged
         /account/prefix/:prefix:
             GET:
-                description: Search for users by some username `prefix`
+                description: Search for accounts by some accountname `prefix`
                 url params:
                     - name: prefix
                       description: prefix to search for
@@ -698,8 +698,8 @@ routes:
                     "200":
                         title: Search results fetched
                         description: Search results for the prefix used were returned
-                        body: $response.user-list.GET.ok
+                        body: $response.account-list.GET.ok
                     "200:1401":
                         title: Bad search
-                        description: Search string has invalid characters that cannot prefix a username
+                        description: Search string has invalid characters that cannot prefix a accountname
                         body: $response.global.invalid

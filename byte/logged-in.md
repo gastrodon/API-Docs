@@ -1,26 +1,26 @@
 <details>
 <summary>GET /account/id/:id</summary>
-Get a user by their id
+Get a account by their id
 
 __url params__
 
 |name|description|
 | - | - |
-|id|the id of the user to query|
+|id|the id of the account to query|
 
 __headers__
 
 |name|value|required|
 | - | - | - |
 |authorization|The token returned when logging in or creating an account|True|
-|user-agent|The user agent of the device using this app|False|
+|user-agent|The account agent of the device using this app|False|
 
 __responses__
 
-- 200 - User information recieved
-User information recieved
+- 200 - account information recieved
+account information recieved
 
-A user of id `id` exists and was retrieved
+A account of id `id` exists and was retrieved
 
 ```JSON
 {
@@ -33,14 +33,14 @@ A user of id `id` exists and was retrieved
         "followingCount": "0                <Subscriptions of this account>",
         "foregroundColor": "#CCD6E9         <Account foreground color",
         "id": "                             <Account id>",
-        "isBlocked": "false                 <Is this user blocked by the authed user?>",
-        "isChannel": "false                 <Is this user a channel?>",
-        "isFollowed": "false                <Is this user being followed by the authed user?>",
-        "isFollowing": "false               <Is this user following the authed user?>",
+        "isBlocked": "false                 <Is this account blocked by the authed account?>",
+        "isChannel": "false                 <Is this account a channel?>",
+        "isFollowed": "false                <Is this account being followed by the authed account?>",
+        "isFollowing": "false               <Is this account following the authed account?>",
         "loopCount": "0                     <Total loops played of this account>",
         "loopsConsumedCount": "0            <Total loops played by this account>",
         "registrationDate": "1580272854     <Account creation Unix timestamp>",
-        "username": "robotter               <Account username>"
+        "accountname": "robotter               <Account accountname>"
     },
     "success": 1
 }
@@ -57,32 +57,32 @@ Unauthorized to make request, either because the authorization header is incorre
 
 <details>
 <summary>GET /account/id/:id/posts</summary>
-Get posts by some user
+Get posts by some account
 
 __url params__
 
 |name|description|
 | - | - |
-|id|the id of the user to query|
+|id|the id of the account to query|
 
 __headers__
 
 |name|value|required|
 | - | - | - |
 |authorization|The token returned when logging in or creating an account|True|
-|user-agent|The user agent of the device using this app|False|
+|user-agent|The account agent of the device using this app|False|
 
 __responses__
 
 - 200 - Feed slice fetched
 Feed slice fetched
 
-A slice of posts of this feed were fetched with usermap and pagination data
+A slice of posts of this feed were fetched with accountmap and pagination data
 
 ```JSON
 {
     "data": {
-        "accounts": "{...}  <id -> user map>",
+        "accounts": "{...}  <id -> account map>",
         "posts": "[...]     <Array of posts>",
         "cursor": "...      <Pagination cursor>"
     },
@@ -101,32 +101,32 @@ Unauthorized to make request, either because the authorization header is incorre
 
 <details>
 <summary>GET /account/id/:id/rebytes</summary>
-Get rebytes by some user
+Get rebytes by some account
 
 __url params__
 
 |name|description|
 | - | - |
-|id|the id of the user to query|
+|id|the id of the account to query|
 
 __headers__
 
 |name|value|required|
 | - | - | - |
 |authorization|The token returned when logging in or creating an account|True|
-|user-agent|The user agent of the device using this app|False|
+|user-agent|The account agent of the device using this app|False|
 
 __responses__
 
 - 200 - Feed slice fetched
 Feed slice fetched
 
-A slice of posts of this feed were fetched with usermap and pagination data
+A slice of posts of this feed were fetched with accountmap and pagination data
 
 ```JSON
 {
     "data": {
-        "accounts": "{...}  <id -> user map>",
+        "accounts": "{...}  <id -> account map>",
         "rebytes": "[...]   <Array of post rebytes>",
         "cursor": "...      <Pagination cursor>"
     },
@@ -152,14 +152,14 @@ __headers__
 |name|value|required|
 | - | - | - |
 |authorization|The token returned when logging in or creating an account|True|
-|user-agent|The user agent of the device using this app|False|
+|user-agent|The account agent of the device using this app|False|
 
 __responses__
 
 - 200 - Account fetched
 Account fetched
 
-The account information of the logged in user was fetched
+The account information of the logged in account was fetched
 
 ```JSON
 {
@@ -170,14 +170,14 @@ The account information of the logged in user was fetched
             "followingCount": "0                <Subscriptions of this account>",
             "foregroundColor": "#CCD6E9         <Account foreground color",
             "id": "                             <account id>",
-            "isChannel": "false                 <Is this user a channel?>",
-            "isDeactivated": "false             <Did this user deactivate their account?>",
-            "isRegistered": "true               <Is this user registered?>",
+            "isChannel": "false                 <Is this account a channel?>",
+            "isDeactivated": "false             <Did this account deactivate their account?>",
+            "isRegistered": "true               <Is this account registered?>",
             "isSuspended": "false               <Is this account suspended?>",
             "loopCount": "0                     <Total loops played of this account>",
             "loopsConsumedCount": "0            <Total loops played by this account>",
             "registrationDate": "1580272854     <Account creation Unix timestamp>",
-            "username": "robotter               <Account username>"
+            "accountname": "robotter               <Account accountname>"
         }
     },
     "success": 1
@@ -193,7 +193,7 @@ Unauthorized to make request, either because the authorization header is incorre
 </details>
 <details>
 <summary>PUT /account/me</summary>
-Update the authed user.
+Update the authed account.
 Any or all of the json fields may be included or omitted,
 but the request will only work if all data being sent is new
 
@@ -203,14 +203,14 @@ __headers__
 |name|value|required|
 | - | - | - |
 |authorization|The token returned when logging in or creating an account|True|
-|user-agent|The user agent of the device using this app|False|
+|user-agent|The account agent of the device using this app|False|
 
 ```JSON
 {
     "colorScheme": "2       <Predefined color scheme to use>",
     "bio": "...             <Profile bio to use, send a blank to remove>",
     "displayName": "...     <Non-unique display name to use, send blank to remove>",
-    "username": "...        <Unique username to use>"
+    "accountname": "...        <Unique accountname to use>"
 }
 ```
 
@@ -245,32 +245,32 @@ It cannot be used. This should be treated similarly too an HTTP 400 bad request
 }
 ```
 
-- 200:1401 - Username invalid
-Username invalid
+- 200:1401 - accountname invalid
+accountname invalid
 
-The username sent is too long or has bad characters
+The accountname sent is too long or has bad characters
 
 ```JSON
 {
     "success": 0,
     "error": {
         "code": 1401,
-        "message": "invalid username"
+        "message": "invalid accountname"
     }
 }
 ```
 
-- 200:1402 - Username taken
-Username taken
+- 200:1402 - accountname taken
+accountname taken
 
-The username sent is already taken and cannot be used
+The accountname sent is already taken and cannot be used
 
 ```JSON
 {
     "success": 0,
     "error": {
         "code": 1402,
-        "message": "username is already in use"
+        "message": "accountname is already in use"
     }
 }
 ```
@@ -293,7 +293,7 @@ __headers__
 |name|value|required|
 | - | - | - |
 |authorization|The token returned when logging in or creating an account|True|
-|user-agent|The user agent of the device using this app|False|
+|user-agent|The account agent of the device using this app|False|
 
 ```JSON
 {
@@ -360,7 +360,7 @@ Unauthorized to make request, either because the authorization header is incorre
 
 <details>
 <summary>GET /account/prefix/:prefix</summary>
-Search for users by some username `prefix`
+Search for accounts by some accountname `prefix`
 
 __url params__
 
@@ -373,7 +373,7 @@ __headers__
 |name|value|required|
 | - | - | - |
 |authorization|The token returned when logging in or creating an account|True|
-|user-agent|The user agent of the device using this app|False|
+|user-agent|The account agent of the device using this app|False|
 
 __responses__
 
@@ -395,14 +395,14 @@ Search results for the prefix used were returned
                 "followingCount": "0                <Subscriptions of this account>",
                 "foregroundColor": "#CCD6E9         <Account foreground color",
                 "id": "                             <Account id>",
-                "isBlocked": "false                 <Is this user blocked by the authed user?>",
-                "isChannel": "false                 <Is this user a channel?>",
-                "isFollowed": "false                <Is this user being followed by the authed user?>",
-                "isFollowing": "false               <Is this user following the authed user?>",
+                "isBlocked": "false                 <Is this account blocked by the authed account?>",
+                "isChannel": "false                 <Is this account a channel?>",
+                "isFollowed": "false                <Is this account being followed by the authed account?>",
+                "isFollowing": "false               <Is this account following the authed account?>",
                 "loopCount": "0                     <Total loops played of this account>",
                 "loopsConsumedCount": "0            <Total loops played by this account>",
                 "registrationDate": "1580272854     <Account creation Unix timestamp>",
-                "username": "robotter               <Account username>"
+                "accountname": "robotter               <Account accountname>"
             }
         ]
     },
@@ -413,14 +413,14 @@ Search results for the prefix used were returned
 - 200:1401 - Bad search
 Bad search
 
-Search string has invalid characters that cannot prefix a username
+Search string has invalid characters that cannot prefix a accountname
 
 ```JSON
 {
     "success": 0,
     "error": {
         "code": 1401,
-        "message": "invalid username"
+        "message": "invalid accountname"
     }
 }
 ```
@@ -443,7 +443,7 @@ __headers__
 |name|value|required|
 | - | - | - |
 |authorization|The token returned when logging in or creating an account|True|
-|user-agent|The user agent of the device using this app|False|
+|user-agent|The account agent of the device using this app|False|
 
 __responses__
 
@@ -485,7 +485,7 @@ __headers__
 |name|value|required|
 | - | - | - |
 |authorization|The token returned when logging in or creating an account|True|
-|user-agent|The user agent of the device using this app|False|
+|user-agent|The account agent of the device using this app|False|
 
 __responses__
 
@@ -536,7 +536,7 @@ __headers__
 |name|value|required|
 | - | - | - |
 |authorization|The token returned when logging in or creating an account|True|
-|user-agent|The user agent of the device using this app|False|
+|user-agent|The account agent of the device using this app|False|
 
 __responses__
 
@@ -598,19 +598,19 @@ __headers__
 |name|value|required|
 | - | - | - |
 |authorization|The token returned when logging in or creating an account|True|
-|user-agent|The user agent of the device using this app|False|
+|user-agent|The account agent of the device using this app|False|
 
 __responses__
 
 - 200 - Feed slice fetched
 Feed slice fetched
 
-A slice of posts of this feed were fetched with usermap and pagination data
+A slice of posts of this feed were fetched with accountmap and pagination data
 
 ```JSON
 {
     "data": {
-        "accounts": "{...}  <id -> user map>",
+        "accounts": "{...}  <id -> account map>",
         "posts": "[...]     <Array of posts>",
         "cursor": "...      <Pagination cursor>"
     },
@@ -636,19 +636,19 @@ __headers__
 |name|value|required|
 | - | - | - |
 |authorization|The token returned when logging in or creating an account|True|
-|user-agent|The user agent of the device using this app|False|
+|user-agent|The account agent of the device using this app|False|
 
 __responses__
 
 - 200 - Feed slice fetched
 Feed slice fetched
 
-A slice of posts of this feed were fetched with usermap and pagination data
+A slice of posts of this feed were fetched with accountmap and pagination data
 
 ```JSON
 {
     "data": {
-        "accounts": "{...}  <id -> user map>",
+        "accounts": "{...}  <id -> account map>",
         "posts": "[...]     <Array of posts>",
         "cursor": "...      <Pagination cursor>"
     },
@@ -676,19 +676,19 @@ __headers__
 |name|value|required|
 | - | - | - |
 |authorization|The token returned when logging in or creating an account|True|
-|user-agent|The user agent of the device using this app|False|
+|user-agent|The account agent of the device using this app|False|
 
 __responses__
 
 - 200 - Feed slice fetched
 Feed slice fetched
 
-A slice of posts of this feed were fetched with usermap data
+A slice of posts of this feed were fetched with accountmap data
 
 ```JSON
 {
     "data": {
-        "accounts": "{...}  <id -> user map>",
+        "accounts": "{...}  <id -> account map>",
         "posts": "[...]     <Array of posts>"
     },
     "success": 1
@@ -708,7 +708,7 @@ Unauthorized to make request, either because the authorization header is incorre
 <summary>GET /feed/popular/v2</summary>
 Get a slice of posts in the popular feed.
 These posts are mostly based on raw popularity, with little to no algorithmic influence.
-This is different than the /v3/ endpoint, which is an algorithm based feed for some user
+This is different than the /v3/ endpoint, which is an algorithm based feed for some account
 
 
 __headers__
@@ -716,19 +716,19 @@ __headers__
 |name|value|required|
 | - | - | - |
 |authorization|The token returned when logging in or creating an account|True|
-|user-agent|The user agent of the device using this app|False|
+|user-agent|The account agent of the device using this app|False|
 
 __responses__
 
 - 200 - Feed slice fetched
 Feed slice fetched
 
-A slice of posts of this feed were fetched with usermap and pagination data
+A slice of posts of this feed were fetched with accountmap and pagination data
 
 ```JSON
 {
     "data": {
-        "accounts": "{...}  <id -> user map>",
+        "accounts": "{...}  <id -> account map>",
         "posts": "[...]     <Array of posts>",
         "cursor": "...      <Pagination cursor>"
     },
@@ -757,19 +757,19 @@ __headers__
 |name|value|required|
 | - | - | - |
 |authorization|The token returned when logging in or creating an account|True|
-|user-agent|The user agent of the device using this app|False|
+|user-agent|The account agent of the device using this app|False|
 
 __responses__
 
 - 200 - Feed slice fetched
 Feed slice fetched
 
-A slice of posts of this feed were fetched with usermap data
+A slice of posts of this feed were fetched with accountmap data
 
 ```JSON
 {
     "data": {
-        "accounts": "{...}  <id -> user map>",
+        "accounts": "{...}  <id -> account map>",
         "posts": "[...]     <Array of posts>"
     },
     "success": 1
@@ -794,7 +794,7 @@ __headers__
 |name|value|required|
 | - | - | - |
 |authorization|The token returned when logging in or creating an account|True|
-|user-agent|The user agent of the device using this app|False|
+|user-agent|The account agent of the device using this app|False|
 
 __responses__
 
@@ -817,10 +817,10 @@ A post of id `id` exists and was retrieved
         "date": "1579934060     <Post create timestamp>",
         "id": "...              <Post id>",
         "likeCount": "119453    <Total like count>",
-        "likedByMe": "false     <Did the authed user like this post?>",
+        "likedByMe": "false     <Did the authed account like this post?>",
         "loopCount": "2356580   <Total loop count>",
         "mentions": "[]         <Array of mentions>",
-        "rebytedByMe": "false   <Did the authed user rebyte this post?>",
+        "rebytedByMe": "false   <Did the authed account rebyte this post?>",
         "thumbSrc": "...        <Thumbnail resource link>",
         "type": "0              <Unknown>",
         "videoSrc": "...        <Video resource link>"
@@ -840,14 +840,14 @@ Unauthorized to make request, either because the authorization header is incorre
 
 <details>
 <summary>GET /post/id/:id/feedback/comments</summary>
-Get a slice of comments on a post with usermap data
+Get a slice of comments on a post with accountmap data
 
 __headers__
 
 |name|value|required|
 | - | - | - |
 |authorization|The token returned when logging in or creating an account|True|
-|user-agent|The user agent of the device using this app|False|
+|user-agent|The account agent of the device using this app|False|
 
 __responses__
 
@@ -878,7 +878,7 @@ A slice of comments was fetched
                             "stop": "13     <Mention substring end>"
                         },
                         "text": "@byte      <Mention text>",
-                        "username": "byte   <Username mentioned"
+                        "accountname": "byte   <accountname mentioned"
                     }
                 ],
                 "postID": "...              <Parent post id>"
@@ -911,7 +911,7 @@ __headers__
 |name|value|required|
 | - | - | - |
 |authorization|The token returned when logging in or creating an account|True|
-|user-agent|The user agent of the device using this app|False|
+|user-agent|The account agent of the device using this app|False|
 
 __responses__
 
@@ -958,14 +958,14 @@ Unauthorized to make request, either because the authorization header is incorre
 
 <details>
 <summary>GET /timeline</summary>
-Get posts in the timeline of the authed user
+Get posts in the timeline of the authed account
 
 __headers__
 
 |name|value|required|
 | - | - | - |
 |authorization|The token returned when logging in or creating an account|True|
-|user-agent|The user agent of the device using this app|False|
+|user-agent|The account agent of the device using this app|False|
 
 __responses__
 
@@ -977,7 +977,7 @@ A slice of the timeline feed was fetched
 ```JSON
 {
     "data": {
-        "accounts": "{...}  <id -> user map>",
+        "accounts": "{...}  <id -> account map>",
         "posts": "[...]     <Array of posts>",
         "cursor": "...      <Pagination cursor>",
         "<->": "            <Only some feeds have cursors, sometimes>"
@@ -998,7 +998,7 @@ Unauthorized to make request, either because the authorization header is incorre
 <details>
 <summary>GET /timeline/rebytes</summary>
 Posts that have been rebyted into your timeline.
-Essentially post objects wrapped in rebyte info, with the regular id -> user table in feeds
+Essentially post objects wrapped in rebyte info, with the regular id -> account table in feeds
 
 
 __headers__
@@ -1006,19 +1006,19 @@ __headers__
 |name|value|required|
 | - | - | - |
 |authorization|The token returned when logging in or creating an account|True|
-|user-agent|The user agent of the device using this app|False|
+|user-agent|The account agent of the device using this app|False|
 
 __responses__
 
 - 200 - Feed slice fetched
 Feed slice fetched
 
-A slice of posts of this feed were fetched with usermap and pagination data
+A slice of posts of this feed were fetched with accountmap and pagination data
 
 ```JSON
 {
     "data": {
-        "accounts": "{...}  <id -> user map>",
+        "accounts": "{...}  <id -> account map>",
         "rebytes": "[...]   <Array of post rebytes>",
         "cursor": "...      <Pagination cursor>"
     },
