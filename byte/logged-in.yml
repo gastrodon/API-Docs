@@ -280,6 +280,23 @@ vars:
                             },
                             "success": 1
                         }
+        categories:
+            GET:
+                ok:
+                    lang: JSON
+                    content:
+                        {
+                            "data": {
+                                "categories": [
+                                    {
+                                        "icon": "...    <Category icon link. This is usually 200px",
+                                        "id": "comedy   <Category id, used in /feed/categories/:id>",
+                                        "name": "Comedy <Category name>"
+                                    }
+                                ]
+                            },
+                            "success": 1
+                        }
 
 routes:
         /account/me:
@@ -363,3 +380,18 @@ routes:
                     Get a slice of posts in the mix feed.
                     This seems to be a mixed feed of posts, possibly comparable to ifunny/collective
                 responses: $feed-responses
+        /categories:
+            GET:
+                description: Get a list of feed categories. These can be used in the /feed/categories/:id endpoint
+                responses:
+                    "200":
+                        title: Categories fetched
+                        description: A list of categories has been fetched
+                        body: $response.categories.GET.ok
+        /feed/categories/:id/popular:
+            GET:
+                description: |
+                    Get a slice of popular posts in some category, denoted by its id.
+                    The only observed sub-endpoint for any category is `popular`.
+                    Lists of categories can be fetched with GET `/categories`
+                responses: $feed-responses-paged

@@ -106,6 +106,48 @@ Unauthorized to make request, either because the authorization header is incorre
 
 
 <details>
+<summary>GET /categories</summary>
+Get a list of feed categories. These can be used in the /feed/categories/:id endpoint
+
+__headers__
+
+|name|value|required|
+| - | - | - |
+|authorization|The token returned when logging in or creating an account|True|
+|user-agent|The user agent of the device using this app|False|
+
+__responses__
+
+- 200 - Categories fetched
+Categories fetched
+
+A list of categories has been fetched
+
+```JSON
+{
+    "data": {
+        "categories": [
+            {
+                "icon": "...    <Category icon link. This is usually 200px",
+                "id": "comedy   <Category id, used in /feed/categories/:id>",
+                "name": "Comedy <Category name>"
+            }
+        ]
+    },
+    "success": 1
+}
+```
+
+- 401 - Unauthorized
+Unauthorized
+
+Unauthorized to make request, either because the authorization header is incorrect or missing
+
+
+</details>
+
+
+<details>
 <summary>POST /client/event</summary>
 Likely has to do with event tracking. Appears to always ratelimit me
 
@@ -199,6 +241,47 @@ Unauthorized to make request, either because the authorization header is incorre
 
 
 <details>
+<summary>GET /feed/categories/:id/popular</summary>
+Get a slice of popular posts in some category, denoted by its id.
+The only observed sub-endpoint for any category is `popular`.
+Lists of categories can be fetched with GET `/categories`
+
+
+__headers__
+
+|name|value|required|
+| - | - | - |
+|authorization|The token returned when logging in or creating an account|True|
+|user-agent|The user agent of the device using this app|False|
+
+__responses__
+
+- 200 - Feed slice fetched
+Feed slice fetched
+
+A slice of posts of this feed were fetched with usermap and pagination data
+
+```JSON
+{
+    "data": {
+        "accounts": "{...}  <id -> user map>",
+        "posts": "[...]     <Array of posts>",
+        "cursor": "...      <Pagination cursor>"
+    },
+    "success": 1
+}
+```
+
+- 401 - Unauthorized
+Unauthorized
+
+Unauthorized to make request, either because the authorization header is incorrect or missing
+
+
+</details>
+
+
+<details>
 <summary>GET /feed/global</summary>
 Get data from the global feed
 
@@ -211,79 +294,17 @@ __headers__
 
 __responses__
 
-- 200 - Feed Data Fetched
-Feed Data Fetched
+- 200 - Feed slice fetched
+Feed slice fetched
 
-A slice of data was fetched from the globla feed
+A slice of posts of this feed were fetched with usermap and pagination data
 
 ```JSON
 {
     "data": {
-        "accounts": {
-            "   <Account id>": {
-                "avatarURL": "...                       <Account pfp link>",
-                "backgroundColor": "#000000             <Account background color",
-                "bio": "...                             <Account bio>",
-                "displayName": "...                     <Non-unique display name>",
-                "followerCount": "0                     <Subscribers of this account>",
-                "followingCount": "0                    <Subscriptions of this account>",
-                "foregroundColor": "#CCD6E9             <Account foreground color",
-                "id": "                                 <Account id, should match the above key>",
-                "isChannel": "false                     <Is this user a channel?>",
-                "isDeactivated": "false                 <Did this user deactivate their account?>",
-                "isRegistered": "true                   <Is this user registered?>",
-                "isSuspended": "false                   <Is this account suspended?>",
-                "loopCount": "0                         <Total loops played of this account>",
-                "loopsConsumedCount": "0                <Total loops played by this account>",
-                "registrationDate": "1580272854         <Account creation Unix timestamp>",
-                "username": "robotter                   <Account username>"
-            }
-        },
-        "posts": [
-            {
-                "allowCuration": "true                  <May this post be curated?>",
-                "allowRemix": "false                    <May this post be remixed?>",
-                "authorID": "...                        <ID that points to the post author",
-                "caption": "                            <Post caption>",
-                "commentCount": "0                      <Total comment count>",
-                "commentCursor": "...                   <Comment pagination cursor>",
-                "comments": [
-                    {
-                        "authorID": "...                <Comment author id>",
-                        "body": "...                    <Comment body",
-                        "date": "1580273915             <Comment creation timestamp>",
-                        "id": "...                      <Comment id. In the format post_id-unique_id",
-                        "mentions": "[...]              <Mentions in this comment>",
-                        "postID": "...                  <ID of this post>"
-                    }
-                ],
-                "date": "1580274189                     <Post create timestamp>",
-                "id": "...                              <ID that points to this post>",
-                "likeCount": "0                         <Total like count>",
-                "likedByMe": "false                     <Was this liked by the authed user?>",
-                "loopCount": "0                         <Total loops played of this video>",
-                "mentions": [
-                    {
-                        "accountID": "...               <Account mentioned>",
-                        "byteRange": {
-                            "start": "10                <Unknown>",
-                            "stop": "15                 <Unknown, same length as range>"
-                        },
-                        "range": {
-                            "start": "8                 <Mention substring start>",
-                            "stop": "13                 <Mention substring end>"
-                        },
-                        "text": "@byte                  <Mention text>",
-                        "username": "byte               <Username mentioned"
-                    }
-                ],
-                "rebytedByMe": "false                   <Was this rebyted by the authed user?>",
-                "thumbSrc": "...                        <Video thumbnail link>",
-                "type": "0                              <Unknown use>",
-                "videoSrc": "...                        <Video link>"
-            }
-        ],
-        "cursor": "...                                  <Likely pagination cursor>"
+        "accounts": "{...}  <id -> user map>",
+        "posts": "[...]     <Array of posts>",
+        "cursor": "...      <Pagination cursor>"
     },
     "success": 1
 }
@@ -322,9 +343,7 @@ A slice of posts of this feed were fetched with usermap data
 {
     "data": {
         "accounts": "{...}  <id -> user map>",
-        "posts": "[...]     <Array of posts>",
-        "cursor": "...      <Pagination cursor>",
-        "<->": "            <Only some feeds have cursors, sometimes>"
+        "posts": "[...]     <Array of posts>"
     },
     "success": 1
 }
@@ -364,9 +383,7 @@ A slice of posts of this feed were fetched with usermap data
 {
     "data": {
         "accounts": "{...}  <id -> user map>",
-        "posts": "[...]     <Array of posts>",
-        "cursor": "...      <Pagination cursor>",
-        "<->": "            <Only some feeds have cursors, sometimes>"
+        "posts": "[...]     <Array of posts>"
     },
     "success": 1
 }
@@ -406,9 +423,7 @@ A slice of posts of this feed were fetched with usermap data
 {
     "data": {
         "accounts": "{...}  <id -> user map>",
-        "posts": "[...]     <Array of posts>",
-        "cursor": "...      <Pagination cursor>",
-        "<->": "            <Only some feeds have cursors, sometimes>"
+        "posts": "[...]     <Array of posts>"
     },
     "success": 1
 }
