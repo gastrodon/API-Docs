@@ -71,14 +71,7 @@ vars:
                         "username": "...        <Unique username to use>"
                     }
     response:
-        global:
-            ok:
-                lang: JSON
-                content:
-                    {
-                        "data": {},
-                        "success": 1
-                    }
+        object:
             feed:
                 lang: JSON
                 content:
@@ -89,6 +82,14 @@ vars:
                             "cursor": "...      <Pagination cursor>",
                             "<->": "            <Only some feeds have cursors, sometimes>"
                         },
+                        "success": 1
+                    }
+        global:
+            ok:
+                lang: JSON
+                content:
+                    {
+                        "data": {},
                         "success": 1
                     }
             taken:
@@ -415,7 +416,7 @@ routes:
                     "200":
                         title: Timeline feed slice fetched
                         description: A slice of the timeline feed was fetched
-                        body: $response.global.feed
+                        body: $response.object.feed
         /timeline/rebytes:
             GET:
                 description: |
