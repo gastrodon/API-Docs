@@ -494,6 +494,36 @@ vars:
                             },
                             "success": 1
                         }
+        user-list:
+            GET:
+                ok:
+                    lang: JSON
+                    content:
+                        {
+                            "data": {
+                                "accounts": [
+                                    {
+                                        "avatarURL": "...                   <Account pfp link>",
+                                        "backgroundColor": "#000000         <Account background color",
+                                        "bio": "...                         <Account bio>",
+                                        "displayName": "...                 <Non-unique display name>",
+                                        "followerCount": "0                 <Subscribers of this account>",
+                                        "followingCount": "0                <Subscriptions of this account>",
+                                        "foregroundColor": "#CCD6E9         <Account foreground color",
+                                        "id": "                             <Account id>",
+                                        "isBlocked": "false                 <Is this user blocked by the authed user?>",
+                                        "isChannel": "false                 <Is this user a channel?>",
+                                        "isFollowed": "false                <Is this user being followed by the authed user?>",
+                                        "isFollowing": "false               <Is this user following the authed user?>",
+                                        "loopCount": "0                     <Total loops played of this account>",
+                                        "loopsConsumedCount": "0            <Total loops played by this account>",
+                                        "registrationDate": "1580272854     <Account creation Unix timestamp>",
+                                        "username": "robotter               <Account username>"
+                                    }
+                                ]
+                            },
+                            "success": 1
+                        }
 
 routes:
         /account/me:
@@ -571,11 +601,7 @@ routes:
                 description: |
                     Posts that have been rebyted into your timeline.
                     Essentially post objects wrapped in rebyte info, with the regular id -> user table in feeds
-                responses:
-                    "200":
-                        title: Rebyte feed slice fetched
-                        description: A slice of rebytes relevant to the authed user were fetched
-                        body: $response.rebytes.GET.ok
+                responses: $feed-rebytes-paged
         /feed/popular/v2:
             GET:
                 description: |
