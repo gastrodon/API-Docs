@@ -341,6 +341,13 @@ routes:
                     These posts are mostly based on raw popularity, with little to no algorithmic influence.
                     This is different than the /v3/ endpoint, which is an algorithm based feed for some user
                 responses: $feed-responses
+        /feed/popular/v3:
+            GET:
+                description: |
+                    Get a slice of posts in the popular:v3 feed.
+                    These posts are curated by an algorithm, not necessarially popular.
+                    For regular popular, see the /v2/ endpoint, which is mostly purely popular
+                responses: $feed-responses
         /feed/mix:
             GET:
                 description: |

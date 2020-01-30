@@ -1,5 +1,5 @@
 <details>
-<summary>GET /account/me/</summary>
+<summary>GET /account/me</summary>
 Get information about the logged in account
 
 __headers__
@@ -49,7 +49,7 @@ Unauthorized to make request, either because the authorization header is incorre
 
 
 <details>
-<summary>PUT /account/me/device/</summary>
+<summary>PUT /account/me/device</summary>
 Give byte information about this device
 
 __headers__
@@ -106,7 +106,7 @@ Unauthorized to make request, either because the authorization header is incorre
 
 
 <details>
-<summary>POST /client/event/</summary>
+<summary>POST /client/event</summary>
 Likely has to do with event tracking. Appears to always ratelimit me
 
 __headers__
@@ -140,7 +140,7 @@ Unauthorized to make request, either because the authorization header is incorre
 
 
 <details>
-<summary>GET /explore/</summary>
+<summary>GET /explore</summary>
 Get possible explore feeds
 
 __headers__
@@ -199,7 +199,7 @@ Unauthorized to make request, either because the authorization header is incorre
 
 
 <details>
-<summary>GET /feed/global/</summary>
+<summary>GET /feed/global</summary>
 Get data from the global feed
 
 __headers__
@@ -299,7 +299,48 @@ Unauthorized to make request, either because the authorization header is incorre
 
 
 <details>
-<summary>GET /feed/popular/v2/</summary>
+<summary>GET /feed/mix</summary>
+Get a slice of posts in the mix feed.
+This seems to be a mixed feed of posts, possibly comparable to ifunny/collective
+
+
+__headers__
+
+|name|value|required|
+| - | - | - |
+|authorization|The token returned when logging in or creating an account|True|
+|user-agent|The user agent of the device using this app|False|
+
+__responses__
+
+- 200 - Feed slice fetched
+Feed slice fetched
+
+A slice of posts of this feed were fetched with usermap data
+
+```JSON
+{
+    "data": {
+        "accounts": "{...}  <id -> user map>",
+        "posts": "[...]     <Array of posts>",
+        "cursor": "...      <Pagination cursor>",
+        "<->": "            <Only some feeds have cursors, sometimes>"
+    },
+    "success": 1
+}
+```
+
+- 401 - Unauthorized
+Unauthorized
+
+Unauthorized to make request, either because the authorization header is incorrect or missing
+
+
+</details>
+
+
+<details>
+<summary>GET /feed/popular/v2</summary>
 Get a slice of posts in the popular feed.
 These posts are mostly based on raw popularity, with little to no algorithmic influence.
 This is different than the /v3/ endpoint, which is an algorithm based feed for some user
@@ -341,7 +382,49 @@ Unauthorized to make request, either because the authorization header is incorre
 
 
 <details>
-<summary>GET /timeline/</summary>
+<summary>GET /feed/popular/v3</summary>
+Get a slice of posts in the popular:v3 feed.
+These posts are curated by an algorithm, not necessarially popular.
+For regular popular, see the /v2/ endpoint, which is mostly purely popular
+
+
+__headers__
+
+|name|value|required|
+| - | - | - |
+|authorization|The token returned when logging in or creating an account|True|
+|user-agent|The user agent of the device using this app|False|
+
+__responses__
+
+- 200 - Feed slice fetched
+Feed slice fetched
+
+A slice of posts of this feed were fetched with usermap data
+
+```JSON
+{
+    "data": {
+        "accounts": "{...}  <id -> user map>",
+        "posts": "[...]     <Array of posts>",
+        "cursor": "...      <Pagination cursor>",
+        "<->": "            <Only some feeds have cursors, sometimes>"
+    },
+    "success": 1
+}
+```
+
+- 401 - Unauthorized
+Unauthorized
+
+Unauthorized to make request, either because the authorization header is incorrect or missing
+
+
+</details>
+
+
+<details>
+<summary>GET /timeline</summary>
 Get posts in the timeline of the authed user
 
 __headers__
@@ -380,7 +463,7 @@ Unauthorized to make request, either because the authorization header is incorre
 
 
 <details>
-<summary>GET /timeline/rebytes/</summary>
+<summary>GET /timeline/rebytes</summary>
 Posts that have been rebyted into your timeline.
 Essentially post objects wrapped in rebyte info, with the regular id -> user table in feeds
 
