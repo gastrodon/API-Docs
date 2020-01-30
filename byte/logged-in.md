@@ -299,6 +299,48 @@ Unauthorized to make request, either because the authorization header is incorre
 
 
 <details>
+<summary>GET /feed/popular/v2/</summary>
+Get a slice of posts in the popular feed.
+These posts are mostly based on raw popularity, with little to no algorithmic influence.
+This is different than the /v3/ endpoint, which is an algorithm based feed for some user
+
+
+__headers__
+
+|name|value|required|
+| - | - | - |
+|authorization|The token returned when logging in or creating an account|True|
+|user-agent|The user agent of the device using this app|False|
+
+__responses__
+
+- 200 - Feed slice fetched
+Feed slice fetched
+
+A slice of posts of this feed were fetched with usermap data
+
+```JSON
+{
+    "data": {
+        "accounts": "{...}  <id -> user map>",
+        "posts": "[...]     <Array of posts>",
+        "cursor": "...      <Pagination cursor>",
+        "<->": "            <Only some feeds have cursors, sometimes>"
+    },
+    "success": 1
+}
+```
+
+- 401 - Unauthorized
+Unauthorized
+
+Unauthorized to make request, either because the authorization header is incorrect or missing
+
+
+</details>
+
+
+<details>
 <summary>GET /timeline/</summary>
 Get posts in the timeline of the authed user
 
@@ -320,7 +362,9 @@ A slice of the timeline feed was fetched
 {
     "data": {
         "accounts": "{...}  <id -> user map>",
-        "posts": "[...]     <Array of posts>"
+        "posts": "[...]     <Array of posts>",
+        "cursor": "...      <Pagination cursor>",
+        "<->": "            <Only some feeds have cursors, sometimes>"
     },
     "success": 1
 }

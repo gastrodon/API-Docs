@@ -14,6 +14,22 @@ globals:
               required: false
 
 vars:
+    feed-responses:
+        "200":
+            title: Feed slice fetched
+            description: A slice of posts of this feed were fetched with usermap data
+            body:
+                lang: JSON
+                content:
+                    {
+                        "data": {
+                            "accounts": "{...}  <id -> user map>",
+                            "posts": "[...]     <Array of posts>",
+                            "cursor": "...      <Pagination cursor>",
+                            "<->": "            <Only some feeds have cursors, sometimes>"
+                        },
+                        "success": 1
+                    }
     request:
         device:
             PUT:
@@ -39,7 +55,9 @@ vars:
                     {
                         "data": {
                             "accounts": "{...}  <id -> user map>",
-                            "posts": "[...]     <Array of posts>"
+                            "posts": "[...]     <Array of posts>",
+                            "cursor": "...      <Pagination cursor>",
+                            "<->": "            <Only some feeds have cursors, sometimes>"
                         },
                         "success": 1
                     }
@@ -297,6 +315,7 @@ routes:
                         title: Explore cards recieved
                         description: The current explore cards have been fetched
                         body: $response.explore.GET.ok
+        # feeds
         /timeline/:
             GET:
                 description: Get posts in the timeline of the authed user
@@ -315,3 +334,10 @@ routes:
                         title: Rebyte feed slice fetched
                         description: A slice of rebytes relevant to the authed user were fetched
                         body: $response.rebytes.GET.ok
+        /feed/popular/v2/:
+            GET:
+                description: |
+                    Get a slice of posts in the popular feed.
+                    These posts are mostly based on raw popularity, with little to no algorithmic influence.
+                    This is different than the /v3/ endpoint, which is an algorithm based feed for some user
+                responses: $feed-responses
