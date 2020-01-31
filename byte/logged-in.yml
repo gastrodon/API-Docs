@@ -97,6 +97,20 @@ vars:
                         "accountname": "...        <Unique accountname to use>"
                     }
     response:
+        full:
+            no-post:
+                title: No such post
+                description: No such post was found with this id
+                body:
+                    lang: JSON
+                    content:
+                        {
+                            "error": {
+                                "code": 1500,
+                                "message": "post not found"
+                            },
+                            "success": 0
+                        }
         object:
             feed:
                 lang: JSON
@@ -606,6 +620,7 @@ routes:
                         title: Post retrieved
                         description: A post of id `id` exists and was retrieved
                         body: $response.object.post
+                    "200:1500": $response.full.no-post
         /post/id/:id/loop:
             POST:
                 description: |
@@ -668,13 +683,13 @@ routes:
                         body: $response.device.PUT.malformed
         /account/id/:id:
             GET:
-                description: Get a account by their id
+                description: Get an account by their id
                 url params:
                     - $url.account-id
                 responses:
                     "200":
                         title: account information recieved
-                        description: A account of id `id` exists and was retrieved
+                        description: an account of id `id` exists and was retrieved
                         body: $response.object.account
         /account/id/:id/posts:
             GET:
@@ -701,5 +716,5 @@ routes:
                         body: $response.account-list.GET.ok
                     "200:1401":
                         title: Bad search
-                        description: Search string has invalid characters that cannot prefix a accountname
+                        description: Search string has invalid characters that cannot prefix an accountname
                         body: $response.global.invalid
