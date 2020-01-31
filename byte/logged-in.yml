@@ -703,6 +703,40 @@ routes:
                 url params:
                     - $url.account-id
                 responses: $feed-rebytes-paged
+        /account/id/:id/follow:
+            PUT:
+                description: Follow an account
+                url params:
+                    - $url.account-id
+                responses:
+                    "200":
+                        title: Account follow added
+                        body: $response.global.ok
+            DELETE:
+                description: Unfollow an account
+                url params:
+                    - $url.account-id
+                responses:
+                    "200":
+                        title: Account follow removed
+                        body: $response.global.ok
+        /account/id/:id/block:
+            PUT:
+                description: Block an account
+                url params:
+                    - $url.account-id
+                responses:
+                    "200":
+                        title: Account was blocked
+                        body: $response.global.ok
+            DELETE:
+                description: Unblock an account
+                url params:
+                    - $url.account-id
+                responses:
+                    "200":
+                        title: Account was unblocked
+                        body: $response.global.ok
         /account/prefix/:prefix:
             GET:
                 description: Search for accounts by some accountname `prefix`
