@@ -101,6 +101,21 @@ It cannot be used. This should be treated similarly too an HTTP 400 bad request
 }
 ```
 
+- 200:1102 - Access denied
+Access denied
+
+This resource cannot be modified. This is usually because you are not its owner
+
+```JSON
+{
+    "error": {
+        "code": 1102,
+        "message": "access denied"
+    },
+    "success": 0
+}
+```
+
 - 401 - Unauthorized
 Unauthorized
 
@@ -134,6 +149,21 @@ Account was unblocked
 {
     "data": {},
     "success": 1
+}
+```
+
+- 200:1102 - Access denied
+Access denied
+
+This resource cannot be modified. This is usually because you are not its owner
+
+```JSON
+{
+    "error": {
+        "code": 1102,
+        "message": "access denied"
+    },
+    "success": 0
 }
 ```
 
@@ -192,6 +222,21 @@ It cannot be used. This should be treated similarly too an HTTP 400 bad request
 }
 ```
 
+- 200:1102 - Access denied
+Access denied
+
+This resource cannot be modified. This is usually because you are not its owner
+
+```JSON
+{
+    "error": {
+        "code": 1102,
+        "message": "access denied"
+    },
+    "success": 0
+}
+```
+
 - 401 - Unauthorized
 Unauthorized
 
@@ -225,6 +270,21 @@ Account follow removed
 {
     "data": {},
     "success": 1
+}
+```
+
+- 200:1102 - Access denied
+Access denied
+
+This resource cannot be modified. This is usually because you are not its owner
+
+```JSON
+{
+    "error": {
+        "code": 1102,
+        "message": "access denied"
+    },
+    "success": 0
 }
 ```
 
@@ -492,6 +552,21 @@ It cannot be used. This should be treated similarly too an HTTP 400 bad request
 }
 ```
 
+- 200:1102 - Access denied
+Access denied
+
+This resource cannot be modified. This is usually because you are not its owner
+
+```JSON
+{
+    "error": {
+        "code": 1102,
+        "message": "access denied"
+    },
+    "success": 0
+}
+```
+
 - 200:1401 - accountname invalid
 accountname invalid
 
@@ -576,6 +651,21 @@ It cannot be used. This should be treated similarly too an HTTP 400 bad request
     "error": {
         "code": 1101,
         "message": "bad request format"
+    },
+    "success": 0
+}
+```
+
+- 200:1102 - Access denied
+Access denied
+
+This resource cannot be modified. This is usually because you are not its owner
+
+```JSON
+{
+    "error": {
+        "code": 1102,
+        "message": "access denied"
     },
     "success": 0
 }
@@ -1033,6 +1123,61 @@ Unauthorized to make request, either because the authorization header is incorre
 
 
 <details>
+<summary>DELETE /feedback/comment/id/:id</summary>
+delete a comment
+
+__url params__
+
+|name|description|
+| - | - |
+|id|the id of the comment to query|
+
+__headers__
+
+|name|value|required|
+| - | - | - |
+|authorization|The token returned when logging in or creating an account|True|
+|user-agent|The account agent of the device using this app|False|
+
+__responses__
+
+- 200 - Comment deleted
+Comment deleted
+
+The comment of id `id` exists
+
+```JSON
+{
+    "data": {},
+    "success": 1
+}
+```
+
+- 200:1102 - Access denied
+Access denied
+
+This resource cannot be modified. This is usually because you are not its owner
+
+```JSON
+{
+    "error": {
+        "code": 1102,
+        "message": "access denied"
+    },
+    "success": 0
+}
+```
+
+- 401 - Unauthorized
+Unauthorized
+
+Unauthorized to make request, either because the authorization header is incorrect or missing
+
+
+</details>
+
+
+<details>
 <summary>GET /post/id/:id</summary>
 Get a post by its id
 
@@ -1301,6 +1446,21 @@ It cannot be used. This should be treated similarly too an HTTP 400 bad request
 }
 ```
 
+- 200:1102 - Access denied
+Access denied
+
+This resource cannot be modified. This is usually because you are not its owner
+
+```JSON
+{
+    "error": {
+        "code": 1102,
+        "message": "access denied"
+    },
+    "success": 0
+}
+```
+
 - 200:1500 - No such post
 No such post
 
@@ -1349,6 +1509,21 @@ Post like removed
 {
     "data": {},
     "success": 1
+}
+```
+
+- 200:1102 - Access denied
+Access denied
+
+This resource cannot be modified. This is usually because you are not its owner
+
+```JSON
+{
+    "error": {
+        "code": 1102,
+        "message": "access denied"
+    },
+    "success": 0
 }
 ```
 
@@ -1482,6 +1657,21 @@ the post was unrebyted from the authed account
 {
     "data": {},
     "success": 1
+}
+```
+
+- 200:1102 - Access denied
+Access denied
+
+This resource cannot be modified. This is usually because you are not its owner
+
+```JSON
+{
+    "error": {
+        "code": 1102,
+        "message": "access denied"
+    },
+    "success": 0
 }
 ```
 

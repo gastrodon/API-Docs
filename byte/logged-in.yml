@@ -11,6 +11,10 @@ globals:
                     The information sent is either malformed, has missing keys, or has unexpected extra keys.
                     It cannot be used. This should be treated similarly too an HTTP 400 bad request
                 body: $response.global.bad-request
+            "200:1102":
+                title: Access denied
+                description: This resource cannot be modified. This is usually because you are not its owner
+                body: $response.global.denied
         "POST":
             "200:1101":
                 title: Bad request format
@@ -18,6 +22,11 @@ globals:
                     The information sent is either malformed, has missing keys, or has unexpected extra keys.
                     It cannot be used. This should be treated similarly too an HTTP 400 bad request
                 body: $response.global.bad-request
+        "DELETE":
+            "200:1102":
+                title: Access denied
+                description: This resource cannot be modified. This is usually because you are not its owner
+                body: $response.global.denied
     headers:
         "*":
             - name: authorization
@@ -35,6 +44,9 @@ vars:
         post-id:
             name: id
             description: the id of the post to query
+        comment-id:
+            name: id
+            description: the id of the comment to query
     feed-responses:
         "200":
             title: Feed slice fetched
@@ -294,6 +306,16 @@ vars:
                         "error": {
                             "code": 1700,
                             "message": "invalid report reason: [\"spam\", \"abuse\", \"notinterested\"]"
+                        },
+                        "success": 0
+                    }
+            denied:
+                lang: JSON
+                content:
+                    {
+                        "error": {
+                            "code": 1102,
+                            "message": "access denied"
                         },
                         "success": 0
                     }
@@ -901,3 +923,14 @@ routes:
                         title: Bad search
                         description: Search string has invalid characters that cannot prefix an accountname
                         body: $response.global.invalid
+        # comments
+        /feedback/comment/id/:id:
+            DELETE:
+                description: delete a comment
+                url params:
+                    - $url.comment-id
+                responses:
+                    "200":
+                        title: Comment deleted
+                        description: The comment of id `id` exists
+                        body: $response.global.ok
