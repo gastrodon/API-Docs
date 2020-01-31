@@ -1,6 +1,6 @@
 <details>
 <summary>GET /account/id/:id</summary>
-Get a account by their id
+Get an account by their id
 
 __url params__
 
@@ -20,7 +20,7 @@ __responses__
 - 200 - account information recieved
 account information recieved
 
-A account of id `id` exists and was retrieved
+an account of id `id` exists and was retrieved
 
 ```JSON
 {
@@ -42,6 +42,188 @@ A account of id `id` exists and was retrieved
         "registrationDate": "1580272854     <Account creation Unix timestamp>",
         "accountname": "robotter               <Account accountname>"
     },
+    "success": 1
+}
+```
+
+- 401 - Unauthorized
+Unauthorized
+
+Unauthorized to make request, either because the authorization header is incorrect or missing
+
+
+</details>
+
+
+<details>
+<summary>PUT /account/id/:id/block</summary>
+Block an account
+
+__url params__
+
+|name|description|
+| - | - |
+|id|the id of the account to query|
+
+__headers__
+
+|name|value|required|
+| - | - | - |
+|authorization|The token returned when logging in or creating an account|True|
+|user-agent|The account agent of the device using this app|False|
+
+__responses__
+
+- 200 - Account was blocked
+Account was blocked
+
+```JSON
+{
+    "data": {},
+    "success": 1
+}
+```
+
+- 200:1101 - Bad request format
+Bad request format
+
+The information sent is either malformed, has missing keys, or has unexpected extra keys.
+It cannot be used. This should be treated similarly too an HTTP 400 bad request
+
+
+```JSON
+{
+    "error": {
+        "code": 1101,
+        "message": "bad request format"
+    },
+    "success": 0
+}
+```
+
+- 401 - Unauthorized
+Unauthorized
+
+Unauthorized to make request, either because the authorization header is incorrect or missing
+
+
+</details>
+<details>
+<summary>DELETE /account/id/:id/block</summary>
+Unblock an account
+
+__url params__
+
+|name|description|
+| - | - |
+|id|the id of the account to query|
+
+__headers__
+
+|name|value|required|
+| - | - | - |
+|authorization|The token returned when logging in or creating an account|True|
+|user-agent|The account agent of the device using this app|False|
+
+__responses__
+
+- 200 - Account was unblocked
+Account was unblocked
+
+```JSON
+{
+    "data": {},
+    "success": 1
+}
+```
+
+- 401 - Unauthorized
+Unauthorized
+
+Unauthorized to make request, either because the authorization header is incorrect or missing
+
+
+</details>
+
+
+<details>
+<summary>PUT /account/id/:id/follow</summary>
+Follow an account
+
+__url params__
+
+|name|description|
+| - | - |
+|id|the id of the account to query|
+
+__headers__
+
+|name|value|required|
+| - | - | - |
+|authorization|The token returned when logging in or creating an account|True|
+|user-agent|The account agent of the device using this app|False|
+
+__responses__
+
+- 200 - Account follow added
+Account follow added
+
+```JSON
+{
+    "data": {},
+    "success": 1
+}
+```
+
+- 200:1101 - Bad request format
+Bad request format
+
+The information sent is either malformed, has missing keys, or has unexpected extra keys.
+It cannot be used. This should be treated similarly too an HTTP 400 bad request
+
+
+```JSON
+{
+    "error": {
+        "code": 1101,
+        "message": "bad request format"
+    },
+    "success": 0
+}
+```
+
+- 401 - Unauthorized
+Unauthorized
+
+Unauthorized to make request, either because the authorization header is incorrect or missing
+
+
+</details>
+<details>
+<summary>DELETE /account/id/:id/follow</summary>
+Unfollow an account
+
+__url params__
+
+|name|description|
+| - | - |
+|id|the id of the account to query|
+
+__headers__
+
+|name|value|required|
+| - | - | - |
+|authorization|The token returned when logging in or creating an account|True|
+|user-agent|The account agent of the device using this app|False|
+
+__responses__
+
+- 200 - Account follow removed
+Account follow removed
+
+```JSON
+{
+    "data": {},
     "success": 1
 }
 ```
@@ -144,6 +326,71 @@ Unauthorized to make request, either because the authorization header is incorre
 
 
 <details>
+<summary>POST /account/id/:id/report</summary>
+Report some account. There is currently no reason selector,
+and the only observed reason is `notinterested`
+
+
+__url params__
+
+|name|description|
+| - | - |
+|id|the id of the account to query|
+
+__headers__
+
+|name|value|required|
+| - | - | - |
+|authorization|The token returned when logging in or creating an account|True|
+|user-agent|The account agent of the device using this app|False|
+
+```JSON
+{
+    "reason": "...        <Report reason>"
+}
+```
+
+__responses__
+
+- 200 - Account reported
+Account reported
+
+The account of id `id` was reported
+
+```JSON
+{
+    "data": {},
+    "success": 1
+}
+```
+
+- 200:1101 - Bad request format
+Bad request format
+
+The information sent is either malformed, has missing keys, or has unexpected extra keys.
+It cannot be used. This should be treated similarly too an HTTP 400 bad request
+
+
+```JSON
+{
+    "error": {
+        "code": 1101,
+        "message": "bad request format"
+    },
+    "success": 0
+}
+```
+
+- 401 - Unauthorized
+Unauthorized
+
+Unauthorized to make request, either because the authorization header is incorrect or missing
+
+
+</details>
+
+
+<details>
 <summary>GET /account/me</summary>
 Get information about the logged in account
 
@@ -210,7 +457,7 @@ __headers__
     "colorScheme": "2       <Predefined color scheme to use>",
     "bio": "...             <Profile bio to use, send a blank to remove>",
     "displayName": "...     <Non-unique display name to use, send blank to remove>",
-    "accountname": "...        <Unique accountname to use>"
+    "accountname": "...     <Unique accountname to use>"
 }
 ```
 
@@ -413,7 +660,7 @@ Search results for the prefix used were returned
 - 200:1401 - Bad search
 Bad search
 
-Search string has invalid characters that cannot prefix a accountname
+Search string has invalid characters that cannot prefix an accountname
 
 ```JSON
 {
@@ -789,6 +1036,12 @@ Unauthorized to make request, either because the authorization header is incorre
 <summary>GET /post/id/:id</summary>
 Get a post by its id
 
+__url params__
+
+|name|description|
+| - | - |
+|id|the id of the post to query|
+
 __headers__
 
 |name|value|required|
@@ -829,6 +1082,21 @@ A post of id `id` exists and was retrieved
 }
 ```
 
+- 200:1500 - No such post
+No such post
+
+No such post was found with this id
+
+```JSON
+{
+    "error": {
+        "code": 1500,
+        "message": "post not found"
+    },
+    "success": 0
+}
+```
+
 - 401 - Unauthorized
 Unauthorized
 
@@ -839,8 +1107,14 @@ Unauthorized to make request, either because the authorization header is incorre
 
 
 <details>
-<summary>GET /post/id/:id/feedback/comments</summary>
+<summary>GET /post/id/:id/feedback/comment</summary>
 Get a slice of comments on a post with accountmap data
+
+__url params__
+
+|name|description|
+| - | - |
+|id|the id of the post to query|
 
 __headers__
 
@@ -897,6 +1171,209 @@ Unauthorized to make request, either because the authorization header is incorre
 
 
 </details>
+<details>
+<summary>POST /post/id/:id/feedback/comment</summary>
+Post a comment on some post
+
+__url params__
+
+|name|description|
+| - | - |
+|id|the id of the post to query|
+
+__headers__
+
+|name|value|required|
+| - | - | - |
+|authorization|The token returned when logging in or creating an account|True|
+|user-agent|The account agent of the device using this app|False|
+
+```JSON
+{
+    "body": "...            <Comment body. Mentions will be included as plaintext>",
+    "postID": "...          <ID of the post this comment will be on>",
+    "stubID": "...          <Unknown, not does not seem to be required>"
+}
+```
+
+__responses__
+
+- 200 - Comment posted
+Comment posted
+
+The sent comment was posted and is now under the video of id `id`
+
+```JSON
+{
+    "accounts": "{...}          <id -> account map>",
+    "authorID": "...            <Comment author id>",
+    "body": "...                <Comment text body>",
+    "date": "1580275243         <Comment create timestamp>",
+    "id": "...-...              <Comment id as <post_id>-<comment_id>",
+    "mentions": [
+        {
+            "accountID": "...   <Account mentioned>",
+            "byteRange": {
+                "start": "10    <Unknown>",
+                "stop": "15     <Unknown, same length as range>"
+            },
+            "range": {
+                "start": "8     <Mention substring start>",
+                "stop": "13     <Mention substring end>"
+            },
+            "text": "@byte      <Mention text>",
+            "accountname": "byte   <accountname mentioned"
+        }
+    ],
+    "postID": "...              <Parent post id>"
+}
+```
+
+- 200:1101 - Bad request format
+Bad request format
+
+The information sent is either malformed, has missing keys, or has unexpected extra keys.
+It cannot be used. This should be treated similarly too an HTTP 400 bad request
+
+
+```JSON
+{
+    "error": {
+        "code": 1101,
+        "message": "bad request format"
+    },
+    "success": 0
+}
+```
+
+- 401 - Unauthorized
+Unauthorized
+
+Unauthorized to make request, either because the authorization header is incorrect or missing
+
+
+</details>
+
+
+<details>
+<summary>PUT /post/id/:id/feedback/like</summary>
+Like a post
+
+__url params__
+
+|name|description|
+| - | - |
+|id|the id of the post to query|
+
+__headers__
+
+|name|value|required|
+| - | - | - |
+|authorization|The token returned when logging in or creating an account|True|
+|user-agent|The account agent of the device using this app|False|
+
+__responses__
+
+- 200 - Post liked
+Post liked
+
+```JSON
+{
+    "data": {},
+    "success": 1
+}
+```
+
+- 200:1101 - Bad request format
+Bad request format
+
+The information sent is either malformed, has missing keys, or has unexpected extra keys.
+It cannot be used. This should be treated similarly too an HTTP 400 bad request
+
+
+```JSON
+{
+    "error": {
+        "code": 1101,
+        "message": "bad request format"
+    },
+    "success": 0
+}
+```
+
+- 200:1500 - No such post
+No such post
+
+No such post was found with this id
+
+```JSON
+{
+    "error": {
+        "code": 1500,
+        "message": "post not found"
+    },
+    "success": 0
+}
+```
+
+- 401 - Unauthorized
+Unauthorized
+
+Unauthorized to make request, either because the authorization header is incorrect or missing
+
+
+</details>
+<details>
+<summary>DELETE /post/id/:id/feedback/like</summary>
+Unlike a post
+
+__url params__
+
+|name|description|
+| - | - |
+|id|the id of the post to query|
+
+__headers__
+
+|name|value|required|
+| - | - | - |
+|authorization|The token returned when logging in or creating an account|True|
+|user-agent|The account agent of the device using this app|False|
+
+__responses__
+
+- 200 - Post like removed
+Post like removed
+
+```JSON
+{
+    "data": {},
+    "success": 1
+}
+```
+
+- 200:1500 - No such post
+No such post
+
+No such post was found with this id
+
+```JSON
+{
+    "error": {
+        "code": 1500,
+        "message": "post not found"
+    },
+    "success": 0
+}
+```
+
+- 401 - Unauthorized
+Unauthorized
+
+Unauthorized to make request, either because the authorization header is incorrect or missing
+
+
+</details>
 
 
 <details>
@@ -905,6 +1382,12 @@ Mark video as looped and increase its total loop count.
 There appears to be no ratelimit to marking posts as looped, so videos can be looped more times
 than they could be watched in the same timeframe
 
+
+__url params__
+
+|name|description|
+| - | - |
+|id|the id of the post to query|
 
 __headers__
 
@@ -929,6 +1412,191 @@ This post has been marked as looped, and its loop count has been updated
     "success": 1
 }
 ```
+
+- 200:1101 - Bad request format
+Bad request format
+
+The information sent is either malformed, has missing keys, or has unexpected extra keys.
+It cannot be used. This should be treated similarly too an HTTP 400 bad request
+
+
+```JSON
+{
+    "error": {
+        "code": 1101,
+        "message": "bad request format"
+    },
+    "success": 0
+}
+```
+
+- 200:1500 - No such post
+No such post
+
+No such post was found with this id
+
+```JSON
+{
+    "error": {
+        "code": 1500,
+        "message": "post not found"
+    },
+    "success": 0
+}
+```
+
+- 401 - Unauthorized
+Unauthorized
+
+Unauthorized to make request, either because the authorization header is incorrect or missing
+
+
+</details>
+
+
+<details>
+<summary>DELETE /post/id/:id/rebyte</summary>
+Unrebyte a post
+
+__url params__
+
+|name|description|
+| - | - |
+|id|the id of the post to query|
+
+__headers__
+
+|name|value|required|
+| - | - | - |
+|authorization|The token returned when logging in or creating an account|True|
+|user-agent|The account agent of the device using this app|False|
+
+__responses__
+
+- 200 - Post unrebyted
+Post unrebyted
+
+the post was unrebyted from the authed account
+
+```JSON
+{
+    "data": {},
+    "success": 1
+}
+```
+
+- 401 - Unauthorized
+Unauthorized
+
+Unauthorized to make request, either because the authorization header is incorrect or missing
+
+
+</details>
+
+
+<details>
+<summary>POST /post/id/:id/report</summary>
+Report a post for some reason. Observed reasons include
+`spam`, `abuse`, `notinterested`
+
+
+__url params__
+
+|name|description|
+| - | - |
+|id|the id of the post to query|
+
+__headers__
+
+|name|value|required|
+| - | - | - |
+|authorization|The token returned when logging in or creating an account|True|
+|user-agent|The account agent of the device using this app|False|
+
+```JSON
+{
+    "reason": "...        <Report reason>"
+}
+```
+
+__responses__
+
+- 200 - Report sent
+Report sent
+
+The report was sent
+
+```JSON
+{
+    "data": {},
+    "success": 1
+}
+```
+
+- 200:1101 - Bad request format
+Bad request format
+
+The information sent is either malformed, has missing keys, or has unexpected extra keys.
+It cannot be used. This should be treated similarly too an HTTP 400 bad request
+
+
+```JSON
+{
+    "error": {
+        "code": 1101,
+        "message": "bad request format"
+    },
+    "success": 0
+}
+```
+
+- 200:1700 - Bad report type
+Bad report type
+
+The report reason is not valid
+
+```JSON
+{
+    "error": {
+        "code": 1700,
+        "message": "invalid report reason: [\"spam\", \"abuse\", \"notinterested\"]"
+    },
+    "success": 0
+}
+```
+
+- 401 - Unauthorized
+Unauthorized
+
+Unauthorized to make request, either because the authorization header is incorrect or missing
+
+
+</details>
+
+
+<details>
+<summary>POST /rebyte</summary>
+Rebyte a post to your profile
+
+__headers__
+
+|name|value|required|
+| - | - | - |
+|authorization|The token returned when logging in or creating an account|True|
+|user-agent|The account agent of the device using this app|False|
+
+```JSON
+{
+    "postID": "...        <ID of the post to rebyte>"
+}
+```
+
+__responses__
+
+- 200 - Post rebyted
+Post rebyted
+
+The post referenced was rebyted and is on your profile
 
 - 200:1101 - Bad request format
 Bad request format

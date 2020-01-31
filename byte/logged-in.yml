@@ -32,6 +32,9 @@ vars:
         account-id:
             name: id
             description: the id of the account to query
+        post-id:
+            name: id
+            description: the id of the post to query
     feed-responses:
         "200":
             title: Feed slice fetched
@@ -94,7 +97,24 @@ vars:
                         "colorScheme": "2       <Predefined color scheme to use>",
                         "bio": "...             <Profile bio to use, send a blank to remove>",
                         "displayName": "...     <Non-unique display name to use, send blank to remove>",
-                        "accountname": "...        <Unique accountname to use>"
+                        "accountname": "...     <Unique accountname to use>"
+                    }
+        rebyte:
+            POST:
+                lang: JSON
+                content: {"postID": "...        <ID of the post to rebyte>"}
+        report:
+            POST:
+                lang: JSON
+                content: {"reason": "...        <Report reason>"}
+        comment:
+            POST:
+                lang: JSON
+                content:
+                    {
+                        "body": "...            <Comment body. Mentions will be included as plaintext>",
+                        "postID": "...          <ID of the post this comment will be on>",
+                        "stubID": "...          <Unknown, not does not seem to be required>"
                     }
     response:
         full:
@@ -150,10 +170,40 @@ vars:
                         },
                         "success": 1
                     }
+            rebyte:
+                {
+                    "data": {
+                        "accounts": "{...}          <id -> profile map>",
+                        "authorID": "...            <Rebyter author id>",
+                        "date": "...                <Rebyte create timestamp>",
+                        "id": "...                  <Rebyte id>",
+                        "post": {
+                            "allowCuration": "true  <May this post be curated?>",
+                            "allowRemix": "false    <May this post be remixed?>",
+                            "authorID": "...        <Post author id>",
+                            "caption": "...         <Post caption>",
+                            "commentCount": "6633   <Total comment count>",
+                            "commentCursor": "...   <Comments paging cursor>",
+                            "comments": "[...]      <Array of comments>",
+                            "date": "1579934060     <Post create timestamp>",
+                            "id": "...              <Post id>",
+                            "likeCount": "119453    <Total like count>",
+                            "likedByMe": "false     <Did the authed account like this post?>",
+                            "loopCount": "2356580   <Total loop count>",
+                            "mentions": "[]         <Array of mentions>",
+                            "rebytedByMe": "false   <Did the authed account rebyte this post?>",
+                            "thumbSrc": "...        <Thumbnail resource link>",
+                            "type": "0              <Unknown>",
+                            "videoSrc": "...        <Video resource link>"
+                        }
+                    },
+                    "success": 1
+                }
             comment:
                 lang: JSON
                 content:
                     {
+                        "accounts": "{...}          <id -> account map>",
                         "authorID": "...            <Comment author id>",
                         "body": "...                <Comment text body>",
                         "date": "1580275243         <Comment create timestamp>",
@@ -234,6 +284,16 @@ vars:
                         "error": {
                             "code": 1101,
                             "message": "bad request format"
+                        },
+                        "success": 0
+                    }
+            invalid-report:
+                lang: JSON
+                content:
+                    {
+                        "error": {
+                            "code": 1700,
+                            "message": "invalid report reason: [\"spam\", \"abuse\", \"notinterested\"]"
                         },
                         "success": 0
                     }
@@ -612,9 +672,20 @@ routes:
                     Lists of categories can be fetched with GET `/categories`
                 responses: $feed-responses-paged
         # posts
+        /rebyte:
+            POST:
+                description: Rebyte a post to your profile
+                body: $request.rebyte.POST
+                responses:
+                    "200":
+                        title: Post rebyted
+                        description: The post referenced was rebyted and is on your profile
+                        body: $response.object.rebyte
         /post/id/:id:
             GET:
                 description: Get a post by its id
+                url params:
+                    - $url.post-id
                 responses:
                     "200":
                         title: Post retrieved
@@ -627,19 +698,84 @@ routes:
                     Mark video as looped and increase its total loop count.
                     There appears to be no ratelimit to marking posts as looped, so videos can be looped more times
                     than they could be watched in the same timeframe
+                url params:
+                    - $url.post-id
                 responses:
                     "200":
                         title: Post looped
                         description: This post has been marked as looped, and its loop count has been updated
                         body: $response.loop.POST.ok
-        /post/id/:id/feedback/comments:
+                    "200:1500": $response.full.no-post
+        /post/id/:id/rebyte:
+            DELETE:
+                description: Unrebyte a post
+                url params:
+                    - $url.post-id
+                responses:
+                    "200":
+                        title: Post unrebyted
+                        description: the post was unrebyted from the authed account
+                        body: $response.global.ok
+        /post/id/:id/feedback/like:
+            PUT:
+                description: Like a post
+                url params:
+                    - $url.account-id
+                url params:
+                    - $url.post-id
+                responses:
+                    "200":
+                        title: Post liked
+                        body: $response.global.ok
+                    "200:1500": $response.full.no-post
+            DELETE:
+                description: Unlike a post
+                url params:
+                    - $url.account-id
+                url params:
+                    - $url.post-id
+                responses:
+                    "200":
+                        title: Post like removed
+                        body: $response.global.ok
+                    "200:1500": $response.full.no-post
+        /post/id/:id/feedback/comment:
             GET:
                 description: Get a slice of comments on a post with accountmap data
+                url params:
+                    - $url.post-id
                 responses:
                     "200":
                         title: Comment slice recieved
                         description: A slice of comments was fetched
                         body: $response.post-comments.GET.ok
+            POST:
+                description: Post a comment on some post
+                body: $request.comment.POST
+                url params:
+                    - $url.post-id
+                responses:
+                    "200":
+                        title: Comment posted
+                        description: The sent comment was posted and is now under the video of id `id`
+                        body: $response.object.comment
+        /post/id/:id/report:
+            POST:
+                description: |
+                    Report a post for some reason. Observed reasons include
+                    `spam`, `abuse`, `notinterested`
+                body: $request.report.POST
+                url params:
+                    - $url.post-id
+                responses:
+                    "200":
+                        title: Report sent
+                        description: The report was sent
+                        body: $response.global.ok
+                    "200:1700":
+                        title: Bad report type
+                        description: The report reason is not valid
+                        body: $response.global.invalid-report
         # accounts
         /account/me:
             GET:
@@ -736,6 +872,19 @@ routes:
                 responses:
                     "200":
                         title: Account was unblocked
+                        body: $response.global.ok
+        /account/id/:id/report:
+            POST:
+                description: |
+                    Report some account. There is currently no reason selector,
+                    and the only observed reason is `notinterested`
+                body: $request.report.POST
+                url params:
+                    - $url.account-id
+                responses:
+                    "200":
+                        title: Account reported
+                        description: The account of id `id` was reported
                         body: $response.global.ok
         /account/prefix/:prefix:
             GET:
