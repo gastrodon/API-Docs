@@ -1,0 +1,50 @@
+vars:
+    body:
+        request:
+            auth:
+                login:
+                    root:
+                        post:
+                            lang: json
+                            content: $data.json.auth.login_post
+
+                update_push_token:
+                    root:
+                        post:
+                            lang: json
+                            content: $data.json.auth.update_push_token
+
+        response:
+            alerts:
+                check:
+                    root:
+                        get:
+                            data: json
+                            content: $data.json.alerts.check
+
+            auth:
+                login:
+                    root:
+                        post:
+                            lang: json
+                            content: $data.json.auth.login_response
+
+            users:
+                namecards:
+                    root:
+                        get:
+                            lang: json
+                            content: |-
+                                {
+                                    "list": [
+                                        $data.json.profile.user_profile,
+                                        "..."
+                                    ],
+                                    "pagination": $data.json.partial.pagination
+                                }
+
+            release_info:
+                root:
+                    get:
+                        lang: json
+                        content: $data.json.root.release_info

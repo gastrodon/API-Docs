@@ -1,0 +1,10 @@
+routes:
+    /alerts/check:
+        GET:
+            description: Check for new activity
+            tables:
+                Headers: $header_table.authed
+            responses:
+                200:
+                    description: New activity was fetched
+                    body: $body.response.alerts.check.root.get

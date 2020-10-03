@@ -1,0 +1,10 @@
+routes:
+    /release-info:
+        GET:
+            description: Get information about an app update that may be available
+            tables:
+                Headers: $header_table.anon
+            responses:
+                200:
+                    description: Update info was fetched
+                    body: $body.response.release_info.root.get

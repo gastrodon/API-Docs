@@ -1,0 +1,190 @@
+vars:
+    data:
+        string:
+            unknown: field or value with an unknown use
+            profile_uid: unique id referencing this user
+            unix_time: unix timestamp of occurence
+            language: 2 character language code
+            alpha_color: hexidecimal color with alpha bits
+
+        json:
+            alerts:
+                check: |-
+                    {
+                        "activitiesAlertCount": "int activity alerts",
+                        "likesAlertCount": "int new likes",
+                        "followersAlertCount": "int new followers",
+                        "noticesCount": "int new notices"
+                    }
+
+            auth:
+                login_post: |-
+                    {
+                        "authType": "int auth type. Password login will be 1, secret or phone login is likely something else",
+                        "birthday": "$data.string.unknown",
+                        "contentRegion": " int $data.string.unknown",
+                        "email": "email to this account, if email login",
+                        "gender": "int $data.string.unknown",
+                        "invitationCode": "$data.string.unknown",
+                        "nickname": "nickname to this account, likely if nickname login",
+                        "password": "password to this account, if a password login",
+                        "phoneNumber": "phone number to this account, likely if phone login",
+                        "purpose": "int $data.string.unknown",
+                        "school": "$data.string.unknown",
+                        "secret": "valid secret for this account, if a secret login",
+                        "securityCode": "likely used when a security code is required to login"
+                    }
+
+                login_response: |-
+                    {
+                    	"sId": "used to make authorized requests",
+                    	"secret": "likely used to log back in without storing the password",
+                    	"account": $data.json.auth.login_profile_partial,
+                    	"userProfile": $data.json.profile.self_profile
+                    }
+
+                login_profile_partial: |-
+                    {
+                        "uid": "$data.string.profile_uid",
+                        "status": "int $data.string.unknown",
+                        "email": "account email",
+                        "createdTime": "$data.string.unix_time",
+                        "deviceId": "id referencing the clients device",
+                        "hasProfile": "int does this user have a profile?"
+                    }
+
+                update_push_token: |-
+                    {
+                        "deviceToken": "device token likely used for google push notifications"
+                    }
+
+            root:
+                release_info: |-
+                    {
+                    	"Code": "$data.string.unknown, likely an api status code",
+                    	"Msg": "$data.string.unknown, likely an api status message",
+                    	"UpdateStatus": "int is the app up to date?",
+                    	"VersionCode": "int target version of the app",
+                    	"VersionName": "semantic version of the app",
+                    	"ModifyContent": "short update changelog",
+                    	"DownloadUrl": "link to the apk containing the target update",
+                    	"ApkSize": "int assumed to be apk size, but is always 0",
+                    	"ApkMd5": "md5 that should be computable from hashing the updated apk"
+                    }
+
+            profile:
+                self_profile: |-
+                    {
+                        "uid": "$data.string.profile_uid",
+                        "nickname": "profile nickname",
+                        "socialId": "profile social id",
+
+                        "onlineStatus": "int $data.string.unknown, but related to whether or not the profile is online",
+                        "nameCardEnabled": "int likely an enum of what name card enabled status is the case for this profile",
+                        "showsSchool": "int is the profile's school shown?",
+                        "showsLocation": "int likely bool of whether or not the location of this profile is shown",
+                        "showsJoinedCircles": "int are joined circles visible?",
+                        "chatInvitationStatus": "int likely a bool describing whether this user may make chat invites",
+                        "pushEnabled": "int are push notifs enabled?",
+                        "gender": "int likely a gender bool",
+
+                        "icon": $data.json.partial.media,
+                        "createdTime": "$data.string.unix_time",
+
+                        "contentRegionName": "name of this profiles region",
+                        "location": $data.json.partial.location,
+                        "language": "$data.string.language",
+
+                        "fansCount": "int number of fans",
+                        "followingCount": "int number of profiles followed by this profile",
+                        "friendsCount": "int likely number of people who both are followed by and do follow this profile",
+
+                        "socialIdModified": "int $data.string.unknown",
+                        "status": "$data.string.unknown",
+                        "contentRegion": "int $data.string.unknown",
+                        "school": "$data.string.unknown"
+                    }
+
+                user_profile: |-
+                    {
+                        "uid": "$data.string.profile_uid",
+                        "nickname": "profile nickname",
+                        "socialId": "profile social id",
+
+                        "onlineStatus": "int $data.string.unknown, but related to whether or not the profile is online",
+                        "nameCardEnabled": "int likely an enum of what name card enabled status is the case for this profile",
+                        "showsSchool": "int is the profile's school shown?",
+                        "showsLocation": "int likely bool of whether or not the location of this profile is shown",
+                        "showsJoinedCircles": "int are joined circles visible?",
+                        "chatInvitationStatus": "int likely a bool describing whether this user may make chat invites",
+                        "pushEnabled": "int are push notifs enabled?",
+                        "gender": "int likely a gender bool",
+
+                        "icon": $data.json.partial.media,
+                        "createdTime": "$data.string.unix_time",
+
+                        "contentRegionName": "name of this profiles region",
+                        "location": $data.json.partial.location,
+                        "language": "$data.string.language",
+
+                        "fansCount": "int number of fans",
+                        "followingCount": "int number of profiles followed by this profile",
+                        "friendsCount": "int likely number of people who both are followed by and do follow this profile",
+
+                        "socialIdModified": "int $data.string.unknown",
+                        "status": "$data.string.unknown",
+                        "contentRegion": "int $data.string.unknown",
+                        "school": "$data.string.unknown",
+
+                        "taglist": [
+                        $data.json.profile.tag,
+                        "..."
+                        ],
+                        "nameCardBackground": $data.json.partial.media
+                    }
+
+                tag: |-
+                    {
+                        "order": "position of this tag, relative to its siblings",
+                        "source": "int $data.string.unknown",
+                        "status": "int $data.string.unknown",
+                        "style": $data.json.profile.tag_style,
+                        "tagId": "int id referencing this tag",
+                        "tagName": "name of this tag"
+                    }
+
+                tag_style: |-
+                    {
+                        "backgroundColor": "$data.string.alpha_color",
+                        "borderColor": "$data.string.alpha_color",
+                        "solidColor": "$data.string.alpha_color",
+                        "textColor": "$data.string.alpha_color"
+                    }
+
+            partial:
+                media: |-
+                    {
+                        "baseUrl": "url template to build sizes with",
+                        "resourceList": [
+                            {
+                                "width": "int width",
+                                "height": "int height",
+                                "url": "url to the icon in this size"
+                            },
+                            "..."
+                        ]
+                    }
+
+                location: |-
+                    {
+                        "longitude": "float longitude",
+                        "latitude": "float latitude",
+                        "address": {
+                            "$data.string.language": "city location"
+                        }
+                    }
+
+                pagination: |-
+                    {
+                        "nextPageToken": "token to fetch the next page relative to this"
+                    }

@@ -1,0 +1,21 @@
+routes:
+    /auth/login:
+        POST:
+            description: Login to Z with some combination of credentials
+            tables:
+                Headers: $header_table.anon
+            body: $body.request.auth.login.root.post
+            responses:
+                200:
+                    description: The login was ok
+                    body: $body.response.auth.login.root.post
+
+    /auth/update-push-token:
+        POST:
+            description: Update the device push token bound to this account
+            tables:
+                Headers: $header_table.authed
+            body: $body.request.auth.update_push_token.root.post
+            responses:
+                200:
+                    description: The push token was accepted

@@ -1,0 +1,21 @@
+vars:
+    query_param:
+        gender:
+            name: gender
+            description: Filter results to this gender
+            required: "No"
+
+        size:
+            name: size
+            description: Return this number of results
+            required: "No"
+
+        page_token:
+            name: pageToken
+            description: Pagination page token
+            required: "No"
+
+    query_param_table:
+        paginated:
+            - $query_param.size
+            - $query_param.page_token

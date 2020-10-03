@@ -1,0 +1,54 @@
+vars:
+    header:
+        raw_device_id:
+            name: rawDeviceId
+            description: An id that can identify the device making the request
+            required: "Yes"
+
+        sid:
+            name: sId
+            description: The authed user's session id
+            required: "Yes"
+
+        user_agent:
+            name: User-Agent
+            description: The user agent of the device making the request
+            required: "No"
+
+        app_type:
+            name: appType
+            description: should be `MainApp`
+            required: "Yes"
+
+        app_version:
+            name: appVersion
+            description: the semantic version of this app
+            required: "Yes"
+
+        device_type:
+            name: deviceType
+            description: appears to always be `1`
+            required: "Yes"
+
+        os_type:
+            name: osType
+            description: appears to always be `2`
+            required: "Yes"
+
+    header_table:
+        authed:
+            - $header.raw_device_id
+            - $header.user_agent
+            - $header.sid
+            - $header.app_type
+            - $header.app_version
+            - $header.device_type
+            - $header.os_type
+
+        anon:
+            - $header.raw_device_id
+            - $header.user_agent
+            - $header.app_type
+            - $header.app_version
+            - $header.device_type
+            - $header.os_type

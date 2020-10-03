@@ -1,0 +1,11 @@
+routes:
+    /users/namecards:
+        GET:
+            description: Get a collection of user namecards
+            tables:
+                Headers: $header_table.authed
+                "URL Params": $query_param_table.paginated
+            responses:
+                200:
+                    description: A collection of user namecards was fetched
+                    body: $body.response.users.namecards.root.get
