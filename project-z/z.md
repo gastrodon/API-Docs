@@ -171,6 +171,110 @@ Update the device push token bound to this account
 </details>
 
 <details>
+<summary>GET /blogs</summary>
+
+Get a collection of blogs
+
+###### Headers
+|name|description|required|
+| - | - | - |
+|rawDeviceId|An id that can identify the device making the request|Yes|
+|User-Agent|The user agent of the device making the request|No|
+|sId|The authed user's session id|Yes|
+|appType|should be `MainApp`|Yes|
+|appVersion|the semantic version of this app|Yes|
+|deviceType|appears to always be `1`|Yes|
+|osType|appears to always be `2`|Yes|
+
+###### URL Params
+|name|description|required|
+| - | - | - |
+|size|Return this number of results|No|
+|pageToken|Pagination page token|No|
+
+
+
+
+#### Responses
+- `200`
+
+  A collection of blogs was fetched
+
+  #### Body
+```json
+{
+    "list": [
+        {
+            "author": {
+                "nickname": "user displayed name",
+                "uid": "unique id referencing this resource",
+                "socialId": "unique social id referencing this user",
+                "socialIdModified": "unique social id referencing this user_modified",
+                "bio": "information about this user",
+                "gender": "the gender of this user",
+                "contentRegion": "int unknown, appears to be an int representing a region",
+                "contentRegionName": "int unknown, appears to be an int representing a region_name",
+                "createdTime": "unix timestamp of occurence",
+                "icon": {
+                    "baseUrl": "url template to build sizes with",
+                    "resourceList": [
+                        {
+                            "width": "int width",
+                            "height": "int height",
+                            "url": "url to the icon in this size"
+                        },
+                        "..."
+                    ]
+                },
+                "chatInvitationStatus": "int likely was this user invited to this chat?",
+                "chatMemberStatus": "int likely bool is this member a member of this chat?",
+                "onlineStatus": "int indicator of how this user may be online",
+                "specialTitle": "special title of this user in this chat",
+                "status": "int field or value with an unknown use"
+            },
+            "blogId": "unique id referencing this resource",
+            "uid": "unique id referencing this resource, differnece to blogId is unknown",
+            "createdTime": "unix timestamp of occurence",
+            "circleIdList": [
+                "unique id referencing this resource",
+                "..."
+            ],
+            "content": "blog content",
+            "contentRegion": "int unknown, appears to be an int representing a region",
+            "language": "2 character language code",
+            "mediaList": [
+                {
+                    "baseUrl": "url template to build sizes with",
+                    "resourceList": [
+                        {
+                            "width": "int width",
+                            "height": "int height",
+                            "url": "url to the icon in this size"
+                        },
+                        "..."
+                    ]
+                },
+                "..."
+            ],
+            "extensions": "field or value with an unknown use, appears to be an empty object",
+            "commentsCount": "int comments",
+            "votesCount": "int votes",
+            "type": "int field or value with an unknown use, likely blog type",
+            "status": "int field or value with an unknown use",
+            "visibility": "int field or value with an unknown use"
+        },
+        "..."
+    ],
+    "pagination": {
+        "nextPageToken": "token to fetch the next page relative to this"
+    }
+}
+```
+
+
+</details>
+
+<details>
 <summary>GET /chat/joined-threads</summary>
 
 Get a collection of threads that you have joined
@@ -229,7 +333,7 @@ Get a collection of threads that you have joined
                 "bio": "information about this user",
                 "gender": "the gender of this user",
                 "contentRegion": "int unknown, appears to be an int representing a region",
-                "contentRegionName": "name of this profiles region",
+                "contentRegionName": "int unknown, appears to be an int representing a region_name",
                 "createdTime": "unix timestamp of occurence",
                 "icon": {
                     "baseUrl": "url template to build sizes with",
@@ -257,7 +361,7 @@ Get a collection of threads that you have joined
                 "bio": "information about this user",
                 "gender": "the gender of this user",
                 "contentRegion": "int unknown, appears to be an int representing a region",
-                "contentRegionName": "name of this profiles region",
+                "contentRegionName": "int unknown, appears to be an int representing a region_name",
                 "createdTime": "unix timestamp of occurence",
                 "icon": {
                     "baseUrl": "url template to build sizes with",
@@ -298,7 +402,7 @@ Get a collection of threads that you have joined
                     "bio": "information about this user",
                     "gender": "the gender of this user",
                     "contentRegion": "int unknown, appears to be an int representing a region",
-                    "contentRegionName": "name of this profiles region",
+                    "contentRegionName": "int unknown, appears to be an int representing a region_name",
                     "createdTime": "unix timestamp of occurence",
                     "icon": {
                         "baseUrl": "url template to build sizes with",
@@ -335,7 +439,7 @@ Get a collection of threads that you have joined
                     "bio": "information about this user",
                     "gender": "the gender of this user",
                     "contentRegion": "int unknown, appears to be an int representing a region",
-                    "contentRegionName": "name of this profiles region",
+                    "contentRegionName": "int unknown, appears to be an int representing a region_name",
                     "createdTime": "unix timestamp of occurence",
                     "icon": {
                         "baseUrl": "url template to build sizes with",
@@ -451,7 +555,7 @@ Get a collection of joinable threads
                 "bio": "information about this user",
                 "gender": "the gender of this user",
                 "contentRegion": "int unknown, appears to be an int representing a region",
-                "contentRegionName": "name of this profiles region",
+                "contentRegionName": "int unknown, appears to be an int representing a region_name",
                 "createdTime": "unix timestamp of occurence",
                 "icon": {
                     "baseUrl": "url template to build sizes with",
@@ -479,7 +583,7 @@ Get a collection of joinable threads
                 "bio": "information about this user",
                 "gender": "the gender of this user",
                 "contentRegion": "int unknown, appears to be an int representing a region",
-                "contentRegionName": "name of this profiles region",
+                "contentRegionName": "int unknown, appears to be an int representing a region_name",
                 "createdTime": "unix timestamp of occurence",
                 "icon": {
                     "baseUrl": "url template to build sizes with",
@@ -520,7 +624,7 @@ Get a collection of joinable threads
                     "bio": "information about this user",
                     "gender": "the gender of this user",
                     "contentRegion": "int unknown, appears to be an int representing a region",
-                    "contentRegionName": "name of this profiles region",
+                    "contentRegionName": "int unknown, appears to be an int representing a region_name",
                     "createdTime": "unix timestamp of occurence",
                     "icon": {
                         "baseUrl": "url template to build sizes with",
@@ -557,7 +661,7 @@ Get a collection of joinable threads
                     "bio": "information about this user",
                     "gender": "the gender of this user",
                     "contentRegion": "int unknown, appears to be an int representing a region",
-                    "contentRegionName": "name of this profiles region",
+                    "contentRegionName": "int unknown, appears to be an int representing a region_name",
                     "createdTime": "unix timestamp of occurence",
                     "icon": {
                         "baseUrl": "url template to build sizes with",

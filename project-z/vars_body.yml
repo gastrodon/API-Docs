@@ -22,6 +22,19 @@ vars:
                             data: json
                             content: $data.json.alerts.check
 
+            blogs:
+                root:
+                    get:
+                        lang: json
+                        content: |-
+                            {
+                                "list": [
+                                    $data.json.blog.blog,
+                                    "..."
+                                ],
+                                "pagination": $data.json.partial.pagination
+                            }
+
             auth:
                 login:
                     root:

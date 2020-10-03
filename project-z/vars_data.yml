@@ -5,7 +5,6 @@ vars:
 
             unix_time: unix timestamp of occurence
             alpha_color: hexidecimal color with alpha bits
-            content_region: int unknown, appears to be an int representing a region
 
             field:
                 uid: unique id referencing this resource
@@ -15,6 +14,7 @@ vars:
                 social_id: unique social id referencing this user
                 social_id_modified: int has this social id been customized?
 
+                content_region: int unknown, appears to be an int representing a region
                 content_region_name: name of this profiles region
                 online_status: int indicator of how this user may be online
 
@@ -43,7 +43,7 @@ vars:
                         "purpose": "int $data.string.unknown",
 
                         "birthday": "$data.string.unknown",
-                        "contentRegion": "$data.string.content_region",
+                        "contentRegion": "$data.string.field.content_region",
                         "gender": "$data.string.field.user_gender",
                         "invitationCode": "$data.string.unknown",
                         "school": "$data.string.unknown"
@@ -72,16 +72,46 @@ vars:
                         "deviceToken": "device token likely used for google push notifications"
                     }
 
+            blog:
+                blog: |-
+                    {
+                        "author": $data.json.profile.user_profile_partial,
+                        "blogId": "$data.string.field.uid",
+                        "uid": "$data.string.field.uid, differnece to blogId is unknown",
+                        "createdTime": "$data.string.unix_time",
+                        "circleIdList": [
+                            "$data.string.field.uid",
+                            "..."
+                        ],
+
+                        "content": "blog content",
+                        "contentRegion": "$data.string.field.content_region",
+                        "language": "$data.string.field.language",
+                        "mediaList": [
+                            $data.json.partial.media,
+                            "..."
+                        ],
+
+                        "extensions": $data.json.partial.extensions,
+
+                        "commentsCount": "int comments",
+                        "votesCount": "int votes",
+                        "type": "int $data.string.unknown, likely blog type",
+
+                        "status": "int $data.string.unknown",
+                        "visibility": "int $data.string.unknown"
+                    }
+
             chat:
                 thread: |-
                     {
                         "background": $data.json.partial.media,
                         "coHostUids": "probably a list of user ids, but always appears to be null",
                         "content": "a description of the chat",
-                        "contentRegion": "$data.string.content_region",
+                        "contentRegion": "$data.string.field.content_region",
                         "createdTime": "$data.string.unix_time",
                         "currentMemberInfo": $data.json.profile.chat_user_profile,
-                        "extensions": $data.json.chat.extensions,
+                        "extensions": $data.json.partial.extensions,
                         "host": $data.json.profile.chat_user_profile,
                         "hostUid": "$data.string.field.uid",
                         "icon": $data.json.partial.media,
@@ -115,9 +145,6 @@ vars:
                     }
 
                 latest_message: $data.json.chat.partial_message
-
-                extensions: |-
-                    "$data.string.unknown, appears to be an empty object"
 
                 check_item: |-
                     {
@@ -155,7 +182,7 @@ vars:
 
                         "socialIdModified": "$data.string.field.social_id_modified",
                         "status": "$data.string.unknown",
-                        "contentRegion": "$data.string.content_region",
+                        "contentRegion": "$data.string.field.content_region",
                         "school": "$data.string.unknown"
                     }
 
@@ -187,7 +214,7 @@ vars:
 
                         "socialIdModified": "$data.string.field.social_id_modified",
                         "status": "$data.string.unknown",
-                        "contentRegion": "$data.string.content_region",
+                        "contentRegion": "$data.string.field.content_region",
                         "school": "$data.string.unknown",
 
                         "taglist": [
@@ -206,7 +233,7 @@ vars:
 
                         "bio": "information about this user",
                         "gender": "$data.string.field.user_gender",
-                        "contentRegion": "$data.string.content_region",
+                        "contentRegion": "$data.string.field.content_region",
                         "contentRegionName": "$data.string.field.content_region_name",
                         "createdTime": "$data.string.unix_time",
                         "icon": $data.json.partial.media,
@@ -269,6 +296,9 @@ vars:
 
                 is_end: |-
                     "isEnd": "bool $data.string.unknown, probably has to do with pagination"
+
+                extensions: |-
+                    "$data.string.unknown, appears to be an empty object"
 
             root:
                 release_info: |-
