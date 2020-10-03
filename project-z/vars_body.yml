@@ -48,3 +48,33 @@ vars:
                     get:
                         lang: json
                         content: $data.json.root.release_info
+
+            chat:
+                joined_threads:
+                    root:
+                        get:
+                            lang: json
+                            content: |-
+                                {
+                                    $data.json.partial.is_end,
+                                    "list": [
+                                        $data.json.chat.thread,
+                                        "..."
+                                    ],
+                                    "threadCheckList": [
+                                        $data.json.chat.check_item,
+                                        "..."
+                                    ]
+                                }
+                threads:
+                    root:
+                        get:
+                            lang: json
+                            content: |-
+                                {
+                                    "list": [
+                                        $data.json.chat.thread,
+                                        "..."
+                                    ],
+                                    "pagination": $data.json.partial.pagination
+                                }

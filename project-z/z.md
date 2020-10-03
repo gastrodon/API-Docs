@@ -55,18 +55,18 @@ Login to Z with some combination of credentials
 ```json
 {
     "authType": "int auth type. Password login will be 1, secret or phone login is likely something else",
-    "birthday": "field or value with an unknown use",
-    "contentRegion": " int field or value with an unknown use",
     "email": "email to this account, if email login",
-    "gender": "int field or value with an unknown use",
-    "invitationCode": "field or value with an unknown use",
-    "nickname": "nickname to this account, likely if nickname login",
+    "nickname": "user displayed name",
     "password": "password to this account, if a password login",
     "phoneNumber": "phone number to this account, likely if phone login",
-    "purpose": "int field or value with an unknown use",
-    "school": "field or value with an unknown use",
     "secret": "valid secret for this account, if a secret login",
-    "securityCode": "likely used when a security code is required to login"
+    "securityCode": "likely used when a security code is required to login",
+    "purpose": "int field or value with an unknown use",
+    "birthday": "field or value with an unknown use",
+    "contentRegion": "int unknown, appears to be an int representing a region",
+    "gender": "the gender of this user",
+    "invitationCode": "field or value with an unknown use",
+    "school": "field or value with an unknown use"
 }
 ```
 
@@ -82,7 +82,7 @@ Login to Z with some combination of credentials
     "sId": "used to make authorized requests",
     "secret": "likely used to log back in without storing the password",
     "account": {
-        "uid": "unique id referencing this user",
+        "uid": "unique id referencing this resource",
         "status": "int field or value with an unknown use",
         "email": "account email",
         "createdTime": "unix timestamp of occurence",
@@ -90,17 +90,17 @@ Login to Z with some combination of credentials
         "hasProfile": "int does this user have a profile?"
     },
     "userProfile": {
-        "uid": "unique id referencing this user",
-        "nickname": "profile nickname",
-        "socialId": "profile social id",
-        "onlineStatus": "int field or value with an unknown use, but related to whether or not the profile is online",
+        "uid": "unique id referencing this resource",
+        "nickname": "user displayed name",
+        "socialId": "unique social id referencing this user",
+        "onlineStatus": "int indicator of how this user may be online",
         "nameCardEnabled": "int likely an enum of what name card enabled status is the case for this profile",
         "showsSchool": "int is the profile's school shown?",
         "showsLocation": "int likely bool of whether or not the location of this profile is shown",
         "showsJoinedCircles": "int are joined circles visible?",
         "chatInvitationStatus": "int likely a bool describing whether this user may make chat invites",
         "pushEnabled": "int are push notifs enabled?",
-        "gender": "int likely a gender bool",
+        "gender": "the gender of this user",
         "icon": {
             "baseUrl": "url template to build sizes with",
             "resourceList": [
@@ -125,9 +125,9 @@ Login to Z with some combination of credentials
         "fansCount": "int number of fans",
         "followingCount": "int number of profiles followed by this profile",
         "friendsCount": "int likely number of people who both are followed by and do follow this profile",
-        "socialIdModified": "int field or value with an unknown use",
+        "socialIdModified": "unique social id referencing this user_modified",
         "status": "field or value with an unknown use",
-        "contentRegion": "int field or value with an unknown use",
+        "contentRegion": "int unknown, appears to be an int representing a region",
         "school": "field or value with an unknown use"
     }
 }
@@ -167,6 +167,446 @@ Update the device push token bound to this account
   The push token was accepted
 
   
+
+</details>
+
+<details>
+<summary>GET /chat/joined-threads</summary>
+
+Get a collection of threads that you have joined
+
+###### Headers
+|name|description|required|
+| - | - | - |
+|rawDeviceId|An id that can identify the device making the request|Yes|
+|User-Agent|The user agent of the device making the request|No|
+|sId|The authed user's session id|Yes|
+|appType|should be `MainApp`|Yes|
+|appVersion|the semantic version of this app|Yes|
+|deviceType|appears to always be `1`|Yes|
+|osType|appears to always be `2`|Yes|
+
+###### URL Params
+|name|description|required|
+| - | - | - |
+|size|Return this number of results|No|
+|start|offset this number of items in a collection|No|
+
+
+
+
+#### Responses
+- `200`
+
+  A collection of threads was fetched
+
+  #### Body
+```json
+{
+    "isEnd": "bool field or value with an unknown use, probably has to do with pagination",
+    "list": [
+        {
+            "background": {
+                "baseUrl": "url template to build sizes with",
+                "resourceList": [
+                    {
+                        "width": "int width",
+                        "height": "int height",
+                        "url": "url to the icon in this size"
+                    },
+                    "..."
+                ]
+            },
+            "coHostUids": "probably a list of user ids, but always appears to be null",
+            "content": "a description of the chat",
+            "contentRegion": "int unknown, appears to be an int representing a region",
+            "createdTime": "unix timestamp of occurence",
+            "currentMemberInfo": {
+                "nickname": "user displayed name",
+                "uid": "unique id referencing this resource",
+                "socialId": "unique social id referencing this user",
+                "socialIdModified": "unique social id referencing this user_modified",
+                "bio": "information about this user",
+                "gender": "the gender of this user",
+                "contentRegion": "int unknown, appears to be an int representing a region",
+                "contentRegionName": "name of this profiles region",
+                "createdTime": "unix timestamp of occurence",
+                "icon": {
+                    "baseUrl": "url template to build sizes with",
+                    "resourceList": [
+                        {
+                            "width": "int width",
+                            "height": "int height",
+                            "url": "url to the icon in this size"
+                        },
+                        "..."
+                    ]
+                },
+                "chatInvitationStatus": "int likely was this user invited to this chat?",
+                "chatMemberStatus": "int likely bool is this member a member of this chat?",
+                "onlineStatus": "int indicator of how this user may be online",
+                "specialTitle": "special title of this user in this chat",
+                "status": "int field or value with an unknown use"
+            },
+            "extensions": "field or value with an unknown use, appears to be an empty object",
+            "host": {
+                "nickname": "user displayed name",
+                "uid": "unique id referencing this resource",
+                "socialId": "unique social id referencing this user",
+                "socialIdModified": "unique social id referencing this user_modified",
+                "bio": "information about this user",
+                "gender": "the gender of this user",
+                "contentRegion": "int unknown, appears to be an int representing a region",
+                "contentRegionName": "name of this profiles region",
+                "createdTime": "unix timestamp of occurence",
+                "icon": {
+                    "baseUrl": "url template to build sizes with",
+                    "resourceList": [
+                        {
+                            "width": "int width",
+                            "height": "int height",
+                            "url": "url to the icon in this size"
+                        },
+                        "..."
+                    ]
+                },
+                "chatInvitationStatus": "int likely was this user invited to this chat?",
+                "chatMemberStatus": "int likely bool is this member a member of this chat?",
+                "onlineStatus": "int indicator of how this user may be online",
+                "specialTitle": "special title of this user in this chat",
+                "status": "int field or value with an unknown use"
+            },
+            "hostUid": "unique id referencing this resource",
+            "icon": {
+                "baseUrl": "url template to build sizes with",
+                "resourceList": [
+                    {
+                        "width": "int width",
+                        "height": "int height",
+                        "url": "url to the icon in this size"
+                    },
+                    "..."
+                ]
+            },
+            "language": "2 character language code",
+            "latestMessage": {
+                "author": {
+                    "nickname": "user displayed name",
+                    "uid": "unique id referencing this resource",
+                    "socialId": "unique social id referencing this user",
+                    "socialIdModified": "unique social id referencing this user_modified",
+                    "bio": "information about this user",
+                    "gender": "the gender of this user",
+                    "contentRegion": "int unknown, appears to be an int representing a region",
+                    "contentRegionName": "name of this profiles region",
+                    "createdTime": "unix timestamp of occurence",
+                    "icon": {
+                        "baseUrl": "url template to build sizes with",
+                        "resourceList": [
+                            {
+                                "width": "int width",
+                                "height": "int height",
+                                "url": "url to the icon in this size"
+                            },
+                            "..."
+                        ]
+                    },
+                    "chatInvitationStatus": "int likely was this user invited to this chat?",
+                    "chatMemberStatus": "int likely bool is this member a member of this chat?",
+                    "onlineStatus": "int indicator of how this user may be online",
+                    "specialTitle": "special title of this user in this chat",
+                    "status": "int field or value with an unknown use"
+                },
+                "content": "content of the message body",
+                "createdTime": "unix timestamp of occurence",
+                "messageId": "unique id referencing this resource",
+                "threadId": "unique id referencing this resource",
+                "uid": "unique id referencing this resource",
+                "type": "int type of message"
+            },
+            "latestMessageId": "unique id referencing this resource",
+            "membersCount": "int members in this chat thread",
+            "membersSummary": [
+                {
+                    "nickname": "user displayed name",
+                    "uid": "unique id referencing this resource",
+                    "socialId": "unique social id referencing this user",
+                    "socialIdModified": "unique social id referencing this user_modified",
+                    "bio": "information about this user",
+                    "gender": "the gender of this user",
+                    "contentRegion": "int unknown, appears to be an int representing a region",
+                    "contentRegionName": "name of this profiles region",
+                    "createdTime": "unix timestamp of occurence",
+                    "icon": {
+                        "baseUrl": "url template to build sizes with",
+                        "resourceList": [
+                            {
+                                "width": "int width",
+                                "height": "int height",
+                                "url": "url to the icon in this size"
+                            },
+                            "..."
+                        ]
+                    },
+                    "chatInvitationStatus": "int likely was this user invited to this chat?",
+                    "chatMemberStatus": "int likely bool is this member a member of this chat?",
+                    "onlineStatus": "int indicator of how this user may be online",
+                    "specialTitle": "special title of this user in this chat",
+                    "status": "int field or value with an unknown use"
+                },
+                "..."
+            ],
+            "status": "int field or value with an unknown use",
+            "tagList": [
+                {
+                    "order": "position of this tag, relative to its siblings",
+                    "source": "int field or value with an unknown use",
+                    "status": "int field or value with an unknown use",
+                    "style": {
+                        "backgroundColor": "hexidecimal color with alpha bits",
+                        "borderColor": "hexidecimal color with alpha bits",
+                        "solidColor": "hexidecimal color with alpha bits",
+                        "textColor": "hexidecimal color with alpha bits"
+                    },
+                    "tagId": "int id referencing this tag",
+                    "tagName": "name of this tag"
+                },
+                "..."
+            ],
+            "threadId": "unique id referencing this resource",
+            "title": "title of this chat thread",
+            "type": "int field or value with an unknown use"
+        },
+        "..."
+    ],
+    "threadCheckList": [
+        {
+            "threadId": "unique id referencing this resource",
+            "latestMessageId": "unique id referencing this resource",
+            "lastReadMessageId": "unique id referencing this resource"
+        },
+        "..."
+    ]
+}
+```
+
+
+</details>
+
+<details>
+<summary>GET /chat/threads</summary>
+
+Get a collection of joinable threads
+
+###### Headers
+|name|description|required|
+| - | - | - |
+|rawDeviceId|An id that can identify the device making the request|Yes|
+|User-Agent|The user agent of the device making the request|No|
+|sId|The authed user's session id|Yes|
+|appType|should be `MainApp`|Yes|
+|appVersion|the semantic version of this app|Yes|
+|deviceType|appears to always be `1`|Yes|
+|osType|appears to always be `2`|Yes|
+
+###### URL Params
+|name|description|required|
+| - | - | - |
+|size|Return this number of results|No|
+|pageToken|Pagination page token|No|
+
+
+
+
+#### Responses
+- `200`
+
+  A collection of threads was fetched
+
+  #### Body
+```json
+{
+    "list": [
+        {
+            "background": {
+                "baseUrl": "url template to build sizes with",
+                "resourceList": [
+                    {
+                        "width": "int width",
+                        "height": "int height",
+                        "url": "url to the icon in this size"
+                    },
+                    "..."
+                ]
+            },
+            "coHostUids": "probably a list of user ids, but always appears to be null",
+            "content": "a description of the chat",
+            "contentRegion": "int unknown, appears to be an int representing a region",
+            "createdTime": "unix timestamp of occurence",
+            "currentMemberInfo": {
+                "nickname": "user displayed name",
+                "uid": "unique id referencing this resource",
+                "socialId": "unique social id referencing this user",
+                "socialIdModified": "unique social id referencing this user_modified",
+                "bio": "information about this user",
+                "gender": "the gender of this user",
+                "contentRegion": "int unknown, appears to be an int representing a region",
+                "contentRegionName": "name of this profiles region",
+                "createdTime": "unix timestamp of occurence",
+                "icon": {
+                    "baseUrl": "url template to build sizes with",
+                    "resourceList": [
+                        {
+                            "width": "int width",
+                            "height": "int height",
+                            "url": "url to the icon in this size"
+                        },
+                        "..."
+                    ]
+                },
+                "chatInvitationStatus": "int likely was this user invited to this chat?",
+                "chatMemberStatus": "int likely bool is this member a member of this chat?",
+                "onlineStatus": "int indicator of how this user may be online",
+                "specialTitle": "special title of this user in this chat",
+                "status": "int field or value with an unknown use"
+            },
+            "extensions": "field or value with an unknown use, appears to be an empty object",
+            "host": {
+                "nickname": "user displayed name",
+                "uid": "unique id referencing this resource",
+                "socialId": "unique social id referencing this user",
+                "socialIdModified": "unique social id referencing this user_modified",
+                "bio": "information about this user",
+                "gender": "the gender of this user",
+                "contentRegion": "int unknown, appears to be an int representing a region",
+                "contentRegionName": "name of this profiles region",
+                "createdTime": "unix timestamp of occurence",
+                "icon": {
+                    "baseUrl": "url template to build sizes with",
+                    "resourceList": [
+                        {
+                            "width": "int width",
+                            "height": "int height",
+                            "url": "url to the icon in this size"
+                        },
+                        "..."
+                    ]
+                },
+                "chatInvitationStatus": "int likely was this user invited to this chat?",
+                "chatMemberStatus": "int likely bool is this member a member of this chat?",
+                "onlineStatus": "int indicator of how this user may be online",
+                "specialTitle": "special title of this user in this chat",
+                "status": "int field or value with an unknown use"
+            },
+            "hostUid": "unique id referencing this resource",
+            "icon": {
+                "baseUrl": "url template to build sizes with",
+                "resourceList": [
+                    {
+                        "width": "int width",
+                        "height": "int height",
+                        "url": "url to the icon in this size"
+                    },
+                    "..."
+                ]
+            },
+            "language": "2 character language code",
+            "latestMessage": {
+                "author": {
+                    "nickname": "user displayed name",
+                    "uid": "unique id referencing this resource",
+                    "socialId": "unique social id referencing this user",
+                    "socialIdModified": "unique social id referencing this user_modified",
+                    "bio": "information about this user",
+                    "gender": "the gender of this user",
+                    "contentRegion": "int unknown, appears to be an int representing a region",
+                    "contentRegionName": "name of this profiles region",
+                    "createdTime": "unix timestamp of occurence",
+                    "icon": {
+                        "baseUrl": "url template to build sizes with",
+                        "resourceList": [
+                            {
+                                "width": "int width",
+                                "height": "int height",
+                                "url": "url to the icon in this size"
+                            },
+                            "..."
+                        ]
+                    },
+                    "chatInvitationStatus": "int likely was this user invited to this chat?",
+                    "chatMemberStatus": "int likely bool is this member a member of this chat?",
+                    "onlineStatus": "int indicator of how this user may be online",
+                    "specialTitle": "special title of this user in this chat",
+                    "status": "int field or value with an unknown use"
+                },
+                "content": "content of the message body",
+                "createdTime": "unix timestamp of occurence",
+                "messageId": "unique id referencing this resource",
+                "threadId": "unique id referencing this resource",
+                "uid": "unique id referencing this resource",
+                "type": "int type of message"
+            },
+            "latestMessageId": "unique id referencing this resource",
+            "membersCount": "int members in this chat thread",
+            "membersSummary": [
+                {
+                    "nickname": "user displayed name",
+                    "uid": "unique id referencing this resource",
+                    "socialId": "unique social id referencing this user",
+                    "socialIdModified": "unique social id referencing this user_modified",
+                    "bio": "information about this user",
+                    "gender": "the gender of this user",
+                    "contentRegion": "int unknown, appears to be an int representing a region",
+                    "contentRegionName": "name of this profiles region",
+                    "createdTime": "unix timestamp of occurence",
+                    "icon": {
+                        "baseUrl": "url template to build sizes with",
+                        "resourceList": [
+                            {
+                                "width": "int width",
+                                "height": "int height",
+                                "url": "url to the icon in this size"
+                            },
+                            "..."
+                        ]
+                    },
+                    "chatInvitationStatus": "int likely was this user invited to this chat?",
+                    "chatMemberStatus": "int likely bool is this member a member of this chat?",
+                    "onlineStatus": "int indicator of how this user may be online",
+                    "specialTitle": "special title of this user in this chat",
+                    "status": "int field or value with an unknown use"
+                },
+                "..."
+            ],
+            "status": "int field or value with an unknown use",
+            "tagList": [
+                {
+                    "order": "position of this tag, relative to its siblings",
+                    "source": "int field or value with an unknown use",
+                    "status": "int field or value with an unknown use",
+                    "style": {
+                        "backgroundColor": "hexidecimal color with alpha bits",
+                        "borderColor": "hexidecimal color with alpha bits",
+                        "solidColor": "hexidecimal color with alpha bits",
+                        "textColor": "hexidecimal color with alpha bits"
+                    },
+                    "tagId": "int id referencing this tag",
+                    "tagName": "name of this tag"
+                },
+                "..."
+            ],
+            "threadId": "unique id referencing this resource",
+            "title": "title of this chat thread",
+            "type": "int field or value with an unknown use"
+        },
+        "..."
+    ],
+    "pagination": {
+        "nextPageToken": "token to fetch the next page relative to this"
+    }
+}
+```
+
 
 </details>
 
@@ -246,17 +686,17 @@ Get a collection of user namecards
 {
     "list": [
         {
-            "uid": "unique id referencing this user",
-            "nickname": "profile nickname",
-            "socialId": "profile social id",
-            "onlineStatus": "int field or value with an unknown use, but related to whether or not the profile is online",
+            "uid": "unique id referencing this resource",
+            "nickname": "user displayed name",
+            "socialId": "unique social id referencing this user",
+            "onlineStatus": "int indicator of how this user may be online",
             "nameCardEnabled": "int likely an enum of what name card enabled status is the case for this profile",
             "showsSchool": "int is the profile's school shown?",
             "showsLocation": "int likely bool of whether or not the location of this profile is shown",
             "showsJoinedCircles": "int are joined circles visible?",
             "chatInvitationStatus": "int likely a bool describing whether this user may make chat invites",
             "pushEnabled": "int are push notifs enabled?",
-            "gender": "int likely a gender bool",
+            "gender": "the gender of this user",
             "icon": {
                 "baseUrl": "url template to build sizes with",
                 "resourceList": [
@@ -281,9 +721,9 @@ Get a collection of user namecards
             "fansCount": "int number of fans",
             "followingCount": "int number of profiles followed by this profile",
             "friendsCount": "int likely number of people who both are followed by and do follow this profile",
-            "socialIdModified": "int field or value with an unknown use",
+            "socialIdModified": "unique social id referencing this user_modified",
             "status": "field or value with an unknown use",
-            "contentRegion": "int field or value with an unknown use",
+            "contentRegion": "int unknown, appears to be an int representing a region",
             "school": "field or value with an unknown use",
             "taglist": [
                 {
@@ -291,10 +731,10 @@ Get a collection of user namecards
                     "source": "int field or value with an unknown use",
                     "status": "int field or value with an unknown use",
                     "style": {
-                        "backgroundColor": "$data.string.alpha_color",
-                        "borderColor": "$data.string.alpha_color",
-                        "solidColor": "$data.string.alpha_color",
-                        "textColor": "$data.string.alpha_color"
+                        "backgroundColor": "hexidecimal color with alpha bits",
+                        "borderColor": "hexidecimal color with alpha bits",
+                        "solidColor": "hexidecimal color with alpha bits",
+                        "textColor": "hexidecimal color with alpha bits"
                     },
                     "tagId": "int id referencing this tag",
                     "tagName": "name of this tag"

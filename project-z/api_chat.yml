@@ -1,0 +1,22 @@
+routes:
+    /chat/joined-threads:
+        GET:
+            description: Get a collection of threads that you have joined
+            tables:
+                Headers: $header_table.authed
+                "URL Params": $query_param_table.start_paginated
+            responses:
+                200:
+                    description: A collection of threads was fetched
+                    body: $body.response.chat.joined_threads.root.get
+
+    /chat/threads:
+        GET:
+            description: Get a collection of joinable threads
+            tables:
+                Headers: $header_table.authed
+                "URL Params": $query_param_table.paginated
+            responses:
+                200:
+                    description: A collection of threads was fetched
+                    body: $body.response.chat.threads.root.get

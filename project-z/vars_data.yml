@@ -2,10 +2,23 @@ vars:
     data:
         string:
             unknown: field or value with an unknown use
-            profile_uid: unique id referencing this user
+
             unix_time: unix timestamp of occurence
-            language: 2 character language code
             alpha_color: hexidecimal color with alpha bits
+            content_region: int unknown, appears to be an int representing a region
+
+            field:
+                uid: unique id referencing this resource
+
+                nickname: user displayed name
+                user_gender: the gender of this user
+                social_id: unique social id referencing this user
+                social_id_modified: int has this social id been customized?
+
+                content_region_name: name of this profiles region
+                online_status: int indicator of how this user may be online
+
+                language: 2 character language code
 
         json:
             alerts:
@@ -21,18 +34,19 @@ vars:
                 login_post: |-
                     {
                         "authType": "int auth type. Password login will be 1, secret or phone login is likely something else",
-                        "birthday": "$data.string.unknown",
-                        "contentRegion": " int $data.string.unknown",
                         "email": "email to this account, if email login",
-                        "gender": "int $data.string.unknown",
-                        "invitationCode": "$data.string.unknown",
-                        "nickname": "nickname to this account, likely if nickname login",
+                        "nickname": "$data.string.field.nickname",
                         "password": "password to this account, if a password login",
                         "phoneNumber": "phone number to this account, likely if phone login",
-                        "purpose": "int $data.string.unknown",
-                        "school": "$data.string.unknown",
                         "secret": "valid secret for this account, if a secret login",
-                        "securityCode": "likely used when a security code is required to login"
+                        "securityCode": "likely used when a security code is required to login",
+                        "purpose": "int $data.string.unknown",
+
+                        "birthday": "$data.string.unknown",
+                        "contentRegion": "$data.string.content_region",
+                        "gender": "$data.string.field.user_gender",
+                        "invitationCode": "$data.string.unknown",
+                        "school": "$data.string.unknown"
                     }
 
                 login_response: |-
@@ -45,7 +59,7 @@ vars:
 
                 login_profile_partial: |-
                     {
-                        "uid": "$data.string.profile_uid",
+                        "uid": "$data.string.field.uid",
                         "status": "int $data.string.unknown",
                         "email": "account email",
                         "createdTime": "$data.string.unix_time",
@@ -58,97 +72,162 @@ vars:
                         "deviceToken": "device token likely used for google push notifications"
                     }
 
-            root:
-                release_info: |-
+            chat:
+                thread: |-
                     {
-                    	"Code": "$data.string.unknown, likely an api status code",
-                    	"Msg": "$data.string.unknown, likely an api status message",
-                    	"UpdateStatus": "int is the app up to date?",
-                    	"VersionCode": "int target version of the app",
-                    	"VersionName": "semantic version of the app",
-                    	"ModifyContent": "short update changelog",
-                    	"DownloadUrl": "link to the apk containing the target update",
-                    	"ApkSize": "int assumed to be apk size, but is always 0",
-                    	"ApkMd5": "md5 that should be computable from hashing the updated apk"
+                        "background": $data.json.partial.media,
+                        "coHostUids": "probably a list of user ids, but always appears to be null",
+                        "content": "a description of the chat",
+                        "contentRegion": "$data.string.content_region",
+                        "createdTime": "$data.string.unix_time",
+                        "currentMemberInfo": $data.json.profile.chat_user_profile,
+                        "extensions": $data.json.chat.extensions,
+                        "host": $data.json.profile.chat_user_profile,
+                        "hostUid": "$data.string.field.uid",
+                        "icon": $data.json.partial.media,
+                        "language": "$data.string.field.language",
+                        "latestMessage": $data.json.chat.latest_message,
+                        "latestMessageId": "$data.string.field.uid",
+                        "membersCount": "int members in this chat thread",
+                        "membersSummary": [
+                            $data.json.profile.chat_user_profile,
+                            "..."
+                        ],
+                        "status": "int $data.string.unknown",
+                        "tagList": [
+                            $data.json.partial.tag,
+                            "..."
+                        ],
+                        "threadId": "$data.string.field.uid",
+                        "title": "title of this chat thread",
+                        "type": "int $data.string.unknown"
+                    }
+
+                partial_message: |-
+                    {
+                        "author": $data.json.profile.user_profile_partial,
+                        "content": "content of the message body",
+                        "createdTime": "$data.string.unix_time",
+                        "messageId": "$data.string.field.uid",
+                        "threadId": "$data.string.field.uid",
+                        "uid": "$data.string.field.uid",
+                        "type": "int type of message"
+                    }
+
+                latest_message: $data.json.chat.partial_message
+
+                extensions: |-
+                    "$data.string.unknown, appears to be an empty object"
+
+                check_item: |-
+                    {
+                        "threadId": "$data.string.field.uid",
+                        "latestMessageId": "$data.string.field.uid",
+                        "lastReadMessageId": "$data.string.field.uid"
                     }
 
             profile:
                 self_profile: |-
                     {
-                        "uid": "$data.string.profile_uid",
-                        "nickname": "profile nickname",
-                        "socialId": "profile social id",
+                        "uid": "$data.string.field.uid",
+                        "nickname": "$data.string.field.nickname",
+                        "socialId": "$data.string.field.social_id",
 
-                        "onlineStatus": "int $data.string.unknown, but related to whether or not the profile is online",
+                        "onlineStatus": "$data.string.field.online_status",
                         "nameCardEnabled": "int likely an enum of what name card enabled status is the case for this profile",
                         "showsSchool": "int is the profile's school shown?",
                         "showsLocation": "int likely bool of whether or not the location of this profile is shown",
                         "showsJoinedCircles": "int are joined circles visible?",
                         "chatInvitationStatus": "int likely a bool describing whether this user may make chat invites",
                         "pushEnabled": "int are push notifs enabled?",
-                        "gender": "int likely a gender bool",
+                        "gender": "$data.string.field.user_gender",
 
                         "icon": $data.json.partial.media,
                         "createdTime": "$data.string.unix_time",
 
-                        "contentRegionName": "name of this profiles region",
+                        "contentRegionName": "$data.string.field.content_region_name",
                         "location": $data.json.partial.location,
-                        "language": "$data.string.language",
+                        "language": "$data.string.field.language",
 
                         "fansCount": "int number of fans",
                         "followingCount": "int number of profiles followed by this profile",
                         "friendsCount": "int likely number of people who both are followed by and do follow this profile",
 
-                        "socialIdModified": "int $data.string.unknown",
+                        "socialIdModified": "$data.string.field.social_id_modified",
                         "status": "$data.string.unknown",
-                        "contentRegion": "int $data.string.unknown",
+                        "contentRegion": "$data.string.content_region",
                         "school": "$data.string.unknown"
                     }
 
                 user_profile: |-
                     {
-                        "uid": "$data.string.profile_uid",
-                        "nickname": "profile nickname",
-                        "socialId": "profile social id",
+                        "uid": "$data.string.field.uid",
+                        "nickname": "$data.string.field.nickname",
+                        "socialId": "$data.string.field.social_id",
 
-                        "onlineStatus": "int $data.string.unknown, but related to whether or not the profile is online",
+                        "onlineStatus": "$data.string.field.online_status",
                         "nameCardEnabled": "int likely an enum of what name card enabled status is the case for this profile",
                         "showsSchool": "int is the profile's school shown?",
                         "showsLocation": "int likely bool of whether or not the location of this profile is shown",
                         "showsJoinedCircles": "int are joined circles visible?",
                         "chatInvitationStatus": "int likely a bool describing whether this user may make chat invites",
                         "pushEnabled": "int are push notifs enabled?",
-                        "gender": "int likely a gender bool",
+                        "gender": "$data.string.field.user_gender",
 
                         "icon": $data.json.partial.media,
                         "createdTime": "$data.string.unix_time",
 
-                        "contentRegionName": "name of this profiles region",
+                        "contentRegionName": "$data.string.field.content_region_name",
                         "location": $data.json.partial.location,
-                        "language": "$data.string.language",
+                        "language": "$data.string.field.language",
 
                         "fansCount": "int number of fans",
                         "followingCount": "int number of profiles followed by this profile",
                         "friendsCount": "int likely number of people who both are followed by and do follow this profile",
 
-                        "socialIdModified": "int $data.string.unknown",
+                        "socialIdModified": "$data.string.field.social_id_modified",
                         "status": "$data.string.unknown",
-                        "contentRegion": "int $data.string.unknown",
+                        "contentRegion": "$data.string.content_region",
                         "school": "$data.string.unknown",
 
                         "taglist": [
-                        $data.json.profile.tag,
+                        $data.json.partial.tag,
                         "..."
                         ],
                         "nameCardBackground": $data.json.partial.media
                     }
 
+                user_profile_partial: |-
+                    {
+                        "nickname": "$data.string.field.nickname",
+                        "uid": "$data.string.field.uid",
+                        "socialId": "$data.string.field.social_id",
+                        "socialIdModified": "$data.string.field.social_id_modified",
+
+                        "bio": "information about this user",
+                        "gender": "$data.string.field.user_gender",
+                        "contentRegion": "$data.string.content_region",
+                        "contentRegionName": "$data.string.field.content_region_name",
+                        "createdTime": "$data.string.unix_time",
+                        "icon": $data.json.partial.media,
+
+                        "chatInvitationStatus": "int likely was this user invited to this chat?",
+                        "chatMemberStatus": "int likely bool is this member a member of this chat?",
+                        "onlineStatus": "$data.string.field.online_status",
+
+                        "specialTitle": "special title of this user in this chat",
+                        "status": "int $data.string.unknown"
+                    }
+
+                chat_user_profile: $data.json.profile.user_profile_partial
+
+            partial:
                 tag: |-
                     {
                         "order": "position of this tag, relative to its siblings",
                         "source": "int $data.string.unknown",
                         "status": "int $data.string.unknown",
-                        "style": $data.json.profile.tag_style,
+                        "style": $data.json.partial.tag_style,
                         "tagId": "int id referencing this tag",
                         "tagName": "name of this tag"
                     }
@@ -161,7 +240,6 @@ vars:
                         "textColor": "$data.string.alpha_color"
                     }
 
-            partial:
                 media: |-
                     {
                         "baseUrl": "url template to build sizes with",
@@ -180,11 +258,28 @@ vars:
                         "longitude": "float longitude",
                         "latitude": "float latitude",
                         "address": {
-                            "$data.string.language": "city location"
+                            "$data.string.field.language": "city location"
                         }
                     }
 
                 pagination: |-
                     {
                         "nextPageToken": "token to fetch the next page relative to this"
+                    }
+
+                is_end: |-
+                    "isEnd": "bool $data.string.unknown, probably has to do with pagination"
+
+            root:
+                release_info: |-
+                    {
+                    	"Code": "$data.string.unknown, likely an api status code",
+                    	"Msg": "$data.string.unknown, likely an api status message",
+                    	"UpdateStatus": "int is the app up to date?",
+                    	"VersionCode": "int target version of the app",
+                    	"VersionName": "semantic version of the app",
+                    	"ModifyContent": "short update changelog",
+                    	"DownloadUrl": "link to the apk containing the target update",
+                    	"ApkSize": "int assumed to be apk size, but is always 0",
+                    	"ApkMd5": "md5 that should be computable from hashing the updated apk"
                     }
