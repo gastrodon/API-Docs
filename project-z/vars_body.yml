@@ -22,6 +22,12 @@ vars:
                             content: $data.json.chat.create_thread
 
                     uid:
+                        start_role_play:
+                            root:
+                                post:
+                                    lang: json
+                                    content: $data.json.chat.start_role_play
+
                         roles:
                             uid:
                                 root:
@@ -34,6 +40,10 @@ vars:
                                     content: $data.json.role.role
 
         response:
+            empty_post:
+                lang: json
+                content: "{}"
+
             alerts:
                 check:
                     root:

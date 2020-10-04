@@ -69,9 +69,7 @@ routes:
             responses:
                 200:
                     description: The authed user did join this thread
-                    body:
-                        lang: json
-                        content: "{}"
+                    body: $body.response.empty_post
 
     /chat/threads/:thread_id/online-members:
         GET:
@@ -124,3 +122,29 @@ routes:
                 200:
                     description: A role was modified
                     body: $body.response.chat.threads.uid.roles.uid.root.post
+
+    /chat/threads/:thread_id/start-role-play:
+        POST:
+            description: |-
+                Start a role play in some thread. Modes are represented as
+                ```
+                1 -> text
+                2 -> voice
+                ```
+            tables:
+                Headers: $header_table.authed
+            body: $body.request.chat.threads.uid.start_role_play.root.post
+            responses:
+                200:
+                    description: A role play was started
+                    body: $body.response.empty_post
+
+    /chat/threads/:thread_id/end-role-play:
+        POST:
+            description: End a role play in some thread
+            tables:
+                Headers: $header_table.authed
+            responses:
+                200:
+                    description: A role play was ended
+                    body: $body.response.empty_post

@@ -180,6 +180,15 @@ vars:
                         "status": "$data.string.field.status"
                     }
 
+                start_role_play: |-
+                    {
+                        "mode": "int role play mode",
+                        "roleIds": [
+                            "int role id",
+                            "..."
+                        ]
+                    }
+
             role:
                 role: |-
                     {

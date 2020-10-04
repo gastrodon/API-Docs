@@ -1079,6 +1079,38 @@ Get information about some chat thread
 </details>
 
 <details>
+<summary>POST /chat/threads/:thread_id/end-role-play</summary>
+
+End a role play in some thread
+
+###### Headers
+|name|description|required|
+| - | - | - |
+|rawDeviceId|An id that can identify the device making the request|Yes|
+|User-Agent|The user agent of the device making the request|No|
+|sId|The authed user's session id|Yes|
+|appType|should be `MainApp`|Yes|
+|appVersion|the semantic version of this app|Yes|
+|deviceType|appears to always be `1`|Yes|
+|osType|appears to always be `2`|Yes|
+
+
+
+
+#### Responses
+- `200`
+
+  A role play was ended
+
+  #### Body
+```json
+{}
+```
+
+
+</details>
+
+<details>
 <summary>POST /chat/threads/:thread_id/mark-as-read</summary>
 
 Mark messages in some thread as having been read
@@ -1510,7 +1542,7 @@ Create a role in some thread
 <details>
 <summary>POST /chat/threads/:thread_id/roles/:role_id</summary>
 
-Update some role
+Update some role in some thread
 
 ###### Headers
 |name|description|required|
@@ -1571,6 +1603,52 @@ Update some role
     "createdTime": "unix timestamp of occurence",
     "status": "int field or value with an unknown use"
 }
+```
+
+
+</details>
+
+<details>
+<summary>POST /chat/threads/:thread_id/start-role-play</summary>
+
+Start a role play in some thread. Modes are represented as
+```
+1 -> text
+2 -> voice
+```
+
+###### Headers
+|name|description|required|
+| - | - | - |
+|rawDeviceId|An id that can identify the device making the request|Yes|
+|User-Agent|The user agent of the device making the request|No|
+|sId|The authed user's session id|Yes|
+|appType|should be `MainApp`|Yes|
+|appVersion|the semantic version of this app|Yes|
+|deviceType|appears to always be `1`|Yes|
+|osType|appears to always be `2`|Yes|
+
+
+#### Body
+```json
+{
+    "mode": "int role play mode",
+    "roleIds": [
+        "int role id",
+        "..."
+    ]
+}
+```
+
+
+#### Responses
+- `200`
+
+  A role play was started
+
+  #### Body
+```json
+{}
 ```
 
 
