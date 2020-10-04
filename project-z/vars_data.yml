@@ -112,7 +112,7 @@ vars:
                         "content": "a description of the chat",
                         "contentRegion": "$data.string.field.content_region",
                         "createdTime": "$data.string.unix_time",
-                        "currentMemberInfo": $data.json.profile.chat_user_profile,
+                        "currentMemberInfo": $data.json.chat.current_member_info,
                         "extensions": $data.json.partial.extensions,
                         "host": $data.json.profile.chat_user_profile,
                         "hostUid": "$data.string.field.uid",
@@ -153,6 +153,14 @@ vars:
                         "threadId": "$data.string.field.uid",
                         "latestMessageId": "$data.string.field.uid",
                         "lastReadMessageId": "$data.string.field.uid"
+                    }
+
+                current_member_info: |-
+                    {
+                        "alertOption": "likely bool int should this chat spawn notifications?",
+                        "chatMemberStatus": "bool int is the authed profile in this thread?",
+                        "lastReadMessageId": "$data.string.field.uid",
+                        "createdTime": "$data.string.unix_time, likely when the authed profile joined this chat, or epoch if not joined"
                     }
 
             circle:
