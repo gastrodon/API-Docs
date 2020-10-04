@@ -1645,6 +1645,38 @@ Update some role in some thread
 </details>
 
 <details>
+<summary>DELETE /chat/threads/:thread_id/roles/:role_id</summary>
+
+Delete some role in some thread
+
+###### Headers
+|name|description|required|
+| - | - | - |
+|rawDeviceId|An id that can identify the device making the request|Yes|
+|User-Agent|The user agent of the device making the request|No|
+|sId|The authed user's session id|Yes|
+|appType|should be `MainApp`|Yes|
+|appVersion|the semantic version of this app|Yes|
+|deviceType|appears to always be `1`|Yes|
+|osType|appears to always be `2`|Yes|
+
+
+
+
+#### Responses
+- `200`
+
+  A role was deleted
+
+  #### Body
+```json
+{}
+```
+
+
+</details>
+
+<details>
 <summary>POST /chat/threads/:thread_id/start-role-play</summary>
 
 Start a role play in some thread. Modes are represented as

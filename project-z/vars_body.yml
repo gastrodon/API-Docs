@@ -40,7 +40,7 @@ vars:
                                     content: $data.json.role.role
 
         response:
-            empty_post:
+            empty_json:
                 lang: json
                 content: "{}"
 
