@@ -265,7 +265,8 @@ Get a collection of blogs
         "..."
     ],
     "pagination": {
-        "nextPageToken": "token to fetch the next page relative to this"
+        "nextPageToken": "token to fetch the next page relative to this, if any",
+        "total": "int total number of items, if fewer than the size queried"
     }
 }
 ```
@@ -709,7 +710,82 @@ Get a collection of joinable threads
         "..."
     ],
     "pagination": {
-        "nextPageToken": "token to fetch the next page relative to this"
+        "nextPageToken": "token to fetch the next page relative to this, if any",
+        "total": "int total number of items, if fewer than the size queried"
+    }
+}
+```
+
+
+</details>
+
+<details>
+<summary>GET /chat/threads/:thread_id/online-members</summary>
+
+Get a collection of members online in some thread
+
+###### Headers
+|name|description|required|
+| - | - | - |
+|rawDeviceId|An id that can identify the device making the request|Yes|
+|User-Agent|The user agent of the device making the request|No|
+|sId|The authed user's session id|Yes|
+|appType|should be `MainApp`|Yes|
+|appVersion|the semantic version of this app|Yes|
+|deviceType|appears to always be `1`|Yes|
+|osType|appears to always be `2`|Yes|
+
+###### URL Params
+|name|description|required|
+| - | - | - |
+|size|Return this number of results|No|
+|pageToken|Pagination page token|No|
+
+
+
+
+#### Responses
+- `200`
+
+  A collection of online users was fetched
+
+  #### Body
+```json
+{
+    "list": [
+        {
+            "nickname": "user displayed name",
+            "uid": "unique id referencing this resource",
+            "socialId": "unique social id referencing this user",
+            "socialIdModified": "unique social id referencing this user_modified",
+            "bio": "information about this user",
+            "gender": "the gender of this user",
+            "contentRegion": "int unknown, appears to be an int representing a region",
+            "contentRegionName": "int unknown, appears to be an int representing a region_name",
+            "createdTime": "unix timestamp of occurence",
+            "icon": {
+                "baseUrl": "url template to build sizes with",
+                "resourceList": [
+                    {
+                        "width": "int width",
+                        "height": "int height",
+                        "url": "url to the icon in this size",
+                        "thumbnail": "is this media a thumbnail? Field only appers to be present if its value is true"
+                    },
+                    "..."
+                ]
+            },
+            "chatInvitationStatus": "int likely was this user invited to this chat?",
+            "chatMemberStatus": "int likely bool is this member a member of this chat?",
+            "onlineStatus": "int indicator of how this user may be online",
+            "specialTitle": "special title of this user in this chat",
+            "status": "int field or value with an unknown use"
+        },
+        "..."
+    ],
+    "pagination": {
+        "nextPageToken": "token to fetch the next page relative to this, if any",
+        "total": "int total number of items, if fewer than the size queried"
     }
 }
 ```
@@ -796,7 +872,8 @@ Get a collection of circles. Currently url param `type` is required, but the API
         "..."
     ],
     "pagination": {
-        "nextPageToken": "token to fetch the next page relative to this"
+        "nextPageToken": "token to fetch the next page relative to this, if any",
+        "total": "int total number of items, if fewer than the size queried"
     }
 }
 ```
@@ -993,7 +1070,8 @@ Get a collection of user namecards
         "..."
     ],
     "pagination": {
-        "nextPageToken": "token to fetch the next page relative to this"
+        "nextPageToken": "token to fetch the next page relative to this, if any",
+        "total": "int total number of items, if fewer than the size queried"
     }
 }
 ```

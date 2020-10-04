@@ -115,7 +115,22 @@ vars:
                                         "..."
                                     ]
                                 }
+                                
                 threads:
+                    uid:
+                        online_members:
+                            root:
+                                get:
+                                    lang: json
+                                    content: |-
+                                        {
+                                            "list": [
+                                                $data.json.profile.chat_user_profile,
+                                                "..."
+                                            ],
+                                            "pagination": $data.json.partial.pagination
+                                        }
+
                     root:
                         get:
                             lang: json

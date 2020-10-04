@@ -20,3 +20,14 @@ routes:
                 200:
                     description: A collection of threads was fetched
                     body: $body.response.chat.threads.root.get
+
+    /chat/threads/:thread_id/online-members:
+        GET:
+            description: Get a collection of members online in some thread
+            tables:
+                Headers: $header_table.authed
+                "URL Params": $query_param_table.paginated
+            responses:
+                200:
+                    description: A collection of online users was fetched
+                    body: $body.response.chat.threads.uid.online_members.root.get
