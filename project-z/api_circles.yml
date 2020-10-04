@@ -1,0 +1,33 @@
+routes:
+    /circles:
+        GET:
+            description: |-
+                Get a collection of circles.
+                Currently url param `type` is required,
+                but the API error implies that this is planned to change.
+                Type may be one of
+                ```
+                joined
+                latest
+                ```
+            tables:
+                Headers: $header_table.authed
+                "URL Params":
+                    - $query_param.size
+                    - $query_param.page_token
+                    - $query_param.type_circles
+                    - $query_param.uid_circles
+            responses:
+                200:
+                    description: A collection of circles was fetched
+                    body: $body.response.circles.root.get
+
+    /circles/:circle_id:
+        GET:
+            description: Get information about some circle
+            tables:
+                Headers: $header_table.authed
+            responses:
+                200:
+                    description: Information about this circle
+                    body: $body.response.circles.uid.root.get

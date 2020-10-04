@@ -72,6 +72,11 @@ vars:
                             content: $data.json.auth.login_response
 
             circles:
+                uid:
+                    root:
+                        get:
+                            lang: json
+                            content: $data.json.circle.circle_page
                 root:
                     get:
                         lang: json

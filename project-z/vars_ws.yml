@@ -108,7 +108,7 @@ vars:
                         "createdTime": 0,
                         "messageId": 0,
                         "roleList": [
-                            $data.role.role,
+                            $data.json.role.role,
                             "..."
                         ],
                         "threadId": "referencing this thread",

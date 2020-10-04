@@ -269,6 +269,33 @@ vars:
                     }
 
             circle:
+                circle_page: |-
+                    {
+                        "adminIdList": [
+                            "uids of circle admins",
+                            "..."
+                        ],
+                        "author": $data.json.profile.user_profile_partial,
+                        "background": $data.json.partial.media,
+                        "circleId": "referencing this circle",
+                        "contentRegion": "$data.string.field.content_region",
+                        "createdTime": "$data.string.unix_time",
+                        "description": "describing this circle",
+                        "icon": $data.json.partial.media,
+                        "joinedStatus": "int unknown, likely enum of authed user memebrship in this circle",
+                        "language": "$data.string.field.language",
+                        "membersCount": "int members in this circle",
+                        "name": "name of this circle",
+                        "socialId": "$data.string.field.social_id",
+                        "socialIdModified": "$data.string.field.social_id_modified",
+                        "status": "$data.string.field.status",
+                        "tagline": "Everything about the Super Mario Bros. franchise.",
+                        "tagList": [
+                            $data.json.partial.tag,
+                            "..."
+                        ],
+                        "uid": "referencing unknown"
+                    }
                 circle_partial: |-
                     {
                         "uid": "$data.string.field.uid",

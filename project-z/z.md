@@ -17,7 +17,7 @@ Check for new activity
 
 
 
-#### Responses
+##### Responses
 - `200`
 
   New activity was fetched
@@ -31,6 +31,7 @@ Check for new activity
     "noticesCount": "int new notices"
 }
 ```
+
 
 
 </details>
@@ -71,7 +72,7 @@ Login to Z with some combination of credentials
 ```
 
 
-#### Responses
+##### Responses
 - `200`
 
   The login was ok
@@ -135,6 +136,7 @@ Login to Z with some combination of credentials
 ```
 
 
+
 </details>
 
 <details>
@@ -162,12 +164,13 @@ Update the device push token bound to this account
 ```
 
 
-#### Responses
+##### Responses
 - `200`
 
   The push token was accepted
 
   
+
 
 </details>
 
@@ -196,7 +199,7 @@ Get a collection of blogs
 
 
 
-#### Responses
+##### Responses
 - `200`
 
   A collection of blogs was fetched
@@ -272,6 +275,7 @@ Get a collection of blogs
 ```
 
 
+
 </details>
 
 <details>
@@ -299,7 +303,7 @@ Get a collection of threads that you have joined
 
 
 
-#### Responses
+##### Responses
 - `200`
 
   A collection of threads was fetched
@@ -475,6 +479,7 @@ Get a collection of threads that you have joined
 ```
 
 
+
 </details>
 
 <details>
@@ -502,7 +507,7 @@ Get a collection of joinable threads
 
 
 
-#### Responses
+##### Responses
 - `200`
 
   A collection of threads was fetched
@@ -673,6 +678,7 @@ Get a collection of joinable threads
 ```
 
 
+
 </details>
 
 <details>
@@ -731,7 +737,7 @@ Create a new thread
 ```
 
 
-#### Responses
+##### Responses
 - `200`
 
   A thread was created
@@ -893,6 +899,7 @@ Create a new thread
 ```
 
 
+
 </details>
 
 <details>
@@ -914,7 +921,7 @@ Get information about some chat thread
 
 
 
-#### Responses
+##### Responses
 - `200`
 
   Information about this thread was fetched
@@ -1076,6 +1083,7 @@ Get information about some chat thread
 ```
 
 
+
 </details>
 
 <details>
@@ -1097,7 +1105,7 @@ Get agora info. Appears to be fetched when voice role plays are started, which w
 
 
 
-#### Responses
+##### Responses
 - `200`
 
   Agora info for this session was fetched
@@ -1110,6 +1118,7 @@ Get agora info. Appears to be fetched when voice role plays are started, which w
     "token": "likely an agora session token"
 }
 ```
+
 
 
 </details>
@@ -1133,7 +1142,7 @@ End a role play in some thread
 
 
 
-#### Responses
+##### Responses
 - `200`
 
   A role play was ended
@@ -1142,6 +1151,7 @@ End a role play in some thread
 ```json
 {}
 ```
+
 
 
 </details>
@@ -1165,7 +1175,7 @@ Mark messages in some thread as having been read
 
 
 
-#### Responses
+##### Responses
 - `200`
 
   Chats were marked as read
@@ -1174,6 +1184,7 @@ Mark messages in some thread as having been read
 ```json
 {}
 ```
+
 
 
 </details>
@@ -1203,7 +1214,7 @@ Get a collection of members in some thread
 
 
 
-#### Responses
+##### Responses
 - `200`
 
   A collection of members was fetched
@@ -1250,6 +1261,7 @@ Get a collection of members in some thread
 ```
 
 
+
 </details>
 
 <details>
@@ -1271,7 +1283,7 @@ Join some thread
 
 
 
-#### Responses
+##### Responses
 - `200`
 
   The authed user did join this thread
@@ -1280,6 +1292,7 @@ Join some thread
 ```json
 {}
 ```
+
 
 
 </details>
@@ -1309,7 +1322,7 @@ Get a collection of messages of some thread
 
 
 
-#### Responses
+##### Responses
 - `200`
 
   A collection of thread messages was fetched
@@ -1365,6 +1378,7 @@ Get a collection of messages of some thread
 ```
 
 
+
 </details>
 
 <details>
@@ -1392,7 +1406,7 @@ Get a collection of members online in some thread
 
 
 
-#### Responses
+##### Responses
 - `200`
 
   A collection of online members was fetched
@@ -1439,6 +1453,7 @@ Get a collection of members online in some thread
 ```
 
 
+
 </details>
 
 <details>
@@ -1465,7 +1480,7 @@ Mode may be one of
 
 
 
-#### Responses
+##### Responses
 - `200`
 
   The role play mode was set
@@ -1474,6 +1489,7 @@ Mode may be one of
 ```json
 {}
 ```
+
 
 
 </details>
@@ -1497,7 +1513,7 @@ Get the roles of some thread
 
 
 
-#### Responses
+##### Responses
 - `200`
 
   A collection of roles was fetched
@@ -1530,6 +1546,7 @@ Get the roles of some thread
     "..."
 ]
 ```
+
 
 
 </details>
@@ -1578,7 +1595,7 @@ Create a role in some thread
 ```
 
 
-#### Responses
+##### Responses
 - `200`
 
   A role was created
@@ -1608,6 +1625,7 @@ Create a role in some thread
     "status": "int field or value with an unknown use"
 }
 ```
+
 
 
 </details>
@@ -1656,7 +1674,7 @@ Update some role in some thread
 ```
 
 
-#### Responses
+##### Responses
 - `200`
 
   A role was modified
@@ -1677,6 +1695,7 @@ Update some role in some thread
     "status": "int field or value with an unknown use"
 }
 ```
+
 
 
 </details>
@@ -1700,7 +1719,7 @@ Delete some role in some thread
 
 
 
-#### Responses
+##### Responses
 - `200`
 
   A role was deleted
@@ -1709,6 +1728,7 @@ Delete some role in some thread
 ```json
 {}
 ```
+
 
 
 </details>
@@ -1746,7 +1766,7 @@ Start a role play in some thread. Modes are represented as
 ```
 
 
-#### Responses
+##### Responses
 - `200`
 
   A role play was started
@@ -1757,12 +1777,20 @@ Start a role play in some thread. Modes are represented as
 ```
 
 
+
 </details>
 
 <details>
 <summary>GET /circles</summary>
 
-Get a collection of circles. Currently url param `type` is required, but the API error implies that this is planned to change. Type may be one of `joined`
+Get a collection of circles.
+Currently url param `type` is required,
+but the API error implies that this is planned to change.
+Type may be one of
+```
+joined
+latest
+```
 
 ###### Headers
 |name|description|required|
@@ -1786,7 +1814,7 @@ Get a collection of circles. Currently url param `type` is required, but the API
 
 
 
-#### Responses
+##### Responses
 - `200`
 
   A collection of circles was fetched
@@ -1845,6 +1873,122 @@ Get a collection of circles. Currently url param `type` is required, but the API
 ```
 
 
+
+</details>
+
+<details>
+<summary>GET /circles/:circle_id</summary>
+
+Get information about some circle
+
+###### Headers
+|name|description|required|
+| - | - | - |
+|rawDeviceId|An id that can identify the device making the request|Yes|
+|User-Agent|The user agent of the device making the request|No|
+|sId|The authed user's session id|Yes|
+|appType|should be `MainApp`|Yes|
+|appVersion|the semantic version of this app|Yes|
+|deviceType|appears to always be `1`|Yes|
+|osType|appears to always be `2`|Yes|
+
+
+
+
+##### Responses
+- `200`
+
+  Information about this circle
+
+  #### Body
+```json
+{
+    "adminIdList": [
+        "uids of circle admins",
+        "..."
+    ],
+    "author": {
+        "nickname": "user displayed name",
+        "uid": "unique id referencing this resource",
+        "socialId": "unique social id referencing this user",
+        "socialIdModified": "unique social id referencing this user_modified",
+        "bio": "information about this user",
+        "gender": "the gender of this user",
+        "contentRegion": "int unknown, appears to be an int representing a region",
+        "contentRegionName": "int unknown, appears to be an int representing a region_name",
+        "createdTime": "unix timestamp of occurence",
+        "icon": {
+            "baseUrl": "url template to build sizes with",
+            "resourceList": [
+                {
+                    "width": "int width",
+                    "height": "int height",
+                    "url": "url to the icon in this size",
+                    "thumbnail": "is this media a thumbnail? Field only appers to be present if its value is true"
+                },
+                "..."
+            ]
+        },
+        "status": "int field or value with an unknown use"
+    },
+    "background": {
+        "baseUrl": "url template to build sizes with",
+        "resourceList": [
+            {
+                "width": "int width",
+                "height": "int height",
+                "url": "url to the icon in this size",
+                "thumbnail": "is this media a thumbnail? Field only appers to be present if its value is true"
+            },
+            "..."
+        ]
+    },
+    "circleId": "referencing this circle",
+    "contentRegion": "int unknown, appears to be an int representing a region",
+    "createdTime": "unix timestamp of occurence",
+    "description": "describing this circle",
+    "icon": {
+        "baseUrl": "url template to build sizes with",
+        "resourceList": [
+            {
+                "width": "int width",
+                "height": "int height",
+                "url": "url to the icon in this size",
+                "thumbnail": "is this media a thumbnail? Field only appers to be present if its value is true"
+            },
+            "..."
+        ]
+    },
+    "joinedStatus": "int unknown, likely enum of authed user memebrship in this circle",
+    "language": "2 character language code",
+    "membersCount": "int members in this circle",
+    "name": "name of this circle",
+    "socialId": "unique social id referencing this user",
+    "socialIdModified": "unique social id referencing this user_modified",
+    "status": "int field or value with an unknown use",
+    "tagline": "Everything about the Super Mario Bros. franchise.",
+    "tagList": [
+        {
+            "order": "position of this tag, relative to its siblings",
+            "source": "int field or value with an unknown use",
+            "status": "int field or value with an unknown use",
+            "style": {
+                "backgroundColor": "hexidecimal color with alpha bits",
+                "borderColor": "hexidecimal color with alpha bits",
+                "solidColor": "hexidecimal color with alpha bits",
+                "textColor": "hexidecimal color with alpha bits"
+            },
+            "tagId": "int id referencing this tag",
+            "tagName": "name of this tag"
+        },
+        "..."
+    ],
+    "uid": "referencing unknown"
+}
+```
+
+
+
 </details>
 
 <details>
@@ -1871,7 +2015,7 @@ Queried when new chats are created
 
 
 
-#### Responses
+##### Responses
 - `200`
 
   Default media was fetched
@@ -1896,6 +2040,7 @@ Queried when new chats are created
 ```
 
 
+
 </details>
 
 <details>
@@ -1916,7 +2061,7 @@ Get information about an app update that may be available
 
 
 
-#### Responses
+##### Responses
 - `200`
 
   Update info was fetched
@@ -1935,6 +2080,7 @@ Get information about an app update that may be available
     "ApkMd5": "md5 that should be computable from hashing the updated apk"
 }
 ```
+
 
 
 </details>
@@ -1965,7 +2111,7 @@ Get a collection of suggested tags
 
 
 
-#### Responses
+##### Responses
 - `200`
 
   A collection of suggested tags names was fetcdhed
@@ -1983,6 +2129,7 @@ Get a collection of suggested tags
     }
 }
 ```
+
 
 
 </details>
@@ -2006,7 +2153,7 @@ Get a collection of users who have blocked you, and a collection of users who yo
 
 
 
-#### Responses
+##### Responses
 - `200`
 
   A collection of blocked and blocking users was fetched
@@ -2024,6 +2171,7 @@ Get a collection of users who have blocked you, and a collection of users who yo
     ]
 }
 ```
+
 
 
 </details>
@@ -2053,7 +2201,7 @@ Get a collection of user namecards
 
 
 
-#### Responses
+##### Responses
 - `200`
 
   A collection of user namecards was fetched
@@ -2142,6 +2290,7 @@ Get a collection of user namecards
 ```
 
 
+
 </details>
 
 <details>
@@ -2163,7 +2312,7 @@ Get some user profile referenced by a user id
 
 
 
-#### Responses
+##### Responses
 - `200`
 
   This user was fetched
@@ -2257,6 +2406,7 @@ Get some user profile referenced by a user id
     ]
 }
 ```
+
 
 
 </details>

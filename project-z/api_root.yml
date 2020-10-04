@@ -10,25 +10,6 @@ routes:
                     description: A collection of blogs was fetched
                     body: $body.response.blogs.root.get
 
-    /circles:
-        GET:
-            description: >-
-                Get a collection of circles.
-                Currently url param `type` is required,
-                but the API error implies that this is planned to change.
-                Type may be one of `joined`
-            tables:
-                Headers: $header_table.authed
-                "URL Params":
-                    - $query_param.size
-                    - $query_param.page_token
-                    - $query_param.type_circles
-                    - $query_param.uid_circles
-            responses:
-                200:
-                    description: A collection of circles was fetched
-                    body: $body.response.circles.root.get
-
     /release-info:
         GET:
             description: Get information about an app update that may be available
