@@ -83,3 +83,14 @@ routes:
                 200:
                     description: A collection of online members was fetched
                     body: $body.response.chat.threads.uid.online_members.root.get
+
+    /chat/threads/:thread_id/messages:
+        GET:
+            description: Get a collection of messages of some thread
+            tables:
+                Headers: $header_table.authed
+                "URL Params": $query_param_table.paginated
+            responses:
+                200:
+                    description: A collection of thread messages was fetched
+                    body: $body.response.chat.threads.uid.messages.root.get

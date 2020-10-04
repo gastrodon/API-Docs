@@ -125,6 +125,19 @@ vars:
 
                 threads:
                     uid:
+                        messages:
+                            root:
+                                get:
+                                    lang: json
+                                    content: |-
+                                        {
+                                            "list": [
+                                                $data.json.message.single_message_partial,
+                                                "..."
+                                            ],
+                                            "pagination": $data.json.partial.pagination
+                                        }
+
                         members:
                             root:
                                 get:

@@ -180,6 +180,21 @@ vars:
                         "status": "$data.string.field.status"
                     }
 
+            message:
+                single_message_partial: |-
+                    {
+                        "author": $data.json.profile.chat_user_profile,
+                        "messageId": "$data.string.field.uid",
+                        "threadId": "$data.string.field.uid",
+                        "uid": "$data.string.field.uid, unknown difference to messageId",
+
+                        "asSummary": "show this message as a summary?",
+                        "content": "body of the message",
+                        "type": "int likely enum type of message",
+
+                        "createdTime": "$data.string.unix_time"
+                    }
+
             circle:
                 circle_partial: |-
                     {
