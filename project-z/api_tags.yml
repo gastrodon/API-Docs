@@ -1,0 +1,14 @@
+routes:
+    /tags/suggest:
+        GET:
+            description: Get a collection of suggested tags
+            tables:
+                Headers: $header_table.authed
+                "URL Params":
+                    - $query_param.size
+                    - $query_param.page_token
+                    - $query_param.word_tags
+            responses:
+                200:
+                    description: A collection of suggested tags names was fetcdhed
+                    body: $body.response.tags.suggest.root.get

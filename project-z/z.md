@@ -1251,6 +1251,54 @@ Get information about an app update that may be available
 </details>
 
 <details>
+<summary>GET /tags/suggest</summary>
+
+Get a collection of suggested tags
+
+###### Headers
+|name|description|required|
+| - | - | - |
+|rawDeviceId|An id that can identify the device making the request|Yes|
+|User-Agent|The user agent of the device making the request|No|
+|sId|The authed user's session id|Yes|
+|appType|should be `MainApp`|Yes|
+|appVersion|the semantic version of this app|Yes|
+|deviceType|appears to always be `1`|Yes|
+|osType|appears to always be `2`|Yes|
+
+###### URL Params
+|name|description|required|
+| - | - | - |
+|size|Return this number of results|No|
+|pageToken|Pagination page token|No|
+|word|fetch tags suggested by this word|No|
+
+
+
+
+#### Responses
+- `200`
+
+  A collection of suggested tags names was fetcdhed
+
+  #### Body
+```json
+{
+    "list": [
+        "tag",
+        "..."
+    ],
+    "pagination": {
+        "nextPageToken": "token to fetch the next page relative to this, if any",
+        "total": "int total number of items, if fewer than the size queried"
+    }
+}
+```
+
+
+</details>
+
+<details>
 <summary>GET /users/block-uids</summary>
 
 Get a collection of users who have blocked you, and a collection of users who you have blocked

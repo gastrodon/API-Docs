@@ -171,3 +171,17 @@ vars:
                                     $data.json.partial.media,
                                     "..."
                                 ]
+
+            tags:
+                suggest:
+                    root:
+                        get:
+                            lang: json
+                            content: |-
+                                {
+                                    "list": [
+                                        "tag",
+                                        "..."
+                                    ],
+                                    "pagination": $data.json.partial.pagination
+                                }
