@@ -1449,13 +1449,10 @@ Create a role in some thread
 #### Body
 ```json
 {
-    "threadId": "thread to create this role in",
-    "agoraUid": "appears to always be 0",
-    "createdTime": "appears to always be 0",
-    "playerUid": "appears to always be 0",
-    "roleId": "appears to always be 0",
-    "roleStatus": "appears to always be 0",
-    "uid": "appears to always be 0",
+    "roleId": "likely references this role",
+    "uid": "uid, unknown difference to roleId",
+    "threadId": "uid thread where this role exists",
+    "createdTime": "unix timestamp of occurence",
     "name": "name of this role",
     "description": "description of this role",
     "inUse": "is this role in use?",

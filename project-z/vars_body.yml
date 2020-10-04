@@ -26,7 +26,7 @@ vars:
                             root:
                                 post:
                                     lang: json
-                                    content: $data.json.role.create_role
+                                    content: $data.json.role.role
 
         response:
             alerts:
