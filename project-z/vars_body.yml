@@ -14,6 +14,13 @@ vars:
                             lang: json
                             content: $data.json.auth.update_push_token
 
+            chat:
+                threads:
+                    root:
+                        post:
+                            lang: json
+                            content: $data.json.chat.create_thread
+
         response:
             alerts:
                 check:
@@ -160,6 +167,9 @@ vars:
                                     ],
                                     "pagination": $data.json.partial.pagination
                                 }
+                        post:
+                            lang: json
+                            content: $data.json.chat.thread
 
             media:
                 default:

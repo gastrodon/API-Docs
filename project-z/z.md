@@ -676,6 +676,226 @@ Get a collection of joinable threads
 </details>
 
 <details>
+<summary>POST /chat/threads</summary>
+
+Create a new thread
+
+###### Headers
+|name|description|required|
+| - | - | - |
+|rawDeviceId|An id that can identify the device making the request|Yes|
+|User-Agent|The user agent of the device making the request|No|
+|sId|The authed user's session id|Yes|
+|appType|should be `MainApp`|Yes|
+|appVersion|the semantic version of this app|Yes|
+|deviceType|appears to always be `1`|Yes|
+|osType|appears to always be `2`|Yes|
+
+
+#### Body
+```json
+{
+    "createdTime": "int appears to always be 0",
+    "hostUid": "int appears to always be 0",
+    "threadId": "int appears to always be 0",
+    "uid": "int appears to always be 0",
+    "title": "title of this thread",
+    "type": "int field or value with an unknown use",
+    "background": {
+        "baseUrl": "url template to build sizes with",
+        "resourceList": [
+            {
+                "width": "int width",
+                "height": "int height",
+                "url": "url to the icon in this size",
+                "thumbnail": "is this media a thumbnail? Field only appers to be present if its value is true"
+            },
+            "..."
+        ]
+    },
+    "icon": {
+        "baseUrl": "url template to build sizes with",
+        "resourceList": [
+            {
+                "width": "int width",
+                "height": "int height",
+                "url": "url to the icon in this size",
+                "thumbnail": "is this media a thumbnail? Field only appers to be present if its value is true"
+            },
+            "..."
+        ]
+    },
+    "latestMessageId": "unique id referencing this resource",
+    "status": "int field or value with an unknown use"
+}
+```
+
+
+#### Responses
+- `200`
+
+  A thread was created
+
+  #### Body
+```json
+{
+    "background": {
+        "baseUrl": "url template to build sizes with",
+        "resourceList": [
+            {
+                "width": "int width",
+                "height": "int height",
+                "url": "url to the icon in this size",
+                "thumbnail": "is this media a thumbnail? Field only appers to be present if its value is true"
+            },
+            "..."
+        ]
+    },
+    "coHostUids": "probably a list of user ids, but always appears to be null",
+    "content": "a description of the chat",
+    "contentRegion": "int unknown, appears to be an int representing a region",
+    "createdTime": "unix timestamp of occurence",
+    "currentMemberInfo": {
+        "alertOption": "likely bool int should this chat spawn notifications?",
+        "chatMemberStatus": "bool int is the authed profile in this thread?",
+        "lastReadMessageId": "unique id referencing this resource",
+        "createdTime": "unix timestamp of occurence, likely when the authed profile joined this chat, or epoch if not joined"
+    },
+    "extensions": "field or value with an unknown use, appears to be an empty object",
+    "host": {
+        "nickname": "user displayed name",
+        "uid": "unique id referencing this resource",
+        "socialId": "unique social id referencing this user",
+        "socialIdModified": "unique social id referencing this user_modified",
+        "bio": "information about this user",
+        "gender": "the gender of this user",
+        "contentRegion": "int unknown, appears to be an int representing a region",
+        "contentRegionName": "int unknown, appears to be an int representing a region_name",
+        "createdTime": "unix timestamp of occurence",
+        "icon": {
+            "baseUrl": "url template to build sizes with",
+            "resourceList": [
+                {
+                    "width": "int width",
+                    "height": "int height",
+                    "url": "url to the icon in this size",
+                    "thumbnail": "is this media a thumbnail? Field only appers to be present if its value is true"
+                },
+                "..."
+            ]
+        },
+        "chatInvitationStatus": "int likely was this user invited to this chat?",
+        "chatMemberStatus": "int likely bool is this member a member of this chat?",
+        "onlineStatus": "int indicator of how this user may be online",
+        "specialTitle": "special title of this user in this chat",
+        "status": "int field or value with an unknown use"
+    },
+    "hostUid": "unique id referencing this resource",
+    "icon": {
+        "baseUrl": "url template to build sizes with",
+        "resourceList": [
+            {
+                "width": "int width",
+                "height": "int height",
+                "url": "url to the icon in this size",
+                "thumbnail": "is this media a thumbnail? Field only appers to be present if its value is true"
+            },
+            "..."
+        ]
+    },
+    "language": "2 character language code",
+    "latestMessage": {
+        "author": {
+            "nickname": "user displayed name",
+            "uid": "unique id referencing this resource",
+            "socialId": "unique social id referencing this user",
+            "socialIdModified": "unique social id referencing this user_modified",
+            "bio": "information about this user",
+            "gender": "the gender of this user",
+            "contentRegion": "int unknown, appears to be an int representing a region",
+            "contentRegionName": "int unknown, appears to be an int representing a region_name",
+            "createdTime": "unix timestamp of occurence",
+            "icon": {
+                "baseUrl": "url template to build sizes with",
+                "resourceList": [
+                    {
+                        "width": "int width",
+                        "height": "int height",
+                        "url": "url to the icon in this size",
+                        "thumbnail": "is this media a thumbnail? Field only appers to be present if its value is true"
+                    },
+                    "..."
+                ]
+            },
+            "status": "int field or value with an unknown use"
+        },
+        "content": "content of the message body",
+        "createdTime": "unix timestamp of occurence",
+        "messageId": "unique id referencing this resource",
+        "threadId": "unique id referencing this resource",
+        "uid": "unique id referencing this resource",
+        "type": "int type of message"
+    },
+    "latestMessageId": "unique id referencing this resource",
+    "membersCount": "int members in this chat thread",
+    "membersSummary": [
+        {
+            "nickname": "user displayed name",
+            "uid": "unique id referencing this resource",
+            "socialId": "unique social id referencing this user",
+            "socialIdModified": "unique social id referencing this user_modified",
+            "bio": "information about this user",
+            "gender": "the gender of this user",
+            "contentRegion": "int unknown, appears to be an int representing a region",
+            "contentRegionName": "int unknown, appears to be an int representing a region_name",
+            "createdTime": "unix timestamp of occurence",
+            "icon": {
+                "baseUrl": "url template to build sizes with",
+                "resourceList": [
+                    {
+                        "width": "int width",
+                        "height": "int height",
+                        "url": "url to the icon in this size",
+                        "thumbnail": "is this media a thumbnail? Field only appers to be present if its value is true"
+                    },
+                    "..."
+                ]
+            },
+            "chatInvitationStatus": "int likely was this user invited to this chat?",
+            "chatMemberStatus": "int likely bool is this member a member of this chat?",
+            "onlineStatus": "int indicator of how this user may be online",
+            "specialTitle": "special title of this user in this chat",
+            "status": "int field or value with an unknown use"
+        },
+        "..."
+    ],
+    "status": "int field or value with an unknown use",
+    "tagList": [
+        {
+            "order": "position of this tag, relative to its siblings",
+            "source": "int field or value with an unknown use",
+            "status": "int field or value with an unknown use",
+            "style": {
+                "backgroundColor": "hexidecimal color with alpha bits",
+                "borderColor": "hexidecimal color with alpha bits",
+                "solidColor": "hexidecimal color with alpha bits",
+                "textColor": "hexidecimal color with alpha bits"
+            },
+            "tagId": "int id referencing this tag",
+            "tagName": "name of this tag"
+        },
+        "..."
+    ],
+    "threadId": "unique id referencing this resource",
+    "title": "title of this chat thread",
+    "type": "int field or value with an unknown use"
+}
+```
+
+
+</details>
+
+<details>
 <summary>GET /chat/threads/:thread_id</summary>
 
 Get information about some chat thread

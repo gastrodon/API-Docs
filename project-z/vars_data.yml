@@ -163,6 +163,23 @@ vars:
                         "createdTime": "$data.string.unix_time, likely when the authed profile joined this chat, or epoch if not joined"
                     }
 
+                create_thread: |-
+                    {
+                        "createdTime": "int appears to always be 0",
+                        "hostUid": "int appears to always be 0",
+                        "threadId": "int appears to always be 0",
+                        "uid": "int appears to always be 0",
+
+                        "title": "title of this thread",
+                        "type": "int $data.string.unknown",
+
+                        "background": $data.json.partial.media,
+                        "icon": $data.json.partial.media,
+
+                        "latestMessageId": "$data.string.field.uid",
+                        "status": "$data.string.field.status"
+                    }
+
             circle:
                 circle_partial: |-
                     {

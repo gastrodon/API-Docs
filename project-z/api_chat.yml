@@ -20,6 +20,15 @@ routes:
                 200:
                     description: A collection of threads was fetched
                     body: $body.response.chat.threads.root.get
+        POST:
+            description: Create a new thread
+            tables:
+                Headers: $header_table.authed
+            body: $body.request.chat.threads.root.post
+            responses:
+                200:
+                    description: A thread was created
+                    body: $body.response.chat.threads.root.post
 
     /chat/threads/:thread_id:
         GET:
