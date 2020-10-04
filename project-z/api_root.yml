@@ -38,3 +38,17 @@ routes:
                 200:
                     description: Update info was fetched
                     body: $body.response.release_info.root.get
+
+    /media/default:
+        GET:
+            description: |-
+                Get a collection of default media.
+                Queried when new chats are created
+            tables:
+                Headers: $header_table.anon
+                "URL Params":
+                    - $query_param.type_default_media
+            responses:
+                200:
+                    description: Default media was fetched
+                    body: $body.response.media.default.root.get

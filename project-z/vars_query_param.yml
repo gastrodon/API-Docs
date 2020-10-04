@@ -30,6 +30,11 @@ vars:
             description: query circles joined by the user referenced by this uid
             required: if `type=joined`
 
+        type_default_media:
+            name: type
+            description: type of media to query. Only `1` appears to be valid
+            required: "Yes"
+
     query_param_table:
         paginated:
             - $query_param.size

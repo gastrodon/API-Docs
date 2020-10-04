@@ -859,6 +859,38 @@ Get information about some chat thread
 </details>
 
 <details>
+<summary>POST /chat/threads/:thread_id/mark-as-read</summary>
+
+Mark messages in some thread as having been read
+
+###### Headers
+|name|description|required|
+| - | - | - |
+|rawDeviceId|An id that can identify the device making the request|Yes|
+|User-Agent|The user agent of the device making the request|No|
+|sId|The authed user's session id|Yes|
+|appType|should be `MainApp`|Yes|
+|appVersion|the semantic version of this app|Yes|
+|deviceType|appears to always be `1`|Yes|
+|osType|appears to always be `2`|Yes|
+
+
+
+
+#### Responses
+- `200`
+
+  Chats were marked as read
+
+  #### Body
+```json
+{}
+```
+
+
+</details>
+
+<details>
 <summary>GET /chat/threads/:thread_id/members</summary>
 
 Get a collection of members in some thread
@@ -1121,6 +1153,57 @@ Get a collection of circles. Currently url param `type` is required, but the API
         "total": "int total number of items, if fewer than the size queried"
     }
 }
+```
+
+
+</details>
+
+<details>
+<summary>GET /media/default</summary>
+
+Get a collection of default media.
+Queried when new chats are created
+
+###### Headers
+|name|description|required|
+| - | - | - |
+|rawDeviceId|An id that can identify the device making the request|Yes|
+|User-Agent|The user agent of the device making the request|No|
+|appType|should be `MainApp`|Yes|
+|appVersion|the semantic version of this app|Yes|
+|deviceType|appears to always be `1`|Yes|
+|osType|appears to always be `2`|Yes|
+
+###### URL Params
+|name|description|required|
+| - | - | - |
+|type|type of media to query. Only `1` appears to be valid|Yes|
+
+
+
+
+#### Responses
+- `200`
+
+  Default media was fetched
+
+  #### Body
+```json
+[
+    {
+        "baseUrl": "url template to build sizes with",
+        "resourceList": [
+            {
+                "width": "int width",
+                "height": "int height",
+                "url": "url to the icon in this size",
+                "thumbnail": "is this media a thumbnail? Field only appers to be present if its value is true"
+            },
+            "..."
+        ]
+    },
+    "..."
+]
 ```
 
 

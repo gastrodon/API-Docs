@@ -160,3 +160,14 @@ vars:
                                     ],
                                     "pagination": $data.json.partial.pagination
                                 }
+
+            media:
+                default:
+                    root:
+                        get:
+                            lang: json
+                            content: |-
+                                [
+                                    $data.json.partial.media,
+                                    "..."
+                                ]
