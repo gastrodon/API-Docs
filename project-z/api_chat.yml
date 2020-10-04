@@ -113,3 +113,14 @@ routes:
                 200:
                     description: A role was created
                     body: $body.response.chat.threads.uid.roles.root.post
+
+    /chat/threads/:thread_id/roles/:role_id:
+        POST:
+            description: Update some role in some thread
+            tables:
+                Headers: $header_table.authed
+            body: $body.request.chat.threads.uid.roles.uid.root.post
+            responses:
+                200:
+                    description: A role was modified
+                    body: $body.response.chat.threads.uid.roles.uid.root.post

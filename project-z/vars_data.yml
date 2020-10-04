@@ -186,7 +186,7 @@ vars:
                         "roleId": "likely references this role",
                         "uid": "uid, unknown difference to roleId",
                         "threadId": "uid thread where this role exists",
-                        
+
                         "createdTime": "$data.string.unix_time",
 
                         "name": "name of this role",
@@ -215,6 +215,24 @@ vars:
                         "inUse": "is this role in use?",
 
                     	"icon": $data.json.partial.media,
+
+                    	"status": "$data.string.field.status"
+                    }
+
+                edit_role: |-
+                    {
+                        "threadId": "thread to create this role in",
+                        "roleId": "references this role",
+                        "uid": "unknown difference to roleId",
+
+                        "agoraUid": "$data.string.always_zero",
+                        "playerUid": "$data.string.always_zero",
+                        "roleStatus": "$data.string.always_zero",
+
+                        "name": "name of this role",
+                        "description": "description of this role",
+                        "inUse": "is this role in use?",
+                        "createdTime": "$data.string.unix_time",
 
                     	"status": "$data.string.field.status"
                     }

@@ -1508,6 +1508,75 @@ Create a role in some thread
 </details>
 
 <details>
+<summary>POST /chat/threads/:thread_id/roles/:role_id</summary>
+
+Update some role
+
+###### Headers
+|name|description|required|
+| - | - | - |
+|rawDeviceId|An id that can identify the device making the request|Yes|
+|User-Agent|The user agent of the device making the request|No|
+|sId|The authed user's session id|Yes|
+|appType|should be `MainApp`|Yes|
+|appVersion|the semantic version of this app|Yes|
+|deviceType|appears to always be `1`|Yes|
+|osType|appears to always be `2`|Yes|
+
+
+#### Body
+```json
+{
+    "roleId": "likely references this role",
+    "uid": "uid, unknown difference to roleId",
+    "threadId": "uid thread where this role exists",
+    "createdTime": "unix timestamp of occurence",
+    "name": "name of this role",
+    "description": "description of this role",
+    "inUse": "is this role in use?",
+    "icon": {
+        "baseUrl": "url template to build sizes with",
+        "resourceList": [
+            {
+                "width": "int width",
+                "height": "int height",
+                "url": "url to the icon in this size",
+                "thumbnail": "is this media a thumbnail? Field only appers to be present if its value is true"
+            },
+            "..."
+        ]
+    },
+    "status": "int field or value with an unknown use"
+}
+```
+
+
+#### Responses
+- `200`
+
+  A role was modified
+
+  #### Body
+```json
+{
+    "threadId": "thread to create this role in",
+    "roleId": "references this role",
+    "uid": "unknown difference to roleId",
+    "agoraUid": "appears to always be 0",
+    "playerUid": "appears to always be 0",
+    "roleStatus": "appears to always be 0",
+    "name": "name of this role",
+    "description": "description of this role",
+    "inUse": "is this role in use?",
+    "createdTime": "unix timestamp of occurence",
+    "status": "int field or value with an unknown use"
+}
+```
+
+
+</details>
+
+<details>
 <summary>GET /circles</summary>
 
 Get a collection of circles. Currently url param `type` is required, but the API error implies that this is planned to change. Type may be one of `joined`

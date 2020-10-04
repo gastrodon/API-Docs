@@ -23,6 +23,11 @@ vars:
 
                     uid:
                         roles:
+                            uid:
+                                root:
+                                    post:
+                                        lang: json
+                                        content: $data.json.role.role
                             root:
                                 post:
                                     lang: json
@@ -177,6 +182,11 @@ vars:
                                         }
 
                         roles:
+                            uid:
+                                root:
+                                    post:
+                                        lang: json
+                                        content: $data.json.role.edit_role
                             root:
                                 get:
                                     lang: json
