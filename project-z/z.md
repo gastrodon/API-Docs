@@ -1079,6 +1079,42 @@ Get information about some chat thread
 </details>
 
 <details>
+<summary>GET /chat/threads/:thread_id/agora-info</summary>
+
+Get agora info. Appears to be fetched when voice role plays are started, which would imply that agora is used for voice chat
+
+###### Headers
+|name|description|required|
+| - | - | - |
+|rawDeviceId|An id that can identify the device making the request|Yes|
+|User-Agent|The user agent of the device making the request|No|
+|sId|The authed user's session id|Yes|
+|appType|should be `MainApp`|Yes|
+|appVersion|the semantic version of this app|Yes|
+|deviceType|appears to always be `1`|Yes|
+|osType|appears to always be `2`|Yes|
+
+
+
+
+#### Responses
+- `200`
+
+  Agora info for this session was fetched
+
+  #### Body
+```json
+{
+    "channelName": "should be the uid of this thread",
+    "agoraUid": "int uid, likely used for voice chat",
+    "token": "likely an agora session token"
+}
+```
+
+
+</details>
+
+<details>
 <summary>POST /chat/threads/:thread_id/end-role-play</summary>
 
 End a role play in some thread

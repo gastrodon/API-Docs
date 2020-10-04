@@ -189,6 +189,13 @@ vars:
                         ]
                     }
 
+                agora_info: |-
+                    {
+                        "channelName": "should be the uid of this thread",
+                        "agoraUid": "int uid, likely used for voice chat",
+                        "token": "likely an agora session token"
+                    }
+
             role:
                 role: |-
                     {

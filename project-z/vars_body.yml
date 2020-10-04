@@ -147,6 +147,11 @@ vars:
 
                 threads:
                     uid:
+                        agora_info:
+                            root:
+                                get:
+                                    lang: json
+                                    content: $data.json.chat.agora_info
                         messages:
                             root:
                                 get:

@@ -148,3 +148,16 @@ routes:
                 200:
                     description: A role play was ended
                     body: $body.response.empty_post
+
+    /chat/threads/:thread_id/agora-info:
+        GET:
+            description: >-
+                Get agora info.
+                Appears to be fetched when voice role plays are started,
+                which would imply that agora is used for voice chat
+            tables:
+                Headers: $header_table.authed
+            responses:
+                200:
+                    description: Agora info for this session was fetched
+                    body: $body.response.chat.threads.uid.agora_info.root.get
