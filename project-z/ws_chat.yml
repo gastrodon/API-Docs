@@ -1,0 +1,33 @@
+routes:
+    ping:
+        RECV:
+            description: The server is sending a ping
+
+    pong:
+        SEND:
+            description: Send a resposne to a Ping
+
+    message:
+        SEND:
+            description: Send a chat message
+            body:
+                lang: json
+                content: $socket_data.message.send
+
+    enter-thread:
+        SEND:
+            description: >-
+                Enter a thread and start recieving
+                websocket updates for its events
+            body:
+                lang: json
+                content: $socket_data.thread.enter
+
+    system-role-play-start:
+        RECV:
+            description: >-
+                A system message stating that
+                a role play has started
+            body:
+                lang: json
+                content: $socket_data.system_message.role_play_start

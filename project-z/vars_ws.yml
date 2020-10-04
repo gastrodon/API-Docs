@@ -1,0 +1,86 @@
+vars:
+    socket_data:
+        message:
+            send: |-
+                {
+                    "t": 1,
+                    "msg": {
+                        "applyCount": "likely $data.string.always_zero",
+                        "asSummary": "$data.string.unknown",
+                        "content": "thread message content",
+                        "createdTime": "$data.string.always_zero",
+                        "extensions": {
+                            "contentStatus": "$data.string.unknown",
+                            "friendshipLevel": "$data.string.unknown"
+                        },
+                        "memberList": [
+                            "likely members who are online or recipient",
+                            "..."
+                        ],
+                        "messageId": "likely $data.string.always_zero",
+                        "refId": "int likely unique socket message id",
+                        "roleList": [
+                            "likely roles applying to sender or recipient",
+                            "..."
+                        ],
+                        "rolePlayMode": "int likely bool was this sent as part of a role play?",
+                        "status": "$data.string.field.status",
+                        "threadActivityType": "$data.string.unknown",
+                        "threadId": "referencing thread to send this message to",
+                        "type": "int likely type of message sent",
+                        "uid": "referencing something unknown",
+                        "userList": [
+                            "unknown, likely uid referencing users",
+                            "..."
+                        ]
+                    },
+                    "threadId": "appears to be same as msg.threadId"
+                }
+
+        system_message:
+            # WARNING likely
+            role_play_start: |-
+                {
+                    "msg": {
+                        "author": $data.json.profile.user_profile_partial,
+                        "createdTime": "$data.string.unix_time",
+                        "messageId": 0,
+                        "threadId": "referencing the thread this is in",
+                        "type": "43, likely represents a role play start",
+                        "uid": "referencing unknown"
+                    },
+                    "t": 1
+                }
+        thread:
+            enter: |-
+                {
+                    "t": 6,
+                    "threadId": "referencing the thread to enter"
+                }
+
+        role_play:
+            # WARNING likely
+            start: |-
+                {
+                    "clientAck": {
+                        "markAsRead": "bool likely mark this message as read?",
+                        "messageId": "int likely referencing message to read",
+                        "threadId": "int referencing message thread"
+                    },
+                    "t": 3,
+                    "threadId": "thread to send this message to"
+                }
+
+            mode_change: |-
+                {
+                    "msg": {
+                        "createdTime": "$data.string.unix_time",
+                        "messageId": 0,
+                        "rolePlayMode": "int thread role play was set to this mode",
+                        "threadActivityType": "$data.string.unknown",
+                        "threadId": "thread to set the roleplay mode in",
+                        "type": "90 likely represents that this is a system message",
+                        "uid": 0
+                    },
+                    "t": 1
+                }
