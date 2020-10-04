@@ -695,10 +695,10 @@ Create a new thread
 #### Body
 ```json
 {
-    "createdTime": "int appears to always be 0",
-    "hostUid": "int appears to always be 0",
-    "threadId": "int appears to always be 0",
-    "uid": "int appears to always be 0",
+    "createdTime": "appears to always be 0",
+    "hostUid": "appears to always be 0",
+    "threadId": "appears to always be 0",
+    "uid": "appears to always be 0",
     "title": "title of this thread",
     "type": "int field or value with an unknown use",
     "background": {
@@ -1367,6 +1367,143 @@ Get a collection of members online in some thread
         "nextPageToken": "token to fetch the next page relative to this, if any",
         "total": "int total number of items, if fewer than the size queried"
     }
+}
+```
+
+
+</details>
+
+<details>
+<summary>GET /chat/threads/:thread_id/roles</summary>
+
+Get the roles of some thread
+
+###### Headers
+|name|description|required|
+| - | - | - |
+|rawDeviceId|An id that can identify the device making the request|Yes|
+|User-Agent|The user agent of the device making the request|No|
+|sId|The authed user's session id|Yes|
+|appType|should be `MainApp`|Yes|
+|appVersion|the semantic version of this app|Yes|
+|deviceType|appears to always be `1`|Yes|
+|osType|appears to always be `2`|Yes|
+
+
+
+
+#### Responses
+- `200`
+
+  A collection of roles was fetched
+
+  #### Body
+```json
+[
+    {
+        "roleId": "likely references this role",
+        "uid": "uid, unknown difference to roleId",
+        "threadId": "uid thread where this role exists",
+        "createdTime": "unix timestamp of occurence",
+        "name": "name of this role",
+        "description": "description of this role",
+        "inUse": "is this role in use?",
+        "icon": {
+            "baseUrl": "url template to build sizes with",
+            "resourceList": [
+                {
+                    "width": "int width",
+                    "height": "int height",
+                    "url": "url to the icon in this size",
+                    "thumbnail": "is this media a thumbnail? Field only appers to be present if its value is true"
+                },
+                "..."
+            ]
+        },
+        "status": "int field or value with an unknown use"
+    },
+    "..."
+]
+```
+
+
+</details>
+
+<details>
+<summary>POST /chat/threads/:thread_id/roles</summary>
+
+Create a role in some thread
+
+###### Headers
+|name|description|required|
+| - | - | - |
+|rawDeviceId|An id that can identify the device making the request|Yes|
+|User-Agent|The user agent of the device making the request|No|
+|sId|The authed user's session id|Yes|
+|appType|should be `MainApp`|Yes|
+|appVersion|the semantic version of this app|Yes|
+|deviceType|appears to always be `1`|Yes|
+|osType|appears to always be `2`|Yes|
+
+
+#### Body
+```json
+{
+    "threadId": "thread to create this role in",
+    "agoraUid": "appears to always be 0",
+    "createdTime": "appears to always be 0",
+    "playerUid": "appears to always be 0",
+    "roleId": "appears to always be 0",
+    "roleStatus": "appears to always be 0",
+    "uid": "appears to always be 0",
+    "name": "name of this role",
+    "description": "description of this role",
+    "inUse": "is this role in use?",
+    "icon": {
+        "baseUrl": "url template to build sizes with",
+        "resourceList": [
+            {
+                "width": "int width",
+                "height": "int height",
+                "url": "url to the icon in this size",
+                "thumbnail": "is this media a thumbnail? Field only appers to be present if its value is true"
+            },
+            "..."
+        ]
+    },
+    "status": "int field or value with an unknown use"
+}
+```
+
+
+#### Responses
+- `200`
+
+  A role was created
+
+  #### Body
+```json
+{
+    "roleId": "likely references this role",
+    "uid": "uid, unknown difference to roleId",
+    "threadId": "uid thread where this role exists",
+    "createdTime": "unix timestamp of occurence",
+    "name": "name of this role",
+    "description": "description of this role",
+    "inUse": "is this role in use?",
+    "icon": {
+        "baseUrl": "url template to build sizes with",
+        "resourceList": [
+            {
+                "width": "int width",
+                "height": "int height",
+                "url": "url to the icon in this size",
+                "thumbnail": "is this media a thumbnail? Field only appers to be present if its value is true"
+            },
+            "..."
+        ]
+    },
+    "status": "int field or value with an unknown use"
 }
 ```
 

@@ -94,3 +94,22 @@ routes:
                 200:
                     description: A collection of thread messages was fetched
                     body: $body.response.chat.threads.uid.messages.root.get
+
+    /chat/threads/:thread_id/roles:
+        GET:
+            description: Get the roles of some thread
+            tables:
+                Headers: $header_table.authed
+            responses:
+                200:
+                    description: A collection of roles was fetched
+                    body: $body.response.chat.threads.uid.roles.root.get
+        POST:
+            description: Create a role in some thread
+            tables:
+                Headers: $header_table.authed
+            body: $body.request.chat.threads.uid.roles.root.post
+            responses:
+                200:
+                    description: A role was created
+                    body: $body.response.chat.threads.uid.roles.root.post

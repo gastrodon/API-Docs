@@ -2,7 +2,7 @@ vars:
     data:
         string:
             unknown: field or value with an unknown use
-
+            always_zero: appears to always be 0
             unix_time: unix timestamp of occurence
             alpha_color: hexidecimal color with alpha bits
 
@@ -165,10 +165,10 @@ vars:
 
                 create_thread: |-
                     {
-                        "createdTime": "int appears to always be 0",
-                        "hostUid": "int appears to always be 0",
-                        "threadId": "int appears to always be 0",
-                        "uid": "int appears to always be 0",
+                        "createdTime": "$data.string.always_zero",
+                        "hostUid": "$data.string.always_zero",
+                        "threadId": "$data.string.always_zero",
+                        "uid": "$data.string.always_zero",
 
                         "title": "title of this thread",
                         "type": "int $data.string.unknown",
@@ -178,6 +178,45 @@ vars:
 
                         "latestMessageId": "$data.string.field.uid",
                         "status": "$data.string.field.status"
+                    }
+
+            role:
+                role: |-
+                    {
+                        "roleId": "likely references this role",
+                        "uid": "uid, unknown difference to roleId",
+                        "threadId": "uid thread where this role exists",
+                        
+                        "createdTime": "$data.string.unix_time",
+
+                        "name": "name of this role",
+                        "description": "description of this role",
+                        "inUse": "is this role in use?",
+
+                        "icon": $data.json.partial.media,
+
+                        "status": "$data.string.field.status"
+                    }
+
+
+                create_role: |-
+                    {
+                        "threadId": "thread to create this role in",
+
+                        "agoraUid": "$data.string.always_zero",
+                        "createdTime": "$data.string.always_zero",
+                        "playerUid": "$data.string.always_zero",
+                        "roleId": "$data.string.always_zero",
+                        "roleStatus": "$data.string.always_zero",
+                        "uid": "$data.string.always_zero",
+
+                        "name": "name of this role",
+                        "description": "description of this role",
+                        "inUse": "is this role in use?",
+
+                    	"icon": $data.json.partial.media,
+
+                    	"status": "$data.string.field.status"
                     }
 
             message:

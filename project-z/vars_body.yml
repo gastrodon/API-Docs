@@ -21,6 +21,13 @@ vars:
                             lang: json
                             content: $data.json.chat.create_thread
 
+                    uid:
+                        roles:
+                            root:
+                                post:
+                                    lang: json
+                                    content: $data.json.role.create_role
+
         response:
             alerts:
                 check:
@@ -168,6 +175,19 @@ vars:
                                             ],
                                             "pagination": $data.json.partial.pagination
                                         }
+
+                        roles:
+                            root:
+                                get:
+                                    lang: json
+                                    content: |-
+                                        [
+                                            $data.json.role.role,
+                                            "..."
+                                        ]
+                                post:
+                                    lang: json
+                                    content: $data.json.role.role
 
                     root:
                         get:
