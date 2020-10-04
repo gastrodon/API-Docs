@@ -31,3 +31,16 @@ routes:
             body:
                 lang: json
                 content: $socket_data.system_message.role_play_start
+
+    ack:
+        RECV:
+            description: The server acked something it recieved
+            body:
+                lang: json
+                content: $socket_data.ack.server
+
+        SEND:
+            description: Ack something sent by the server
+            body:
+                lang: json
+                content: $socket_data.ack.client

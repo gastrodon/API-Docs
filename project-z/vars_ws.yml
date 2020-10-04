@@ -1,4 +1,9 @@
 vars:
+    data:
+        string:
+            field:
+                ref_id: int likely unique socket message id
+
     socket_data:
         message:
             send: |-
@@ -18,9 +23,9 @@ vars:
                             "..."
                         ],
                         "messageId": "likely $data.string.always_zero",
-                        "refId": "int likely unique socket message id",
+                        "refId": "$data.string.field.ref_id",
                         "roleList": [
-                            "likely roles applying to sender or recipient",
+                            "appears to be empty",
                             "..."
                         ],
                         "rolePlayMode": "int likely bool was this sent as part of a role play?",
@@ -37,10 +42,34 @@ vars:
                     "threadId": "appears to be same as msg.threadId"
                 }
 
+        ack:
+            client: |-
+                {
+                    "t": 3,
+                    "clientAck": {
+                        "markAsRead": "read this message?",
+                        "messageId": "references message to ack",
+                        "threadId": "references thread in which the message is"
+                    },
+                    "threadId": "same as clientAck.threadId"
+                }
+
+            server: |-
+                {
+                    "t": 2,
+                    "serverAck": {
+                        "apiCode": "api code for this ack, 0 appears to be ok",
+                        "createdTime": "$data.string.unix_time",
+                        "messageId": "references message to ack",
+                        "refId": "$data.string.field.ref_id"
+                    }
+                }
+
         system_message:
             # WARNING likely
             role_play_start: |-
                 {
+                    "t": 1,
                     "msg": {
                         "author": $data.json.profile.user_profile_partial,
                         "createdTime": "$data.string.unix_time",
@@ -48,8 +77,7 @@ vars:
                         "threadId": "referencing the thread this is in",
                         "type": "43, likely represents a role play start",
                         "uid": "referencing unknown"
-                    },
-                    "t": 1
+                    }
                 }
         thread:
             enter: |-
@@ -59,20 +87,9 @@ vars:
                 }
 
         role_play:
-            # WARNING likely
-            start: |-
-                {
-                    "clientAck": {
-                        "markAsRead": "bool likely mark this message as read?",
-                        "messageId": "int likely referencing message to read",
-                        "threadId": "int referencing message thread"
-                    },
-                    "t": 3,
-                    "threadId": "thread to send this message to"
-                }
-
             mode_change: |-
                 {
+                    "t": 1,
                     "msg": {
                         "createdTime": "$data.string.unix_time",
                         "messageId": 0,
@@ -81,6 +98,21 @@ vars:
                         "threadId": "thread to set the roleplay mode in",
                         "type": "90 likely represents that this is a system message",
                         "uid": 0
-                    },
-                    "t": 1
+                    }
+                }
+
+            started: |-
+                {
+                    "t": 1,
+                    "msg": {
+                        "createdTime": 0,
+                        "messageId": 0,
+                        "roleList": [
+                            $data.role.role,
+                            "..."
+                        ],
+                        "threadId": "referencing this thread",
+                        "type": "37, likely references a role play starting",
+                        "uid": 0
+                    }
                 }

@@ -1,4 +1,52 @@
 <details>
+<summary>RECV ack</summary>
+
+The server acked something it recieved
+
+
+
+#### Body
+```json
+{
+    "t": 2,
+    "serverAck": {
+        "apiCode": "api code for this ack, 0 appears to be ok",
+        "createdTime": "unix timestamp of occurence",
+        "messageId": "references message to ack",
+        "refId": "int likely unique socket message id"
+    }
+}
+```
+
+
+
+</details>
+
+<details>
+<summary>SEND ack</summary>
+
+Ack something sent by the server
+
+
+
+#### Body
+```json
+{
+    "t": 3,
+    "clientAck": {
+        "markAsRead": "read this message?",
+        "messageId": "references message to ack",
+        "threadId": "references thread in which the message is"
+    },
+    "threadId": "same as clientAck.threadId"
+}
+```
+
+
+
+</details>
+
+<details>
 <summary>SEND enter-thread</summary>
 
 Enter a thread and start recieving websocket updates for its events
@@ -44,7 +92,7 @@ Send a chat message
         "messageId": "likely appears to always be 0",
         "refId": "int likely unique socket message id",
         "roleList": [
-            "likely roles applying to sender or recipient",
+            "appears to be empty",
             "..."
         ],
         "rolePlayMode": "int likely bool was this sent as part of a role play?",
@@ -100,6 +148,7 @@ A system message stating that a role play has started
 #### Body
 ```json
 {
+    "t": 1,
     "msg": {
         "author": {
             "nickname": "user displayed name",
@@ -130,8 +179,7 @@ A system message stating that a role play has started
         "threadId": "referencing the thread this is in",
         "type": "43, likely represents a role play start",
         "uid": "referencing unknown"
-    },
-    "t": 1
+    }
 }
 ```
 
