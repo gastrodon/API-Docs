@@ -1442,6 +1442,43 @@ Get a collection of members online in some thread
 </details>
 
 <details>
+<summary>POST /chat/threads/:thread_id/role-play-mode/:mode</summary>
+
+Set the role play mode
+Mode may be one of
+```
+1 -> text
+2 -> voice
+```
+
+###### Headers
+|name|description|required|
+| - | - | - |
+|rawDeviceId|An id that can identify the device making the request|Yes|
+|User-Agent|The user agent of the device making the request|No|
+|sId|The authed user's session id|Yes|
+|appType|should be `MainApp`|Yes|
+|appVersion|the semantic version of this app|Yes|
+|deviceType|appears to always be `1`|Yes|
+|osType|appears to always be `2`|Yes|
+
+
+
+
+#### Responses
+- `200`
+
+  The role play mode was set
+
+  #### Body
+```json
+{}
+```
+
+
+</details>
+
+<details>
 <summary>GET /chat/threads/:thread_id/roles</summary>
 
 Get the roles of some thread

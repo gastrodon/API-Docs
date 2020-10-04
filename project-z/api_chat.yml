@@ -157,6 +157,22 @@ routes:
                     description: A role play was ended
                     body: $body.response.empty_json
 
+    /chat/threads/:thread_id/role-play-mode/:mode:
+        POST:
+            description: |-
+                Set the role play mode
+                Mode may be one of
+                ```
+                1 -> text
+                2 -> voice
+                ```
+            tables:
+                Headers: $header_table.authed
+            responses:
+                200:
+                    description: The role play mode was set
+                    body: $body.response.empty_json
+
     /chat/threads/:thread_id/agora-info:
         GET:
             description: >-
