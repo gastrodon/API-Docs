@@ -21,6 +21,49 @@ routes:
                     description: A collection of threads was fetched
                     body: $body.response.chat.threads.root.get
 
+    /chat/threads/:thread_id:
+        GET:
+            description: Get information about some chat thread
+            tables:
+                Headers: $header_table.authed
+            responses:
+                200:
+                    description: Information about this thread was fetched
+                    body: $body.response.chat.threads.uid.root.get
+
+    /chat/threads/:thread_id/mark-as-read:
+        POST:
+            description: Mark messages in some thread as having been read
+            tables:
+                Headers: $header_table.authed
+            responses:
+                200:
+                    description: Chats were marked as read
+                    body:
+                        lang: json
+                        content: "{}"
+
+    /chat/threads/:thread_id/members:
+        GET:
+            description: Get a collection of members in some thread
+            tables:
+                Headers: $header_table.authed
+                "URL Params": $query_param_table.paginated
+            responses:
+                200:
+                    description: A collection of members was fetched
+                    body: $body.response.chat.threads.uid.members.root.get
+        POST:
+            description: Join some thread
+            tables:
+                Headers: $header_table.authed
+            responses:
+                200:
+                    description: The authed user did join this thread
+                    body:
+                        lang: json
+                        content: "{}"
+
     /chat/threads/:thread_id/online-members:
         GET:
             description: Get a collection of members online in some thread
@@ -29,5 +72,5 @@ routes:
                 "URL Params": $query_param_table.paginated
             responses:
                 200:
-                    description: A collection of online users was fetched
+                    description: A collection of online members was fetched
                     body: $body.response.chat.threads.uid.online_members.root.get
