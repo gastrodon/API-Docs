@@ -377,7 +377,8 @@ vars:
 
                 pagination: |-
                     {
-                        "nextPageToken": "token to fetch the next page relative to this"
+                        "nextPageToken": "token to fetch the next page relative to this, if any",
+                        "total": "int total number of items, if fewer than the size queried"
                     }
 
                 is_end: |-
