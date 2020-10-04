@@ -20,6 +20,16 @@ vars:
             description: offset this number of items in a collection
             required: "No"
 
+        type_circles:
+            name: type
+            description: type of circle to query
+            required: "Yes"
+
+        uid_circles:
+            name: uid
+            description: query circles joined by the user referenced by this uid
+            required: if `type=joined`
+
     query_param_table:
         paginated:
             - $query_param.size

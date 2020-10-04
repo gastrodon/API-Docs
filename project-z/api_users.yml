@@ -1,4 +1,26 @@
 routes:
+    /users/profile/:user_id:
+        GET:
+            description: Get some user profile referenced by a user id
+            tables:
+                Headers: $header_table.authed
+            responses:
+                200:
+                    description: This user was fetched
+                    body: $body.response.users.profile.uid.root.get
+
+    /users/block-uids:
+        GET:
+            description: >-
+                Get a collection of users who have blocked you,
+                and a collection of users who you have blocked
+            tables:
+                Headers: $header_table.authed
+            responses:
+                200:
+                    description: A collection of blocked and blocking users was fetched
+                    body: $body.response.users.blocked_uids.root.get
+
     /users/namecards:
         GET:
             description: Get a collection of user namecards

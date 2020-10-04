@@ -29,7 +29,7 @@ vars:
                         content: |-
                             {
                                 "list": [
-                                    $data.json.blog.blog,
+                                    $data.json.blog.blog_partial,
                                     "..."
                                 ],
                                 "pagination": $data.json.partial.pagination
@@ -42,7 +42,36 @@ vars:
                             lang: json
                             content: $data.json.auth.login_response
 
+            circles:
+                root:
+                    get:
+                        lang: json
+                        content: |-
+                            {
+                                "list": [
+                                    $data.json.circle.circle_partial,
+                                    "..."
+                                ],
+                                "pagination": $data.json.partial.pagination
+                            }
+
             users:
+                blocked_uids:
+                    root:
+                        get:
+                            lang: json
+                            content: |-
+                                {
+                                    "blockedByMeList": [
+                                        "$data.string.field.uid",
+                                        "..."
+                                    ],
+                                    "blockMeList": [
+                                        "$data.string.field.uid",
+                                        "..."
+                                    ]
+                                }
+
                 namecards:
                     root:
                         get:
@@ -50,11 +79,18 @@ vars:
                             content: |-
                                 {
                                     "list": [
-                                        $data.json.profile.user_profile,
+                                        $data.json.profile.user_profile_namecard,
                                         "..."
                                     ],
                                     "pagination": $data.json.partial.pagination
                                 }
+
+                profile:
+                    uid:
+                        root:
+                            get:
+                                lang: json
+                                content: $data.json.profile.user_profile_page
 
             release_info:
                 root:

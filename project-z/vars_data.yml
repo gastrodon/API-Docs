@@ -10,12 +10,14 @@ vars:
                 uid: unique id referencing this resource
 
                 nickname: user displayed name
+                bio: information about this user
                 user_gender: the gender of this user
                 social_id: unique social id referencing this user
                 social_id_modified: int has this social id been customized?
 
                 content_region: int unknown, appears to be an int representing a region
                 content_region_name: name of this profiles region
+                status: int $data.string.unknown
                 online_status: int indicator of how this user may be online
 
                 language: 2 character language code
@@ -60,7 +62,7 @@ vars:
                 login_profile_partial: |-
                     {
                         "uid": "$data.string.field.uid",
-                        "status": "int $data.string.unknown",
+                        "status": "$data.string.field.status",
                         "email": "account email",
                         "createdTime": "$data.string.unix_time",
                         "deviceId": "id referencing the clients device",
@@ -73,7 +75,7 @@ vars:
                     }
 
             blog:
-                blog: |-
+                blog_partial: |-
                     {
                         "author": $data.json.profile.user_profile_partial,
                         "blogId": "$data.string.field.uid",
@@ -98,7 +100,7 @@ vars:
                         "votesCount": "int votes",
                         "type": "int $data.string.unknown, likely blog type",
 
-                        "status": "int $data.string.unknown",
+                        "status": "$data.string.field.status",
                         "visibility": "int $data.string.unknown"
                     }
 
@@ -123,7 +125,7 @@ vars:
                             $data.json.profile.chat_user_profile,
                             "..."
                         ],
-                        "status": "int $data.string.unknown",
+                        "status": "$data.string.field.status",
                         "tagList": [
                             $data.json.partial.tag,
                             "..."
@@ -151,6 +153,30 @@ vars:
                         "threadId": "$data.string.field.uid",
                         "latestMessageId": "$data.string.field.uid",
                         "lastReadMessageId": "$data.string.field.uid"
+                    }
+
+            circle:
+                circle_partial: |-
+                    {
+                        "uid": "$data.string.field.uid",
+                        "circleId": "$data.string.field.uid",
+                        "socialId": "$data.string.field.social_id",
+                        "name": "name of this circle",
+                        "tagline": "tagline of this circle",
+
+                        "createdTime": "$data.string.unix_time",
+                        "status": "$data.string.field.status",
+
+                        "contentRegion": "$data.string.field.content_region",
+                        "language": "$data.string.field.language",
+
+                        "icon": $data.json.partial.media,
+                        "tagList": [
+                            $data.json.partial.tag,
+                            "..."
+                        ],
+
+                        "membersCount": "int number of members"
                     }
 
             profile:
@@ -181,12 +207,12 @@ vars:
                         "friendsCount": "int likely number of people who both are followed by and do follow this profile",
 
                         "socialIdModified": "$data.string.field.social_id_modified",
-                        "status": "$data.string.unknown",
+                        "status": "$data.string.field.status",
                         "contentRegion": "$data.string.field.content_region",
                         "school": "$data.string.unknown"
                     }
 
-                user_profile: |-
+                user_profile_namecard: |-
                     {
                         "uid": "$data.string.field.uid",
                         "nickname": "$data.string.field.nickname",
@@ -213,15 +239,59 @@ vars:
                         "friendsCount": "int likely number of people who both are followed by and do follow this profile",
 
                         "socialIdModified": "$data.string.field.social_id_modified",
-                        "status": "$data.string.unknown",
+                        "status": "$data.string.field.status",
                         "contentRegion": "$data.string.field.content_region",
                         "school": "$data.string.unknown",
 
                         "taglist": [
-                        $data.json.partial.tag,
-                        "..."
+                            $data.json.partial.tag,
+                            "..."
                         ],
                         "nameCardBackground": $data.json.partial.media
+                    }
+
+                user_profile_page: |-
+                    {
+                        "uid": "$data.string.field.uid",
+                        "nickname": "$data.string.field.nickname",
+                        "bio": "$data.string.field.bio",
+                        "socialId": "$data.string.field.social_id",
+
+                        "nameCardEnabled": "int likely an enum of what name card enabled status is the case for this profile",
+                        "showsSchool": "int is the profile's school shown?",
+                        "showsLocation": "int likely bool of whether or not the location of this profile is shown",
+                        "showsJoinedCircles": "int are joined circles visible?",
+                        "chatInvitationStatus": "int likely a bool describing whether this user may make chat invites",
+                        "pushEnabled": "int are push notifs enabled?",
+                        "gender": "$data.string.field.user_gender",
+
+                        "icon": $data.json.partial.media,
+                        "background": $data.json.partial.media,
+                        "nameCardBackground": $data.json.partial.media,
+                        "createdTime": "$data.string.unix_time",
+
+                        "contentRegionName": "$data.string.field.content_region_name",
+                        "location": $data.json.partial.location,
+                        "language": "$data.string.field.language",
+
+                        "fansCount": "int number of fans",
+                        "followingCount": "int number of profiles followed by this profile",
+                        "friendsCount": "int likely number of people who both are followed by and do follow this profile",
+
+                        "onlineStatus": "$data.string.field.online_status",
+                        "followMeStatus": "int describing how this user may or may not be following the authed user",
+                        "followedByMeStatus": "int describing how this user may or may not be followed by the authed user",
+                        "hasProfile": "int bool does this user have a profile?",
+
+                        "socialIdModified": "$data.string.field.social_id_modified",
+                        "status": "$data.string.field.status",
+                        "contentRegion": "$data.string.field.content_region",
+                        "school": "$data.string.unknown",
+
+                        "taglist": [
+                            $data.json.partial.tag,
+                            "..."
+                        ]
                     }
 
                 user_profile_partial: |-
@@ -231,7 +301,7 @@ vars:
                         "socialId": "$data.string.field.social_id",
                         "socialIdModified": "$data.string.field.social_id_modified",
 
-                        "bio": "information about this user",
+                        "bio": "$data.string.field.bio",
                         "gender": "$data.string.field.user_gender",
                         "contentRegion": "$data.string.field.content_region",
                         "contentRegionName": "$data.string.field.content_region_name",
@@ -243,7 +313,7 @@ vars:
                         "onlineStatus": "$data.string.field.online_status",
 
                         "specialTitle": "special title of this user in this chat",
-                        "status": "int $data.string.unknown"
+                        "status": "$data.string.field.status"
                     }
 
                 chat_user_profile: $data.json.profile.user_profile_partial
@@ -253,7 +323,7 @@ vars:
                     {
                         "order": "position of this tag, relative to its siblings",
                         "source": "int $data.string.unknown",
-                        "status": "int $data.string.unknown",
+                        "status": "$data.string.field.status",
                         "style": $data.json.partial.tag_style,
                         "tagId": "int id referencing this tag",
                         "tagName": "name of this tag"
@@ -274,7 +344,8 @@ vars:
                             {
                                 "width": "int width",
                                 "height": "int height",
-                                "url": "url to the icon in this size"
+                                "url": "url to the icon in this size",
+                                "thumbnail": "is this media a thumbnail? Field only appers to be present if its value is true"
                             },
                             "..."
                         ]

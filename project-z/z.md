@@ -107,7 +107,8 @@ Login to Z with some combination of credentials
                 {
                     "width": "int width",
                     "height": "int height",
-                    "url": "url to the icon in this size"
+                    "url": "url to the icon in this size",
+                    "thumbnail": "is this media a thumbnail? Field only appers to be present if its value is true"
                 },
                 "..."
             ]
@@ -126,7 +127,7 @@ Login to Z with some combination of credentials
         "followingCount": "int number of profiles followed by this profile",
         "friendsCount": "int likely number of people who both are followed by and do follow this profile",
         "socialIdModified": "unique social id referencing this user_modified",
-        "status": "field or value with an unknown use",
+        "status": "int field or value with an unknown use",
         "contentRegion": "int unknown, appears to be an int representing a region",
         "school": "field or value with an unknown use"
     }
@@ -221,7 +222,8 @@ Get a collection of blogs
                         {
                             "width": "int width",
                             "height": "int height",
-                            "url": "url to the icon in this size"
+                            "url": "url to the icon in this size",
+                            "thumbnail": "is this media a thumbnail? Field only appers to be present if its value is true"
                         },
                         "..."
                     ]
@@ -249,7 +251,8 @@ Get a collection of blogs
                         {
                             "width": "int width",
                             "height": "int height",
-                            "url": "url to the icon in this size"
+                            "url": "url to the icon in this size",
+                            "thumbnail": "is this media a thumbnail? Field only appers to be present if its value is true"
                         },
                         "..."
                     ]
@@ -316,7 +319,8 @@ Get a collection of threads that you have joined
                     {
                         "width": "int width",
                         "height": "int height",
-                        "url": "url to the icon in this size"
+                        "url": "url to the icon in this size",
+                        "thumbnail": "is this media a thumbnail? Field only appers to be present if its value is true"
                     },
                     "..."
                 ]
@@ -341,7 +345,8 @@ Get a collection of threads that you have joined
                         {
                             "width": "int width",
                             "height": "int height",
-                            "url": "url to the icon in this size"
+                            "url": "url to the icon in this size",
+                            "thumbnail": "is this media a thumbnail? Field only appers to be present if its value is true"
                         },
                         "..."
                     ]
@@ -369,7 +374,8 @@ Get a collection of threads that you have joined
                         {
                             "width": "int width",
                             "height": "int height",
-                            "url": "url to the icon in this size"
+                            "url": "url to the icon in this size",
+                            "thumbnail": "is this media a thumbnail? Field only appers to be present if its value is true"
                         },
                         "..."
                     ]
@@ -387,7 +393,8 @@ Get a collection of threads that you have joined
                     {
                         "width": "int width",
                         "height": "int height",
-                        "url": "url to the icon in this size"
+                        "url": "url to the icon in this size",
+                        "thumbnail": "is this media a thumbnail? Field only appers to be present if its value is true"
                     },
                     "..."
                 ]
@@ -410,7 +417,8 @@ Get a collection of threads that you have joined
                             {
                                 "width": "int width",
                                 "height": "int height",
-                                "url": "url to the icon in this size"
+                                "url": "url to the icon in this size",
+                                "thumbnail": "is this media a thumbnail? Field only appers to be present if its value is true"
                             },
                             "..."
                         ]
@@ -447,7 +455,8 @@ Get a collection of threads that you have joined
                             {
                                 "width": "int width",
                                 "height": "int height",
-                                "url": "url to the icon in this size"
+                                "url": "url to the icon in this size",
+                                "thumbnail": "is this media a thumbnail? Field only appers to be present if its value is true"
                             },
                             "..."
                         ]
@@ -538,7 +547,8 @@ Get a collection of joinable threads
                     {
                         "width": "int width",
                         "height": "int height",
-                        "url": "url to the icon in this size"
+                        "url": "url to the icon in this size",
+                        "thumbnail": "is this media a thumbnail? Field only appers to be present if its value is true"
                     },
                     "..."
                 ]
@@ -563,7 +573,8 @@ Get a collection of joinable threads
                         {
                             "width": "int width",
                             "height": "int height",
-                            "url": "url to the icon in this size"
+                            "url": "url to the icon in this size",
+                            "thumbnail": "is this media a thumbnail? Field only appers to be present if its value is true"
                         },
                         "..."
                     ]
@@ -591,7 +602,8 @@ Get a collection of joinable threads
                         {
                             "width": "int width",
                             "height": "int height",
-                            "url": "url to the icon in this size"
+                            "url": "url to the icon in this size",
+                            "thumbnail": "is this media a thumbnail? Field only appers to be present if its value is true"
                         },
                         "..."
                     ]
@@ -609,7 +621,8 @@ Get a collection of joinable threads
                     {
                         "width": "int width",
                         "height": "int height",
-                        "url": "url to the icon in this size"
+                        "url": "url to the icon in this size",
+                        "thumbnail": "is this media a thumbnail? Field only appers to be present if its value is true"
                     },
                     "..."
                 ]
@@ -632,7 +645,8 @@ Get a collection of joinable threads
                             {
                                 "width": "int width",
                                 "height": "int height",
-                                "url": "url to the icon in this size"
+                                "url": "url to the icon in this size",
+                                "thumbnail": "is this media a thumbnail? Field only appers to be present if its value is true"
                             },
                             "..."
                         ]
@@ -669,7 +683,8 @@ Get a collection of joinable threads
                             {
                                 "width": "int width",
                                 "height": "int height",
-                                "url": "url to the icon in this size"
+                                "url": "url to the icon in this size",
+                                "thumbnail": "is this media a thumbnail? Field only appers to be present if its value is true"
                             },
                             "..."
                         ]
@@ -702,6 +717,93 @@ Get a collection of joinable threads
             "threadId": "unique id referencing this resource",
             "title": "title of this chat thread",
             "type": "int field or value with an unknown use"
+        },
+        "..."
+    ],
+    "pagination": {
+        "nextPageToken": "token to fetch the next page relative to this"
+    }
+}
+```
+
+
+</details>
+
+<details>
+<summary>GET /circles</summary>
+
+Get a collection of circles. Currently url param `type` is required, but the API error implies that this is planned to change. Type may be one of `joined`
+
+###### Headers
+|name|description|required|
+| - | - | - |
+|rawDeviceId|An id that can identify the device making the request|Yes|
+|User-Agent|The user agent of the device making the request|No|
+|sId|The authed user's session id|Yes|
+|appType|should be `MainApp`|Yes|
+|appVersion|the semantic version of this app|Yes|
+|deviceType|appears to always be `1`|Yes|
+|osType|appears to always be `2`|Yes|
+
+###### URL Params
+|name|description|required|
+| - | - | - |
+|size|Return this number of results|No|
+|pageToken|Pagination page token|No|
+|type|type of circle to query|Yes|
+|uid|query circles joined by the user referenced by this uid|if `type=joined`|
+
+
+
+
+#### Responses
+- `200`
+
+  A collection of circles was fetched
+
+  #### Body
+```json
+{
+    "list": [
+        {
+            "uid": "unique id referencing this resource",
+            "circleId": "unique id referencing this resource",
+            "socialId": "unique social id referencing this user",
+            "name": "name of this circle",
+            "tagline": "tagline of this circle",
+            "createdTime": "unix timestamp of occurence",
+            "status": "int field or value with an unknown use",
+            "contentRegion": "int unknown, appears to be an int representing a region",
+            "language": "2 character language code",
+            "icon": {
+                "baseUrl": "url template to build sizes with",
+                "resourceList": [
+                    {
+                        "width": "int width",
+                        "height": "int height",
+                        "url": "url to the icon in this size",
+                        "thumbnail": "is this media a thumbnail? Field only appers to be present if its value is true"
+                    },
+                    "..."
+                ]
+            },
+            "tagList": [
+                {
+                    "order": "position of this tag, relative to its siblings",
+                    "source": "int field or value with an unknown use",
+                    "status": "int field or value with an unknown use",
+                    "style": {
+                        "backgroundColor": "hexidecimal color with alpha bits",
+                        "borderColor": "hexidecimal color with alpha bits",
+                        "solidColor": "hexidecimal color with alpha bits",
+                        "textColor": "hexidecimal color with alpha bits"
+                    },
+                    "tagId": "int id referencing this tag",
+                    "tagName": "name of this tag"
+                },
+                "..."
+            ],
+            "membersCount": "int number of members"
         },
         "..."
     ],
@@ -749,6 +851,47 @@ Get information about an app update that may be available
     "DownloadUrl": "link to the apk containing the target update",
     "ApkSize": "int assumed to be apk size, but is always 0",
     "ApkMd5": "md5 that should be computable from hashing the updated apk"
+}
+```
+
+
+</details>
+
+<details>
+<summary>GET /users/block-uids</summary>
+
+Get a collection of users who have blocked you, and a collection of users who you have blocked
+
+###### Headers
+|name|description|required|
+| - | - | - |
+|rawDeviceId|An id that can identify the device making the request|Yes|
+|User-Agent|The user agent of the device making the request|No|
+|sId|The authed user's session id|Yes|
+|appType|should be `MainApp`|Yes|
+|appVersion|the semantic version of this app|Yes|
+|deviceType|appears to always be `1`|Yes|
+|osType|appears to always be `2`|Yes|
+
+
+
+
+#### Responses
+- `200`
+
+  A collection of blocked and blocking users was fetched
+
+  #### Body
+```json
+{
+    "blockedByMeList": [
+        "unique id referencing this resource",
+        "..."
+    ],
+    "blockMeList": [
+        "unique id referencing this resource",
+        "..."
+    ]
 }
 ```
 
@@ -807,7 +950,8 @@ Get a collection of user namecards
                     {
                         "width": "int width",
                         "height": "int height",
-                        "url": "url to the icon in this size"
+                        "url": "url to the icon in this size",
+                        "thumbnail": "is this media a thumbnail? Field only appers to be present if its value is true"
                     },
                     "..."
                 ]
@@ -826,7 +970,7 @@ Get a collection of user namecards
             "followingCount": "int number of profiles followed by this profile",
             "friendsCount": "int likely number of people who both are followed by and do follow this profile",
             "socialIdModified": "unique social id referencing this user_modified",
-            "status": "field or value with an unknown use",
+            "status": "int field or value with an unknown use",
             "contentRegion": "int unknown, appears to be an int representing a region",
             "school": "field or value with an unknown use",
             "taglist": [
@@ -851,7 +995,8 @@ Get a collection of user namecards
                     {
                         "width": "int width",
                         "height": "int height",
-                        "url": "url to the icon in this size"
+                        "url": "url to the icon in this size",
+                        "thumbnail": "is this media a thumbnail? Field only appers to be present if its value is true"
                     },
                     "..."
                 ]
@@ -862,6 +1007,123 @@ Get a collection of user namecards
     "pagination": {
         "nextPageToken": "token to fetch the next page relative to this"
     }
+}
+```
+
+
+</details>
+
+<details>
+<summary>GET /users/profile/:user_id</summary>
+
+Get some user profile referenced by a user id
+
+###### Headers
+|name|description|required|
+| - | - | - |
+|rawDeviceId|An id that can identify the device making the request|Yes|
+|User-Agent|The user agent of the device making the request|No|
+|sId|The authed user's session id|Yes|
+|appType|should be `MainApp`|Yes|
+|appVersion|the semantic version of this app|Yes|
+|deviceType|appears to always be `1`|Yes|
+|osType|appears to always be `2`|Yes|
+
+
+
+
+#### Responses
+- `200`
+
+  This user was fetched
+
+  #### Body
+```json
+{
+    "uid": "unique id referencing this resource",
+    "nickname": "user displayed name",
+    "bio": "information about this user",
+    "socialId": "unique social id referencing this user",
+    "nameCardEnabled": "int likely an enum of what name card enabled status is the case for this profile",
+    "showsSchool": "int is the profile's school shown?",
+    "showsLocation": "int likely bool of whether or not the location of this profile is shown",
+    "showsJoinedCircles": "int are joined circles visible?",
+    "chatInvitationStatus": "int likely a bool describing whether this user may make chat invites",
+    "pushEnabled": "int are push notifs enabled?",
+    "gender": "the gender of this user",
+    "icon": {
+        "baseUrl": "url template to build sizes with",
+        "resourceList": [
+            {
+                "width": "int width",
+                "height": "int height",
+                "url": "url to the icon in this size",
+                "thumbnail": "is this media a thumbnail? Field only appers to be present if its value is true"
+            },
+            "..."
+        ]
+    },
+    "background": {
+        "baseUrl": "url template to build sizes with",
+        "resourceList": [
+            {
+                "width": "int width",
+                "height": "int height",
+                "url": "url to the icon in this size",
+                "thumbnail": "is this media a thumbnail? Field only appers to be present if its value is true"
+            },
+            "..."
+        ]
+    },
+    "nameCardBackground": {
+        "baseUrl": "url template to build sizes with",
+        "resourceList": [
+            {
+                "width": "int width",
+                "height": "int height",
+                "url": "url to the icon in this size",
+                "thumbnail": "is this media a thumbnail? Field only appers to be present if its value is true"
+            },
+            "..."
+        ]
+    },
+    "createdTime": "unix timestamp of occurence",
+    "contentRegionName": "name of this profiles region",
+    "location": {
+        "longitude": "float longitude",
+        "latitude": "float latitude",
+        "address": {
+            "2 character language code": "city location"
+        }
+    },
+    "language": "2 character language code",
+    "fansCount": "int number of fans",
+    "followingCount": "int number of profiles followed by this profile",
+    "friendsCount": "int likely number of people who both are followed by and do follow this profile",
+    "onlineStatus": "int indicator of how this user may be online",
+    "followMeStatus": "int describing how this user may or may not be following the authed user",
+    "followedByMeStatus": "int describing how this user may or may not be followed by the authed user",
+    "hasProfile": "int bool does this user have a profile?",
+    "socialIdModified": "unique social id referencing this user_modified",
+    "status": "int field or value with an unknown use",
+    "contentRegion": "int unknown, appears to be an int representing a region",
+    "school": "field or value with an unknown use",
+    "taglist": [
+        {
+            "order": "position of this tag, relative to its siblings",
+            "source": "int field or value with an unknown use",
+            "status": "int field or value with an unknown use",
+            "style": {
+                "backgroundColor": "hexidecimal color with alpha bits",
+                "borderColor": "hexidecimal color with alpha bits",
+                "solidColor": "hexidecimal color with alpha bits",
+                "textColor": "hexidecimal color with alpha bits"
+            },
+            "tagId": "int id referencing this tag",
+            "tagName": "name of this tag"
+        },
+        "..."
+    ]
 }
 ```
 
