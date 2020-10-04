@@ -228,10 +228,6 @@ Get a collection of blogs
                         "..."
                     ]
                 },
-                "chatInvitationStatus": "int likely was this user invited to this chat?",
-                "chatMemberStatus": "int likely bool is this member a member of this chat?",
-                "onlineStatus": "int indicator of how this user may be online",
-                "specialTitle": "special title of this user in this chat",
                 "status": "int field or value with an unknown use"
             },
             "blogId": "unique id referencing this resource",
@@ -423,10 +419,6 @@ Get a collection of threads that you have joined
                             "..."
                         ]
                     },
-                    "chatInvitationStatus": "int likely was this user invited to this chat?",
-                    "chatMemberStatus": "int likely bool is this member a member of this chat?",
-                    "onlineStatus": "int indicator of how this user may be online",
-                    "specialTitle": "special title of this user in this chat",
                     "status": "int field or value with an unknown use"
                 },
                 "content": "content of the message body",
@@ -651,10 +643,6 @@ Get a collection of joinable threads
                             "..."
                         ]
                     },
-                    "chatInvitationStatus": "int likely was this user invited to this chat?",
-                    "chatMemberStatus": "int likely bool is this member a member of this chat?",
-                    "onlineStatus": "int indicator of how this user may be online",
-                    "specialTitle": "special title of this user in this chat",
                     "status": "int field or value with an unknown use"
                 },
                 "content": "content of the message body",

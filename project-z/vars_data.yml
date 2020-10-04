@@ -308,6 +308,23 @@ vars:
                         "createdTime": "$data.string.unix_time",
                         "icon": $data.json.partial.media,
 
+                        "status": "$data.string.field.status"
+                    }
+
+                chat_user_profile: |-
+                    {
+                        "nickname": "$data.string.field.nickname",
+                        "uid": "$data.string.field.uid",
+                        "socialId": "$data.string.field.social_id",
+                        "socialIdModified": "$data.string.field.social_id_modified",
+
+                        "bio": "$data.string.field.bio",
+                        "gender": "$data.string.field.user_gender",
+                        "contentRegion": "$data.string.field.content_region",
+                        "contentRegionName": "$data.string.field.content_region_name",
+                        "createdTime": "$data.string.unix_time",
+                        "icon": $data.json.partial.media,
+
                         "chatInvitationStatus": "int likely was this user invited to this chat?",
                         "chatMemberStatus": "int likely bool is this member a member of this chat?",
                         "onlineStatus": "$data.string.field.online_status",
@@ -315,8 +332,6 @@ vars:
                         "specialTitle": "special title of this user in this chat",
                         "status": "$data.string.field.status"
                     }
-
-                chat_user_profile: $data.json.profile.user_profile_partial
 
             partial:
                 tag: |-
