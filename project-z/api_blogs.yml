@@ -1,0 +1,11 @@
+routes:
+    /blogs:
+        GET:
+            description: Get a collection of blogs
+            tables:
+                Headers: $header_table.authed
+                "URL Params": $query_param_table.paginated
+            responses:
+                200:
+                    description: A collection of blogs was fetched
+                    body: $body.response.blogs.root.get
