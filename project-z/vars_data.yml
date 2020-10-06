@@ -36,19 +36,12 @@ vars:
                 login_post: |-
                     {
                         "authType": "int auth type. Password login will be 1, secret or phone login is likely something else",
-                        "email": "email to this account, if email login",
-                        "nickname": "$data.string.field.nickname",
                         "password": "password to this account, if a password login",
+                        "email": "email to this account, if email login",
                         "phoneNumber": "phone number to this account, likely if phone login",
-                        "secret": "valid secret for this account, if a secret login",
-                        "securityCode": "likely used when a security code is required to login",
-                        "purpose": "int $data.string.unknown",
 
-                        "birthday": "$data.string.unknown",
-                        "contentRegion": "$data.string.field.content_region",
-                        "gender": "$data.string.field.user_gender",
-                        "invitationCode": "$data.string.unknown",
-                        "school": "$data.string.unknown"
+                        "secret": "likely able to be used in place of phoneNumber and password",
+                        "securityCode": "likely used when a security code is required to login"
                     }
 
                 login_response: |-

@@ -56,18 +56,11 @@ Login to Z with some combination of credentials
 ```json
 {
     "authType": "int auth type. Password login will be 1, secret or phone login is likely something else",
-    "email": "email to this account, if email login",
-    "nickname": "user displayed name",
     "password": "password to this account, if a password login",
+    "email": "email to this account, if email login",
     "phoneNumber": "phone number to this account, likely if phone login",
-    "secret": "valid secret for this account, if a secret login",
-    "securityCode": "likely used when a security code is required to login",
-    "purpose": "int field or value with an unknown use",
-    "birthday": "field or value with an unknown use",
-    "contentRegion": "int unknown, appears to be an int representing a region",
-    "gender": "the gender of this user",
-    "invitationCode": "field or value with an unknown use",
-    "school": "field or value with an unknown use"
+    "secret": "likely able to be used in place of phoneNumber and password",
+    "securityCode": "likely used when a security code is required to login"
 }
 ```
 
