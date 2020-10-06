@@ -18,12 +18,12 @@ vars:
         app_type:
             name: appType
             description: should be `MainApp`
-            required: "Yes"
+            required: "No"
 
         app_version:
             name: appVersion
             description: the semantic version of this app
-            required: "Yes"
+            required: "No"
 
         device_type:
             name: deviceType

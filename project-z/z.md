@@ -9,8 +9,8 @@ Check for new activity
 |rawDeviceId|An id that can identify the device making the request|Yes|
 |User-Agent|The user agent of the device making the request|No|
 |sId|The authed user's session id|Yes|
-|appType|should be `MainApp`|Yes|
-|appVersion|the semantic version of this app|Yes|
+|appType|should be `MainApp`|No|
+|appVersion|the semantic version of this app|No|
 |deviceType|appears to always be `1`|Yes|
 |osType|appears to always be `2`|Yes|
 
@@ -46,8 +46,8 @@ Login to Z with some combination of credentials
 | - | - | - |
 |rawDeviceId|An id that can identify the device making the request|Yes|
 |User-Agent|The user agent of the device making the request|No|
-|appType|should be `MainApp`|Yes|
-|appVersion|the semantic version of this app|Yes|
+|appType|should be `MainApp`|No|
+|appVersion|the semantic version of this app|No|
 |deviceType|appears to always be `1`|Yes|
 |osType|appears to always be `2`|Yes|
 
@@ -143,8 +143,8 @@ Update the device push token bound to this account
 |rawDeviceId|An id that can identify the device making the request|Yes|
 |User-Agent|The user agent of the device making the request|No|
 |sId|The authed user's session id|Yes|
-|appType|should be `MainApp`|Yes|
-|appVersion|the semantic version of this app|Yes|
+|appType|should be `MainApp`|No|
+|appVersion|the semantic version of this app|No|
 |deviceType|appears to always be `1`|Yes|
 |osType|appears to always be `2`|Yes|
 
@@ -178,8 +178,8 @@ Get a collection of blogs
 |rawDeviceId|An id that can identify the device making the request|Yes|
 |User-Agent|The user agent of the device making the request|No|
 |sId|The authed user's session id|Yes|
-|appType|should be `MainApp`|Yes|
-|appVersion|the semantic version of this app|Yes|
+|appType|should be `MainApp`|No|
+|appVersion|the semantic version of this app|No|
 |deviceType|appears to always be `1`|Yes|
 |osType|appears to always be `2`|Yes|
 
@@ -282,8 +282,8 @@ Get a collection of threads that you have joined
 |rawDeviceId|An id that can identify the device making the request|Yes|
 |User-Agent|The user agent of the device making the request|No|
 |sId|The authed user's session id|Yes|
-|appType|should be `MainApp`|Yes|
-|appVersion|the semantic version of this app|Yes|
+|appType|should be `MainApp`|No|
+|appVersion|the semantic version of this app|No|
 |deviceType|appears to always be `1`|Yes|
 |osType|appears to always be `2`|Yes|
 
@@ -486,8 +486,8 @@ Get a collection of joinable threads
 |rawDeviceId|An id that can identify the device making the request|Yes|
 |User-Agent|The user agent of the device making the request|No|
 |sId|The authed user's session id|Yes|
-|appType|should be `MainApp`|Yes|
-|appVersion|the semantic version of this app|Yes|
+|appType|should be `MainApp`|No|
+|appVersion|the semantic version of this app|No|
 |deviceType|appears to always be `1`|Yes|
 |osType|appears to always be `2`|Yes|
 
@@ -685,8 +685,8 @@ Create a new thread
 |rawDeviceId|An id that can identify the device making the request|Yes|
 |User-Agent|The user agent of the device making the request|No|
 |sId|The authed user's session id|Yes|
-|appType|should be `MainApp`|Yes|
-|appVersion|the semantic version of this app|Yes|
+|appType|should be `MainApp`|No|
+|appVersion|the semantic version of this app|No|
 |deviceType|appears to always be `1`|Yes|
 |osType|appears to always be `2`|Yes|
 
@@ -906,8 +906,8 @@ Get information about some chat thread
 |rawDeviceId|An id that can identify the device making the request|Yes|
 |User-Agent|The user agent of the device making the request|No|
 |sId|The authed user's session id|Yes|
-|appType|should be `MainApp`|Yes|
-|appVersion|the semantic version of this app|Yes|
+|appType|should be `MainApp`|No|
+|appVersion|the semantic version of this app|No|
 |deviceType|appears to always be `1`|Yes|
 |osType|appears to always be `2`|Yes|
 
@@ -1090,8 +1090,8 @@ Get agora info. Appears to be fetched when voice role plays are started, which w
 |rawDeviceId|An id that can identify the device making the request|Yes|
 |User-Agent|The user agent of the device making the request|No|
 |sId|The authed user's session id|Yes|
-|appType|should be `MainApp`|Yes|
-|appVersion|the semantic version of this app|Yes|
+|appType|should be `MainApp`|No|
+|appVersion|the semantic version of this app|No|
 |deviceType|appears to always be `1`|Yes|
 |osType|appears to always be `2`|Yes|
 
@@ -1127,8 +1127,8 @@ End a role play in some thread
 |rawDeviceId|An id that can identify the device making the request|Yes|
 |User-Agent|The user agent of the device making the request|No|
 |sId|The authed user's session id|Yes|
-|appType|should be `MainApp`|Yes|
-|appVersion|the semantic version of this app|Yes|
+|appType|should be `MainApp`|No|
+|appVersion|the semantic version of this app|No|
 |deviceType|appears to always be `1`|Yes|
 |osType|appears to always be `2`|Yes|
 
@@ -1160,8 +1160,8 @@ Mark messages in some thread as having been read
 |rawDeviceId|An id that can identify the device making the request|Yes|
 |User-Agent|The user agent of the device making the request|No|
 |sId|The authed user's session id|Yes|
-|appType|should be `MainApp`|Yes|
-|appVersion|the semantic version of this app|Yes|
+|appType|should be `MainApp`|No|
+|appVersion|the semantic version of this app|No|
 |deviceType|appears to always be `1`|Yes|
 |osType|appears to always be `2`|Yes|
 
@@ -1193,8 +1193,8 @@ Get a collection of members in some thread
 |rawDeviceId|An id that can identify the device making the request|Yes|
 |User-Agent|The user agent of the device making the request|No|
 |sId|The authed user's session id|Yes|
-|appType|should be `MainApp`|Yes|
-|appVersion|the semantic version of this app|Yes|
+|appType|should be `MainApp`|No|
+|appVersion|the semantic version of this app|No|
 |deviceType|appears to always be `1`|Yes|
 |osType|appears to always be `2`|Yes|
 
@@ -1268,8 +1268,8 @@ Join some thread
 |rawDeviceId|An id that can identify the device making the request|Yes|
 |User-Agent|The user agent of the device making the request|No|
 |sId|The authed user's session id|Yes|
-|appType|should be `MainApp`|Yes|
-|appVersion|the semantic version of this app|Yes|
+|appType|should be `MainApp`|No|
+|appVersion|the semantic version of this app|No|
 |deviceType|appears to always be `1`|Yes|
 |osType|appears to always be `2`|Yes|
 
@@ -1301,8 +1301,8 @@ Get a collection of messages of some thread
 |rawDeviceId|An id that can identify the device making the request|Yes|
 |User-Agent|The user agent of the device making the request|No|
 |sId|The authed user's session id|Yes|
-|appType|should be `MainApp`|Yes|
-|appVersion|the semantic version of this app|Yes|
+|appType|should be `MainApp`|No|
+|appVersion|the semantic version of this app|No|
 |deviceType|appears to always be `1`|Yes|
 |osType|appears to always be `2`|Yes|
 
@@ -1385,8 +1385,8 @@ Get a collection of members online in some thread
 |rawDeviceId|An id that can identify the device making the request|Yes|
 |User-Agent|The user agent of the device making the request|No|
 |sId|The authed user's session id|Yes|
-|appType|should be `MainApp`|Yes|
-|appVersion|the semantic version of this app|Yes|
+|appType|should be `MainApp`|No|
+|appVersion|the semantic version of this app|No|
 |deviceType|appears to always be `1`|Yes|
 |osType|appears to always be `2`|Yes|
 
@@ -1465,8 +1465,8 @@ Mode may be one of
 |rawDeviceId|An id that can identify the device making the request|Yes|
 |User-Agent|The user agent of the device making the request|No|
 |sId|The authed user's session id|Yes|
-|appType|should be `MainApp`|Yes|
-|appVersion|the semantic version of this app|Yes|
+|appType|should be `MainApp`|No|
+|appVersion|the semantic version of this app|No|
 |deviceType|appears to always be `1`|Yes|
 |osType|appears to always be `2`|Yes|
 
@@ -1498,8 +1498,8 @@ Get the roles of some thread
 |rawDeviceId|An id that can identify the device making the request|Yes|
 |User-Agent|The user agent of the device making the request|No|
 |sId|The authed user's session id|Yes|
-|appType|should be `MainApp`|Yes|
-|appVersion|the semantic version of this app|Yes|
+|appType|should be `MainApp`|No|
+|appVersion|the semantic version of this app|No|
 |deviceType|appears to always be `1`|Yes|
 |osType|appears to always be `2`|Yes|
 
@@ -1555,8 +1555,8 @@ Create a role in some thread
 |rawDeviceId|An id that can identify the device making the request|Yes|
 |User-Agent|The user agent of the device making the request|No|
 |sId|The authed user's session id|Yes|
-|appType|should be `MainApp`|Yes|
-|appVersion|the semantic version of this app|Yes|
+|appType|should be `MainApp`|No|
+|appVersion|the semantic version of this app|No|
 |deviceType|appears to always be `1`|Yes|
 |osType|appears to always be `2`|Yes|
 
@@ -1634,8 +1634,8 @@ Update some role in some thread
 |rawDeviceId|An id that can identify the device making the request|Yes|
 |User-Agent|The user agent of the device making the request|No|
 |sId|The authed user's session id|Yes|
-|appType|should be `MainApp`|Yes|
-|appVersion|the semantic version of this app|Yes|
+|appType|should be `MainApp`|No|
+|appVersion|the semantic version of this app|No|
 |deviceType|appears to always be `1`|Yes|
 |osType|appears to always be `2`|Yes|
 
@@ -1704,8 +1704,8 @@ Delete some role in some thread
 |rawDeviceId|An id that can identify the device making the request|Yes|
 |User-Agent|The user agent of the device making the request|No|
 |sId|The authed user's session id|Yes|
-|appType|should be `MainApp`|Yes|
-|appVersion|the semantic version of this app|Yes|
+|appType|should be `MainApp`|No|
+|appVersion|the semantic version of this app|No|
 |deviceType|appears to always be `1`|Yes|
 |osType|appears to always be `2`|Yes|
 
@@ -1741,8 +1741,8 @@ Start a role play in some thread. Modes are represented as
 |rawDeviceId|An id that can identify the device making the request|Yes|
 |User-Agent|The user agent of the device making the request|No|
 |sId|The authed user's session id|Yes|
-|appType|should be `MainApp`|Yes|
-|appVersion|the semantic version of this app|Yes|
+|appType|should be `MainApp`|No|
+|appVersion|the semantic version of this app|No|
 |deviceType|appears to always be `1`|Yes|
 |osType|appears to always be `2`|Yes|
 
@@ -1791,8 +1791,8 @@ latest
 |rawDeviceId|An id that can identify the device making the request|Yes|
 |User-Agent|The user agent of the device making the request|No|
 |sId|The authed user's session id|Yes|
-|appType|should be `MainApp`|Yes|
-|appVersion|the semantic version of this app|Yes|
+|appType|should be `MainApp`|No|
+|appVersion|the semantic version of this app|No|
 |deviceType|appears to always be `1`|Yes|
 |osType|appears to always be `2`|Yes|
 
@@ -1880,8 +1880,8 @@ Get information about some circle
 |rawDeviceId|An id that can identify the device making the request|Yes|
 |User-Agent|The user agent of the device making the request|No|
 |sId|The authed user's session id|Yes|
-|appType|should be `MainApp`|Yes|
-|appVersion|the semantic version of this app|Yes|
+|appType|should be `MainApp`|No|
+|appVersion|the semantic version of this app|No|
 |deviceType|appears to always be `1`|Yes|
 |osType|appears to always be `2`|Yes|
 
@@ -1995,8 +1995,8 @@ Queried when new chats are created
 | - | - | - |
 |rawDeviceId|An id that can identify the device making the request|Yes|
 |User-Agent|The user agent of the device making the request|No|
-|appType|should be `MainApp`|Yes|
-|appVersion|the semantic version of this app|Yes|
+|appType|should be `MainApp`|No|
+|appVersion|the semantic version of this app|No|
 |deviceType|appears to always be `1`|Yes|
 |osType|appears to always be `2`|Yes|
 
@@ -2046,8 +2046,8 @@ Get information about an app update that may be available
 | - | - | - |
 |rawDeviceId|An id that can identify the device making the request|Yes|
 |User-Agent|The user agent of the device making the request|No|
-|appType|should be `MainApp`|Yes|
-|appVersion|the semantic version of this app|Yes|
+|appType|should be `MainApp`|No|
+|appVersion|the semantic version of this app|No|
 |deviceType|appears to always be `1`|Yes|
 |osType|appears to always be `2`|Yes|
 
@@ -2089,8 +2089,8 @@ Get a collection of suggested tags
 |rawDeviceId|An id that can identify the device making the request|Yes|
 |User-Agent|The user agent of the device making the request|No|
 |sId|The authed user's session id|Yes|
-|appType|should be `MainApp`|Yes|
-|appVersion|the semantic version of this app|Yes|
+|appType|should be `MainApp`|No|
+|appVersion|the semantic version of this app|No|
 |deviceType|appears to always be `1`|Yes|
 |osType|appears to always be `2`|Yes|
 
@@ -2138,8 +2138,8 @@ Get a collection of users who have blocked you, and a collection of users who yo
 |rawDeviceId|An id that can identify the device making the request|Yes|
 |User-Agent|The user agent of the device making the request|No|
 |sId|The authed user's session id|Yes|
-|appType|should be `MainApp`|Yes|
-|appVersion|the semantic version of this app|Yes|
+|appType|should be `MainApp`|No|
+|appVersion|the semantic version of this app|No|
 |deviceType|appears to always be `1`|Yes|
 |osType|appears to always be `2`|Yes|
 
@@ -2180,8 +2180,8 @@ Get a collection of user namecards
 |rawDeviceId|An id that can identify the device making the request|Yes|
 |User-Agent|The user agent of the device making the request|No|
 |sId|The authed user's session id|Yes|
-|appType|should be `MainApp`|Yes|
-|appVersion|the semantic version of this app|Yes|
+|appType|should be `MainApp`|No|
+|appVersion|the semantic version of this app|No|
 |deviceType|appears to always be `1`|Yes|
 |osType|appears to always be `2`|Yes|
 
@@ -2297,8 +2297,8 @@ Get some user profile referenced by a user id
 |rawDeviceId|An id that can identify the device making the request|Yes|
 |User-Agent|The user agent of the device making the request|No|
 |sId|The authed user's session id|Yes|
-|appType|should be `MainApp`|Yes|
-|appVersion|the semantic version of this app|Yes|
+|appType|should be `MainApp`|No|
+|appVersion|the semantic version of this app|No|
 |deviceType|appears to always be `1`|Yes|
 |osType|appears to always be `2`|Yes|
 
