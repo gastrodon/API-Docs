@@ -26,7 +26,10 @@ routes:
             description: Get a collection of user namecards
             tables:
                 Headers: $header_table.authed
-                "URL Params": $query_param_table.paginated
+                "URL Params":
+                    - $query_param.size
+                    - $query_param.page_token
+                    - $query_param.namecard_gender
             responses:
                 200:
                     description: A collection of user namecards was fetched

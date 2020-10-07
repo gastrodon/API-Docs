@@ -2322,6 +2322,7 @@ Get a collection of user namecards
 | - | - | - |
 |size|Return this number of results|No|
 |pageToken|Pagination page token|No|
+|gender|gender enum where `0 -> male` and `1 -> female`. Does nto actually appear to do anything, but is used by the api|No|
 
 
 
