@@ -272,6 +272,138 @@ Get a collection of blogs
 </details>
 
 <details>
+<summary>GET /blogs/:blog_id</summary>
+
+Get information about some blog
+
+###### Headers
+|name|description|required|
+| - | - | - |
+|rawDeviceId|An id that can identify the device making the request|Yes|
+|User-Agent|The user agent of the device making the request|No|
+|sId|The authed user's session id|Yes|
+|appType|should be `MainApp`|No|
+|appVersion|the semantic version of this app|No|
+|deviceType|appears to always be `1`|Yes|
+|osType|appears to always be `2`|Yes|
+
+
+
+
+##### Responses
+- `200`
+
+  Information about this blog was fetched
+
+  #### Body
+```json
+{
+    "author": {
+        "nickname": "user displayed name",
+        "uid": "unique id referencing this resource",
+        "socialId": "unique social id referencing this user",
+        "socialIdModified": "unique social id referencing this user_modified",
+        "bio": "information about this user",
+        "gender": "the gender of this user",
+        "contentRegion": "int unknown, appears to be an int representing a region",
+        "contentRegionName": "int unknown, appears to be an int representing a region_name",
+        "createdTime": "unix timestamp of occurence",
+        "icon": {
+            "baseUrl": "url template to build sizes with",
+            "resourceList": [
+                {
+                    "width": "int width",
+                    "height": "int height",
+                    "url": "url to the icon in this size",
+                    "thumbnail": "is this media a thumbnail? Field only appers to be present if its value is true"
+                },
+                "..."
+            ]
+        },
+        "status": "int field or value with an unknown use"
+    },
+    "blogId": "unique id referencing this resource",
+    "uid": "unique id referencing this resource, differnece to blogId is unknown",
+    "createdTime": "unix timestamp of occurence",
+    "circleIdList": [
+        "unique id referencing this resource",
+        "..."
+    ],
+    "circleList": [
+        {
+            "uid": "unique id referencing this resource",
+            "circleId": "unique id referencing this resource",
+            "socialId": "unique social id referencing this user",
+            "name": "name of this circle",
+            "tagline": "tagline of this circle",
+            "createdTime": "unix timestamp of occurence",
+            "status": "int field or value with an unknown use",
+            "contentRegion": "int unknown, appears to be an int representing a region",
+            "language": "2 character language code",
+            "icon": {
+                "baseUrl": "url template to build sizes with",
+                "resourceList": [
+                    {
+                        "width": "int width",
+                        "height": "int height",
+                        "url": "url to the icon in this size",
+                        "thumbnail": "is this media a thumbnail? Field only appers to be present if its value is true"
+                    },
+                    "..."
+                ]
+            },
+            "tagList": [
+                {
+                    "order": "position of this tag, relative to its siblings",
+                    "source": "int field or value with an unknown use",
+                    "status": "int field or value with an unknown use",
+                    "style": {
+                        "backgroundColor": "hexidecimal color with alpha bits",
+                        "borderColor": "hexidecimal color with alpha bits",
+                        "solidColor": "hexidecimal color with alpha bits",
+                        "textColor": "hexidecimal color with alpha bits"
+                    },
+                    "tagId": "int id referencing this tag",
+                    "tagName": "name of this tag"
+                },
+                "..."
+            ],
+            "membersCount": "int number of members"
+        },
+        "..."
+    ],
+    "content": "blog content",
+    "contentRegion": "int unknown, appears to be an int representing a region",
+    "language": "2 character language code",
+    "mediaList": [
+        {
+            "baseUrl": "url template to build sizes with",
+            "resourceList": [
+                {
+                    "width": "int width",
+                    "height": "int height",
+                    "url": "url to the icon in this size",
+                    "thumbnail": "is this media a thumbnail? Field only appers to be present if its value is true"
+                },
+                "..."
+            ]
+        },
+        "..."
+    ],
+    "extensions": "field or value with an unknown use, appears to be an empty object",
+    "commentsCount": "int comments",
+    "votesCount": "int votes",
+    "type": "int field or value with an unknown use, likely blog type",
+    "status": "int field or value with an unknown use",
+    "visibility": "int field or value with an unknown use"
+}
+```
+
+
+
+</details>
+
+<details>
 <summary>GET /chat/joined-threads</summary>
 
 Get a collection of threads that you have joined

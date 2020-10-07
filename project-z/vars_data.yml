@@ -97,6 +97,39 @@ vars:
                         "visibility": "int $data.string.unknown"
                     }
 
+                blog_page: |-
+                    {
+                        "author": $data.json.profile.user_profile_partial,
+                        "blogId": "$data.string.field.uid",
+                        "uid": "$data.string.field.uid, differnece to blogId is unknown",
+                        "createdTime": "$data.string.unix_time",
+                        "circleIdList": [
+                            "$data.string.field.uid",
+                            "..."
+                        ],
+                        "circleList": [
+                            $data.json.circle.circle_partial,
+                            "..."
+                        ],
+
+                        "content": "blog content",
+                        "contentRegion": "$data.string.field.content_region",
+                        "language": "$data.string.field.language",
+                        "mediaList": [
+                            $data.json.partial.media,
+                            "..."
+                        ],
+
+                        "extensions": $data.json.partial.extensions,
+
+                        "commentsCount": "int comments",
+                        "votesCount": "int votes",
+                        "type": "int $data.string.unknown, likely blog type",
+
+                        "status": "$data.string.field.status",
+                        "visibility": "int $data.string.unknown"
+                    }
+
             chat:
                 thread: |-
                     {

@@ -52,6 +52,11 @@ vars:
                             content: $data.json.alerts.check
 
             blogs:
+                uid:
+                    root:
+                        get:
+                            lang: json
+                            content: $data.json.blog.blog_page
                 root:
                     get:
                         lang: json
