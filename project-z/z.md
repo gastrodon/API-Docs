@@ -188,6 +188,7 @@ Get a collection of blogs
 | - | - | - |
 |size|Return this number of results|No|
 |pageToken|Pagination page token|No|
+|type|type of blog to query. Must be one of `latest, following`|Yes|
 
 
 

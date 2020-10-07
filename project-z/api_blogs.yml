@@ -4,7 +4,10 @@ routes:
             description: Get a collection of blogs
             tables:
                 Headers: $header_table.authed
-                "URL Params": $query_param_table.paginated
+                "URL Params":
+                    - $query_param.size
+                    - $query_param.page_token
+                    - $query_param.type_blogs
             responses:
                 200:
                     description: A collection of blogs was fetched

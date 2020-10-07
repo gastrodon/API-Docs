@@ -25,6 +25,13 @@ vars:
             description: type of circle to query
             required: "Yes"
 
+        type_blogs:
+            name: type
+            description: >-
+                type of blog to query.
+                Must be one of `latest, following`
+            required: "Yes"
+
         uid_circles:
             name: uid
             description: query circles joined by the user referenced by this uid
