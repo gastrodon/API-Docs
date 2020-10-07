@@ -1912,11 +1912,6 @@ Start a role play in some thread. Modes are represented as
 Get a collection of circles.
 Currently url param `type` is required,
 but the API error implies that this is planned to change.
-Type may be one of
-```
-joined
-latest
-```
 
 ###### Headers
 |name|description|required|
@@ -1934,7 +1929,7 @@ latest
 | - | - | - |
 |size|Return this number of results|No|
 |pageToken|Pagination page token|No|
-|type|type of circle to query|Yes|
+|type|type of circle to query. Must be one of `latest, joined`|Yes|
 |uid|query circles joined by the user referenced by this uid|if `type=joined`|
 
 

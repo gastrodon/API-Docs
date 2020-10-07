@@ -22,7 +22,9 @@ vars:
 
         type_circles:
             name: type
-            description: type of circle to query
+            description: >-
+                type of circle to query.
+                Must be one of `latest, joined`
             required: "Yes"
 
         type_blogs:

@@ -5,11 +5,6 @@ routes:
                 Get a collection of circles.
                 Currently url param `type` is required,
                 but the API error implies that this is planned to change.
-                Type may be one of
-                ```
-                joined
-                latest
-                ```
             tables:
                 Headers: $header_table.authed
                 "URL Params":
