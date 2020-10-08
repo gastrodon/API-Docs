@@ -629,6 +629,7 @@ Get a collection of joinable threads
 | - | - | - |
 |size|Return this number of results|No|
 |pageToken|Pagination page token|No|
+|type|type of thread to query Must be `latest`|Yes|
 
 
 

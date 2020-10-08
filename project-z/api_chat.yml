@@ -15,7 +15,10 @@ routes:
             description: Get a collection of joinable threads
             tables:
                 Headers: $header_table.authed
-                "URL Params": $query_param_table.paginated
+                "URL Params":
+                    - $query_param.size
+                    - $query_param.page_token
+                    - $query_param.type_threads
             responses:
                 200:
                     description: A collection of threads was fetched
